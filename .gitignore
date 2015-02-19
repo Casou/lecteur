@@ -53,3 +53,6 @@ ressources/video_traitees/*
 *.log
 .buildpath
 .project
+*.zip
+.settings*
+lecteur
