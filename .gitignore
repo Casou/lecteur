@@ -41,3 +41,15 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Exclusions spécifiques au projet
+*.webm
+*.srt
+ressources/raw_videos/*
+ressources/raw_videos_bin/*
+ressources/thumbnails/*
+ressources/video_traitees/*
+*.sql
+*.log
+.buildpath
+.project
