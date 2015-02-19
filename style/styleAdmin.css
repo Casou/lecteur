@@ -1,0 +1,314 @@
+#adminActions {
+/*
+	background: url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png") repeat-x scroll 50% 50% #5c9ccc;
+*/
+    border: 1px solid #4297d7;
+    background-color: #DDE;
+    color: #000;
+    left: 0;
+    position: absolute;
+    top: 39px;
+    width: 100%;
+    height : 25px;
+    padding : 0 0 0 190px;
+    line-height: 25px;
+}
+
+#adminActions ul {
+	padding : 0;
+	margin : 0;
+	list-style-type : none;
+}
+
+#adminActions ul li {
+	padding : 0;
+	margin : 0;
+}
+
+#adminActions ul li {
+	float : left;
+	padding-right : 25px;
+}
+
+#adminActions ul li a {
+	font-weight : bold;
+	text-decoration : none;
+	color : #000;
+}
+
+#adminActions ul li a:hover {
+	// text-shadow : 0 0 1px #FFF, 0 0 2px #FFF, 0 0 4px #FFF;
+	text-shadow: 1px 1px #fff, -1px -1px #fff, 
+			0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff;
+}
+
+
+#admin_left_div {
+	width : 20%;
+	float : left;
+	margin-top : 20px;
+}
+
+#editDiv {
+	width : 75%;
+	float : left;
+	margin-top : 20px;
+	margin-left : 3%;
+}
+
+#admin_left_div ul {
+	list-style-type : none;
+	margin : 0;
+	padding : 0;
+}
+
+#admin_left_div li a {
+color : black;
+float : left;
+width : 100%;
+line-height : 24px;
+padding-left: 5px;
+}
+
+#admin_left_div li a:hover {
+background-color : #FEE47B;
+}
+
+#admin_left_div li img {
+	height : 25px;
+}
+
+#admin_left_div li {
+margin : 0;
+	// display:block;
+	// float:left;
+	// width : 33%;
+}
+
+#admin_left_div button {
+	margin : auto;
+	margin-top : 15px;
+	font-size : 12px;
+	width : 100%;
+}
+
+
+#editDiv h2 button {
+	margin : 0;
+}
+
+#editDiv button {
+	margin-top : 25px;
+}
+
+#editDiv ul {
+	list-style-type : none;
+	margin : 0;
+	padding : 0;
+}
+
+#addCritere {
+width : 30px;
+height : 30px;
+}
+
+.critere {
+width : 100%;
+/*
+	background-color : #DDF;
+	border-radius : 5px;
+*/
+padding : 10px 0 5px 0;
+background: -moz-linear-gradient(top, rgba(221,221,255,0) 0%, rgba(221,221,255,0.8) 8%, rgba(221,221,255,1) 11%, rgba(221,221,255,1) 20%, rgba(144,167,229,1) 50%, rgba(221,221,255,1) 80%, rgba(221,221,255,1) 89%, rgba(221,221,255,0.8) 93%, rgba(221,221,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(221,221,255,0)), color-stop(8%,rgba(221,221,255,0.8)), color-stop(11%,rgba(221,221,255,1)), color-stop(20%,rgba(221,221,255,1)), color-stop(50%,rgba(144,167,229,1)), color-stop(80%,rgba(221,221,255,1)), color-stop(89%,rgba(221,221,255,1)), color-stop(93%,rgba(221,221,255,0.8)), color-stop(100%,rgba(221,221,255,0))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(221,221,255,0) 0%,rgba(221,221,255,0.8) 8%,rgba(221,221,255,1) 11%,rgba(221,221,255,1) 20%,rgba(144,167,229,1) 50%,rgba(221,221,255,1) 80%,rgba(221,221,255,1) 89%,rgba(221,221,255,0.8) 93%,rgba(221,221,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(221,221,255,0) 0%,rgba(221,221,255,0.8) 8%,rgba(221,221,255,1) 11%,rgba(221,221,255,1) 20%,rgba(144,167,229,1) 50%,rgba(221,221,255,1) 80%,rgba(221,221,255,1) 89%,rgba(221,221,255,0.8) 93%,rgba(221,221,255,0) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(221,221,255,0) 0%,rgba(221,221,255,0.8) 8%,rgba(221,221,255,1) 11%,rgba(221,221,255,1) 20%,rgba(144,167,229,1) 50%,rgba(221,221,255,1) 80%,rgba(221,221,255,1) 89%,rgba(221,221,255,0.8) 93%,rgba(221,221,255,0) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(221,221,255,0) 0%,rgba(221,221,255,0.8) 8%,rgba(221,221,255,1) 11%,rgba(221,221,255,1) 20%,rgba(144,167,229,1) 50%,rgba(221,221,255,1) 80%,rgba(221,221,255,1) 89%,rgba(221,221,255,0.8) 93%,rgba(221,221,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ddddff', endColorstr='#00ddddff',GradientType=0 ); /* IE6-9 */
+
+}
+
+.critere_innerDiv { padding : 10px; margin-bottom : 15px; }
+.critere_innerDiv div { margin : 0 }
+.deleteCritere { float : right; }
+
+
+#evtDialog select {
+	width : 100px;
+}
+
+#evtDialog #tableEvts {
+	width : 100%;
+}
+
+#evtDialog #tableEvts td {
+	border: 1px solid #4297D7;
+}
+
+#evtDialog h2 {
+	margin-bottom : 0;
+}
+
+#evtDialog #tableEvts_length {
+	display : none;
+}
+
+
+
+#edit_user_profil {
+float : right;
+width : 50%;
+min-width : 30%;
+}
+
+#edit_user_profil select {
+width : 100%;
+}
+
+#profil_available, #available_user_select, #available_profile_select {
+background : url('images/fond_select_dispo.png') no-repeat center center #FFF;
+}
+
+#profil_linked, #linked_user_select, #linked_profile_select {
+background : url('images/fond_select_affecte.png') no-repeat center center #FFF;
+}
+
+
+
+
+#allowUserDialog select, #allowProfileDialog select, #attachTagDialog select, #allowEditVideoProfileUserDialog select {
+width : 290px;
+margin-bottom : 20px;
+}
+
+
+
+.accordeon-blue.ui-state-default {
+	// background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_glass_85_dfeffc_1x400.png") repeat-x scroll 50% 50% #EE322A;
+}
+
+.accordeon-darkblue.ui-accordion-header.ui-state-active,
+.accordeon-darkblue.ui-state-default {
+	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_15_0b3e6f_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : white;
+}
+
+.accordeon-darkblue.ui-accordion-header.ui-state-active {
+	color : #a1cfff;
+}
+
+.accordeon-darkblue.ui-state-default .ui-icon {
+	background-image : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_6da8d5_256x240.png");
+}
+
+
+.accordeon-red.ui-accordion-header.ui-state-active,
+.accordeon-red.ui-state-default {
+	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_55_ee322a_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : #a3000a;
+	text-shadow: 0 0 1px white, 0 0 2px white;
+}
+
+.accordeon-red.ui-state-default .ui-icon {
+	background-image : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_cd0a0a_256x240.png");
+}
+
+.accordeon-red.ui-accordion-header.ui-state-active {
+	color : #bb0007;
+}
+
+.accordeon-yellow.ui-accordion-header.ui-state-active,
+.accordeon-yellow.ui-state-default {
+	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_75_d5ce00_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : #c66400;
+	text-shadow: 0 0 1px white, 0 0 2px white;
+}
+
+
+.accordeon-orange.ui-state-default .ui-icon, 
+.accordeon-yellow.ui-state-default .ui-icon {
+	background-image : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_b74400_256x240.png");
+}
+
+.accordeon-orange.ui-accordion-header.ui-state-active,
+.accordeon-yellow.ui-accordion-header.ui-state-active {
+	color : #c53d00;
+}
+
+.accordeon-orange.ui-accordion-header.ui-state-active,
+.accordeon-orange.ui-state-default {
+	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_75_f88300_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color: #c65000;
+    text-shadow: 0 0 1px white, 0 0 2px white;
+}
+
+
+.accordeon-pink.ui-accordion-header.ui-state-active,
+.accordeon-pink.ui-state-default {
+	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_75_ff7ee8_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : #890072;
+}
+
+.accordeon-pink.ui-state-default .ui-icon {
+	background-image : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_ba079c_256x240.png");
+}
+
+.accordeon-pink.ui-accordion-header.ui-state-active {
+	color : #8300b1;
+}
+
+
+.accordeon-green.ui-accordion-header.ui-state-active,
+.accordeon-green.ui-state-default {
+	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_33_419702_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : #b3ffb2;
+}
+
+.accordeon-green.ui-state-default .ui-icon {
+	background-image : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_c1ffc2_256x240.png");
+}
+
+.accordeon-green.ui-accordion-header.ui-state-active {
+	color : #FFF;
+}
+
+#editDiv .evts_div ul {
+	display : inline-table;	
+	margin-left : 10px;
+}
+
+.evts_div ul li {
+	margin : 0;
+	font-size : 14px;
+}
+.tag, .critere_innerDiv div.tag {
+	background-color : #EEE;
+	border : 1px solid #CCC;
+	border-radius : 4px;
+	float: left;
+	padding: 0 10px;
+	margin-right : 10px;
+}
+
+.tag img {
+	vertical-align: sub;
+}
+
+
+
+
+
+
+
+#allowed_videos_dialog {
+	background-color : #EEF;
+}
+
+#allowed_videos_dialog h1 {
+	display : none;
+}
+
+#allowed_videos_dialog .listeDiv {
+	margin-bottom : 15px;
+}

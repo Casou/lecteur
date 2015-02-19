@@ -1,0 +1,264 @@
+#liste_playlist {
+	width : 275px;
+	float : left;
+}
+
+#contenu_playlist {
+	margin-left : 290px;
+}
+
+.playlist_list {
+	border : 1px solid #4297D7;
+	border-radius : 7px;
+	margin-bottom : 25px;
+	background-color : white;
+}
+
+.playlist_list_ul {
+	display : block;
+}
+
+.playlist_list .playlist_list_title,
+#playlist_video_list_order h2,
+#playlist_video_list_rights h2  {
+	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png") repeat-x scroll 50% 50% #5c9ccc;
+	font-weight : bold;
+	text-align : center;
+	font-size : 16px;
+	padding : 2px 0 4px;
+}
+
+.playlist_list ul {
+	list-style-type : none;
+	padding : 0;
+	margin : 7px 0 0 0;
+}
+
+.playlist_list ul li {
+	margin : 0;
+}
+
+.playlist_list ul li a {
+	float : left;
+	width : 85%;
+	padding : 0 0 0 10px;
+	line-height : 24px;
+	box-sizing: border-box;
+	color : black;
+}
+
+.playlist_list ul li a:hover {
+background-color : #FEE47B;
+}
+
+.playlist_list ul li.empty a {
+	color : #777;
+	font-style : italic;
+	cursor : default;
+}
+
+.playlist_list ul li.empty a:hover {
+	background-color : #ddd;
+}
+
+.playlist_list ul li a.playlist_list_edit {
+	float : right;
+	width : 15%;
+	cursor : pointer;
+}
+
+.playlist_list ul li .playlist_creator {
+	font-style : italic;
+	font-size : 12px;
+}
+
+
+
+
+.playlist_list .clear {
+	height : 7px;
+}
+
+
+
+#playlist_lecteur {
+	margin : auto;
+	background : black;
+	color : white;
+	width : 950px;
+	border : 1px solid #777;
+}
+
+#playlist_lecteur #playlist_lecteur_titre {
+	width : 100%;
+	padding : 2px 10px;
+	font-weight : bold;
+}
+
+#playlist_lecteur #playlist_lecteur_video video,
+#playlist_lecteur #playlist_lecteur_video ul {
+	float : left;
+}
+
+#playlist_lecteur #playlist_lecteur_video ul {
+	list-style-type : none;
+	margin : 0;
+	padding: 0;
+	max-height: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 310px;
+}
+
+
+#playlist_video_list_order #playlist_video_list li,
+#playlist_lecteur #playlist_lecteur_video ul li {
+	height : 50px;
+	margin : 0;
+}
+
+#playlist_lecteur #playlist_lecteur_video ul li.selected {
+	background-color : #555;
+}
+
+#playlist_lecteur #playlist_lecteur_video ul li a {
+	float : left;
+	width : 100%;
+	height : 100%;
+	/* line-height : 25px; */
+	padding-left : 10px;
+	color : white;
+	white-space: nowrap;
+	overflow: hidden;
+	-o-text-overflow: ellipsis; /* pour Opera 9 */
+	text-overflow: ellipsis; /* pour le reste du monde */
+}
+
+#playlist_lecteur #playlist_lecteur_video ul li a:hover {
+	background-color : #444;
+}
+
+#playlist_video_list_order #playlist_video_list li span.video_thumbnail img, 
+#playlist_lecteur #playlist_lecteur_video ul li a img {
+	height : 40px;
+	width : 60px;
+	margin-top : 5px;
+	float : left;
+}
+
+#playlist_lecteur #playlist_lecteur_video ul li a .video_title {
+	margin-left : 10px;
+}
+
+#playlist_lecteur #playlist_lecteur_video ul li a .video_event {
+	margin-left : 10px;
+	font-style : italic;
+	font-size : 14px;
+}
+
+
+#playlist_lecteur_passes {
+	width : 100%;
+	height : 150px;
+	background : white;
+	color : black;
+	overflow : auto;
+}
+
+
+
+#playlist_video_list_order,
+#playlist_video_list_rights {
+	background : white;
+	border : 1px solid #4297D7;
+	border-radius : 10px;
+	margin-bottom : 25px;
+	box-shadow : 2px 2px 2px #aaa, 4px 4px 4px #aaa;
+}
+
+#playlist_video_list_order h2,
+#playlist_video_list_rights h2 {
+	margin : 0; // margin : 0 0 10px 0;
+	padding-left : 15px;
+	// font-size : 24px;
+	text-align : left;
+}
+
+#playlist_video_list_order #playlist_video_list { 
+	list-style-type: none; 
+	padding: 0; 
+	width: 60%; 
+	margin : 7px 15px;
+}
+
+#playlist_video_list_order #playlist_video_list li { 
+	margin: 0; 
+	padding: 4px 20px 5px; 
+	font-size: 16px; 
+	line-height: 25px;
+	cursor : move;
+	border : 1px solid #777;
+	background-color : white;
+}
+#playlist_video_list_order #playlist_video_list li span.ui-icon { 
+	position : absolute; 
+	margin : 17px 0 0 -17px; 
+}
+
+#playlist_video_list_order #playlist_video_list li span.video_title,
+#playlist_video_list_order #playlist_video_list li span.video_evenement {
+	position : absolute;
+	margin-left : 15px;
+}
+
+#playlist_video_list_order #playlist_video_list li span.video_evenement { 
+	font-size : 13px;
+	font-style: italic;
+}
+
+#playlist_video_list_order #playlist_video_list li span.video_delete { 
+	float : right;
+}
+
+#playlist_video_list_rights table {
+	margin : 0 0 10px 15px;
+}
+
+#playlist_video_list_rights table tr {
+	border : 1px solid #777;
+}
+
+.playlist_rights_user {
+	width : 200px;
+}
+.playlist_rights_check {
+	text-align : center;
+	width : 100px;
+}
+
+
+
+
+
+
+.playlist_action_bar {
+background-color : #F5F5FA;
+width : 100%;
+height : 20px;
+border-bottom : 1px solid #888;
+margin-bottom : 15px;
+}
+
+.playlist_action_bar input {
+background-color : white;
+font-weight : bold;
+margin : 0;
+border : 1px solid #888;
+cursor : pointer;
+}
+
+.playlist_action_bar input:hover {
+background-color : #DDD;
+-webkit-transition: background-color 0.5s; /* For Safari 3.1 to 6.0 */
+transition: background-color 0.5s;
+}

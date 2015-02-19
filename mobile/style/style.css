@@ -1,0 +1,28 @@
+.ui-body {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.ui-body-a {
+	background: none;
+}
+
+#diconnect {
+	background: none repeat scroll 0 0 #E32E34;
+	border-color: #7C191C;
+	color: #FFFFFF;
+}
+
+#diconnect:hover {
+	background: none repeat scroll 0 0 #FF343B;
+	border-color: #8C1C20;
+	color: #FFFFFF;
+}
+
+#diconnect:hover.ui-focus {
+	box-shadow: 0 0 12px FFA53F;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}

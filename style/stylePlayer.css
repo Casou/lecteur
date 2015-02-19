@@ -1,0 +1,112 @@
+.playerDialog_div {
+	padding : 0;
+}
+
+.playerDialog_div .ui-dialog-titlebar {
+	margin : 0.2em;
+}
+
+#playerDialog {
+	padding : 0;
+}
+
+#playerDialog video {
+	margin-top : 10px;
+}
+
+
+#playerDialog .srt {
+	background : url("images/background_srt.png");
+    border-radius: 5px 5px 5px 5px;
+    border : 1px #AAAAAA solid;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    height: 35px;
+    margin-left: 11%;
+    margin-top: -75px;
+    padding: 2px 2%;
+    position: absolute;
+    text-align: center;
+    width: 70%;
+    z-index: 999999999;
+}
+
+#playerDialog .srt .text {
+    opacity: 0.6;
+}
+
+#playerPasses {
+	text-align : left;
+	height : 197px;
+	overflow : auto;
+	margin : 0 15px;
+}
+
+#shareVideo {
+	text-align : left;
+	font-size : 16px;
+	background-color : #DDD;
+	font-weight: bold;
+    padding: 5px 0 5px 19px;
+}
+
+#shareVideoKey {
+	background : transparent;
+	border : 1px solid #999;
+	width : 530px;
+	cursor : text;
+	padding : 2px 3px 0;
+	display : none;
+}
+
+
+#player_srt_close img {
+	margin-left: 48%;
+    top: -10px;
+    position: absolute;
+    z-index: 999999999;
+}
+
+a.playerGoto {
+	color : blue;
+}
+
+a.playerGoto:hover {
+	text-decoration : underline;
+}
+
+
+
+
+
+#usePlaylistDialog table {
+	width : 100%;
+}
+
+#usePlaylistDialog table th {
+	width : 50%;
+	text-align : center;
+	font-size : 24px;
+	line-height : 50px;
+}
+
+#usePlaylistDialog table th:first-of-type,
+#usePlaylistDialog table td:first-of-type {
+	border-right : 1px solid #333;
+}
+
+
+#usePlaylistDialog table td {
+	text-align : center;
+	font-size : 15px;
+	line-height : 40px;
+}
+
+#usePlaylistDialog table td input, #usePlaylistDialog table td select {
+	width : 80%;
+}
+
+#usePlaylistDialog button {
+	margin-top : 20px;
+}

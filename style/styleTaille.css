@@ -1,0 +1,157 @@
+#manageTreatedVideoTable td.id {
+	width : 5%;
+}
+
+#manageTreatedVideoTable td.nom_affiche {
+	width : 40%;
+}
+
+#manageTreatedVideoTable td.nom_affiche input {
+	width : 94%;
+}
+
+#manageTreatedVideoTable td.type {
+	width : 9%;
+}
+
+#manageTreatedVideoTable td.evenement {
+	width : 21%;
+}
+
+#manageTreatedVideoTable td.duree {
+	width : 5%;
+	text-align : right;
+}
+
+#manageTreatedVideoTable td.action {
+	width : 20%;
+}
+
+
+
+
+@media (min-width: 1200px) {
+	#manageTreatedVideoTable {
+		font-size : 14px;
+	}
+	
+	#manageTreatedVideoTable img {
+		width : 32px;
+	}
+	
+}
+
+
+@media (min-width: 800px) and (max-width: 1199px) {
+	#manageTreatedVideoTable {
+		font-size : 12px;
+	}
+	
+	#manageTreatedVideoTable img {
+		width : 26px;
+	}
+	
+	#manageTreatedVideoTable .action {
+		min-width : 85px;
+	}
+	
+	#bodyContent {
+		margin-left : 165px;
+	}
+	
+	#bodyContent #title h1 {
+	    font-size : 22px;
+	    padding-left : 180px;
+	}
+
+	#menu {
+		width : 140px;
+	}
+	
+	#collapse_menu {
+		left : 165px;
+	}
+	
+	#menu_bar {
+		left : 155px;
+	}
+	
+	#menu h1, h1, #indexStatTable th {
+		font-size : 24px;
+	}
+	#menu_list li.level_1 {
+		font-size : 18px;
+		margin-top : 7px;
+		padding-top : 7px;
+	}
+	
+	#menu_list li.level_2 {
+		font-size : 15px;
+	}
+	
+	#indexStatTable td {
+		font-size : 16px;
+	}
+	
+	#manageTreatedVideoTable td.nom_affiche input {
+		width : 91%;
+	}
+	
+}
+
+@media (max-width: 799px) {
+	#manageTreatedVideoTable {
+		font-size : 10px;
+	}
+	
+	#manageTreatedVideoTable img {
+		width : 18px;
+	}
+	
+	#manageTreatedVideoTable .action {
+		min-width : 65px;
+	}
+	
+	#bodyContent #title h1 {
+	    font-size : 20px;
+	    padding-left : 160px;
+	}
+	
+	#bodyContent {
+		margin-left : 150px;
+	}
+	
+	#menu {
+		width : 120px;
+	}
+	
+	#collapse_menu {
+		left : 145px;
+	}
+	
+	#menu_bar {
+		left : 135px;
+	}
+	
+	#menu h1, h1, #indexStatTable th {
+		font-size : 20px;
+	}
+	#menu_list li.level_1 {
+		font-size : 16px;
+		margin-top : 4px;
+		padding-top : 4px;
+	}
+	
+	#menu_list li.level_2 {
+		font-size : 13px;
+	}
+	
+	#indexStatTable td {
+		font-size : 15px;
+	}
+	
+	#manageTreatedVideoTable td.nom_affiche input {
+		width : 88%;
+	}
+
+}

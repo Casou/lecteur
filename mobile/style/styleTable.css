@@ -1,0 +1,131 @@
+.table_result {
+background-color : white;
+margin-bottom : 20px;
+}
+
+.table_result th, .table_result td {
+border : 1px #A6C9E2 solid;
+padding : 0 3px;
+}
+
+.table_result th {
+color : #2255AA;
+background-color : #CCEEFF;
+text-shadow : none;
+}
+
+.table_result td {
+font-size : 14px;
+}
+
+.table_result th.title {
+	background : #007DD0;
+	color : white;
+}
+
+.table_result .nom_affiche {
+width : 35%;
+}
+
+.table_result .nom_affiche .evenement {
+	color : #555;
+	font-size : 11px;
+}
+
+.table_result .type {
+width : 7%;
+}
+
+.table_result .danses {
+width : 8%;
+}
+
+.table_result .danses div {
+	max-width : 50px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table_result .passes {
+width : 35%;
+}
+
+.table_result .profs {
+width : 15%;
+}
+
+.table_result .profs div {
+	max-width : 85px;
+	max-height : 150px;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table_result .tr_video:hover {
+background-color : #ffd65c;
+cursor : pointer;
+}
+
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+	.table_result th {
+		font-size : 15px;
+	}
+	.table_result td {
+		font-size : 12px;
+	}
+	.table_result .nom_affiche .evenement {
+		font-size : 9px;
+	}
+	
+	.table_result .danses div {
+		max-width : 40px;
+	}
+}
+
+@media screen and (min-width: 400px) and (max-width: 600px) {
+	.table_result th {
+		font-size : 11px;
+	}
+	.table_result td {
+		font-size : 9px;
+	}
+	.table_result .nom_affiche .evenement {
+		font-size : 8px;
+	}
+	
+	.table_result .danses div {
+		max-width : 40px;
+	}
+	
+	.table_result .type {
+		display : none;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.table_result th {
+		font-size : 9px;
+	}
+	.table_result td {
+		font-size : 7px;
+	}
+	.table_result .nom_affiche .evenement {
+		font-size : 6px;
+	}
+	
+	.table_result .danses div {
+		max-width : 20px;
+	}
+	
+	.table_result .type {
+		display : none;
+	}
+	
+	.table_result .profs {
+		display : none;
+	}
+}
+

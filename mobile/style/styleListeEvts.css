@@ -1,0 +1,30 @@
+#evenements div h3, #evenements div h3 a {
+	font-size : 16px;
+}
+
+#evenements .ui-collapsible-content {
+	padding : 0;
+}
+
+#evenements .table_result {
+	margin : 0;
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+	#evenements div h3, #evenements div h3 a {
+		font-size : 15px;
+	}
+}
+
+@media screen and (min-width: 400px) and (max-width: 600px) {
+	#evenements div h3, #evenements div h3 a {
+		font-size : 14px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	#evenements div h3, #evenements div h3 a {
+		font-size : 12px;
+	}
+}
+

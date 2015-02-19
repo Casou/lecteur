@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+.dataTables_wrapper table {
+	border-collapse : collapse;
+}
+
+.dataTables_length, .dataTables_info {
+float : left; 
+padding : 5px;
+}
+
+.dataTables_filter, .dataTables_paginate {
+float : right; 
+padding : 5px;
+}
+
+.css_right {
+    float: right;
+}
+
+.dataTables_wrapper .ui-buttonset .ui-button {
+    margin-right: -0.1em;
+    padding: 0 8px;
+}
+
+.ui-buttonset .ui-button.ui-state-disabled {
+	background-color : #DDDDDD;
+	color : #666666;
+	opacity : 0.6;
+}
+
+.DataTables_sort_wrapper {
+	cursor : pointer;
+}

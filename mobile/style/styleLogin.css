@@ -1,0 +1,11 @@
+#loginPage div[data-role=page] div[data-role=content] div {
+	margin-bottom : 10px;
+}
+
+.ui-content {
+	background : #e7f8ff;
+}
+
+.ui-content .ui-body-a {
+	background : #ffffff;
+}
