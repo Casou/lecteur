@@ -56,3 +56,4 @@ ressources/video_traitees/*
 *.zip
 .settings*
 lecteur
+constantsPrivate.php

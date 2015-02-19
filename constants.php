@@ -8,18 +8,6 @@ define('APPLICATION_VERSION', '2.4.1');
 define('URL_APPLICATION', 'http://basile.parent.free.fr/lecteur');
 define('ABSOLUTE_PATH', '/lecteur/');
 
-/*
-DEFINE('DB_HOST', 'sql.free.fr');
-DEFINE('DB_USER', 'basile.parent');
-DEFINE('DB_PASSWORD', 'jiraigum');
-DEFINE('DB_NAME', '');
-*/
-
-DEFINE('DB_HOST', 'localhost');
-DEFINE('DB_USER', 'root');
-DEFINE('DB_PASSWORD', '');
-DEFINE('DB_NAME', 'stages');
-
 
 DEFINE('ENCODING_STATE_WAITING', 1);
 DEFINE('ENCODING_STATE_RUNNING', 2);
