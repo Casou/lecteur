@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-$pathToPhpRoot = "..";
-include_once "$pathToPhpRoot/includes.php";
+$pathToPhpRoot = "../";
+include_once $pathToPhpRoot."includes.php";
+Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
 
 if (isset($_POST["login"]) && isset($_POST["password"])) {
 	$user = MetierUser::login($_POST["login"], $_POST["password"]);
