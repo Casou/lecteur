@@ -1,9 +1,9 @@
 <?php
 session_start();
-$pathToPhpRoot = "../..";
+$pathToPhpRoot = "../../";
 
-include_once "$pathToPhpRoot/includes.php";
-include_once "$pathToPhpRoot/ajaxController/ajaxResponseObject.php";
+include_once $pathToPhpRoot."includes.php";
+include_once $pathToPhpRoot."ajaxController/ajaxResponseObject.php";
 
 header('Content-Type: text/html; charset=utf-8');
 
@@ -16,7 +16,7 @@ if (!isset($_POST['evenement']) || !isset($_POST['danse'])) {
 $id_evenement = $_POST['evenement'];
 $id_danse = $_POST['danse'];
 
-$videos = MetierVideo::getVideoByDanseAndEvenementWithAttributes($id_danse, $id_evenement);
+$videos = MetierVideo::getVideoByDanseAndEvenementWithAttributes($id_danse, $id_evenement, $_SESSION['userId']);
 
 include "../liste_tableauAjax.php";
 ?>

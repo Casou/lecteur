@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-$pathToPhpRoot = "..";
-include_once '../fwk/php/includeFwk.php';
+$pathToPhpRoot = "../";
+include_once $pathToPhpRoot.'fwk/php/includeFwk.php';
 
 header('Content-Type: text/html; charset=utf-8');
 

@@ -57,3 +57,4 @@ ressources/video_traitees/*
 .settings*
 lecteur
 constantsPrivate.php
+*.bak

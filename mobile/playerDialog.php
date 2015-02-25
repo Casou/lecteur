@@ -1,6 +1,6 @@
 <?php 
-$pathToPhpRoot = "..";
-include_once "$pathToPhpRoot/includes.php";
+$pathToPhpRoot = "../";
+include_once $pathToPhpRoot."includes.php";
 
 ?>
 <div id="playerDialog" data-role="dialog" title="Visualisation" style="text-align : center">
@@ -24,7 +24,7 @@ include_once "$pathToPhpRoot/includes.php";
 		<h1><?= $video->nom_affiche ?></h1>
 	
     	<video id="player" title="Prévisualisation" width="90%" controls>
-    		<source src="<?= $pathToPhpRoot."/".changeBackToSlash(PATH_CONVERTED_FILE)."/".$video->nom_video ?>"></source>
+    		<source src="<?= $pathToPhpRoot.changeBackToSlash(PATH_CONVERTED_FILE)."/".$video->nom_video ?>"></source>
 		</video>
 		
 		<div id="playerPasses">
@@ -63,5 +63,6 @@ include_once "$pathToPhpRoot/includes.php";
 			    return s;
 			  }
 		</script>
+		
 	</div>
 </div>

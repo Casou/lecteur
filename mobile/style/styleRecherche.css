@@ -1,0 +1,65 @@
+div.ui-select {
+	margin : 20px 0;
+}
+
+#event_search table td, #prof_search table td {
+	width : 45%;
+	vertical-align: top;
+}
+
+#linkedEvents, #linkedProfs {
+	padding-left : 10px;	
+}
+
+#linkedEvents h2, #linkedProfs h2 {
+	margin : 0;
+	font-size : 15px;
+}
+
+#linkedEvents ul, #linkedProfs ul {
+	margin : 0;
+}
+
+#linkedEvents div, #linkedProfs div {
+	font-size : 12px;
+	margin-bottom : 7px;
+}
+
+.ui-listview.autocomplete li {
+	font-size : 12px;
+}
+
+.ui-listview.autocomplete {
+	margin-top: -5px;
+    position: absolute;
+    width: 50%;
+    z-index: 9999999;
+}
+
+
+#table_resultat {
+	margin-top : 15px;
+	font-size : 10px;
+}
+
+#table_resultat .tr_video {
+	background-color : white;
+}
+
+#table_resultat .tr_video:hover {
+	background-color : #ffd65c;
+	cursor : pointer;
+}
+
+#table_resultat th {
+	border : 1px solid #a6c9e2;
+	background-color: #cceeff;
+    color: #2255aa;
+    text-shadow: none;
+}
+
+#table_resultat td {
+	border : 1px solid #a6c9e2;
+}
+
+

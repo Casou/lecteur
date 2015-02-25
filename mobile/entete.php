@@ -47,16 +47,20 @@ header('Content-Type: text/html; charset=utf-8');
 	<link rel="stylesheet" href="style/styleTable.css" />
 	<link rel="stylesheet" href="style/styleDialog.css" />
 	<link rel="stylesheet" href="style/styleListeEvts.css" />
+	<link rel="stylesheet" href="style/styleRecherche.css" />
+	<link rel="stylesheet" href="style/stylePlaylist.css" />
 	
 	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery.mobile-1.4.0.min.js"></script>
 	<script type="text/javascript" src="../js/common.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.0.custom.min.js"></script>
 	
 </head>
 
 <body>
 
-<div data-role="page" data-theme="a">
+<div data-role="page" data-theme="a" id="divPage">
 	<div data-role="header" data-position="inline" data-theme="a">
 		<a href="index.php" data-form="ui-icon" title="Accueil" data-role="button" role="button"
 			class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow"> 
