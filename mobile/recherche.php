@@ -134,10 +134,12 @@ function deleteProfesseur(id) {
 
 
 function research() {
+	showLoadingPopup();
 	$.ajax({
 		type: 'POST', // Le type de ma requete
 		url: 'rechercheResultat.php', // L'url vers laquelle la requete sera envoyee
 		dataType : 'html',
+		async : false,
 		data: {
 			formulaire: $('#rechercheForm').serialize() // Les donnees que l'on souhaite envoyer au serveur au format JSON
 		},
@@ -150,6 +152,7 @@ function research() {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
 		}
 	});
+	hideLoadingPopup();
 }
 
 
@@ -190,12 +193,6 @@ var professeurs = [
 	?> 
 ];
 
-
-$(document).ready(function() {
-	
-
-
-});
 
 $(document).on( "pageinit", "#divPage", function() {
 	$( "#rechercheEvenementAutocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
@@ -260,7 +257,7 @@ $( document).on( "click", "#rechercheProfAutocomplete li", function() {
 </script>
 
 <?php
-//include "playerDialog.php";
+include "playerPopup.php";
 
 include_once "pied.php";
 ?>

@@ -83,7 +83,7 @@ $allEvenements = MetierEvenement::getAllEvenementWithVideoCountByDanse($id_danse
 </script>
 
 <?php
-include "playerDialog.php";
+include "playerPopup.php";
 
 include_once "pied.php";
 ?>

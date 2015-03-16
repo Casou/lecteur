@@ -16,8 +16,9 @@ $randomId = generateRandom();
 		foreach ($videos as $videoDTO) {
 			$video = $videoDTO->video;
 		?>
-		<tr onClick='openDialog(<?= $video->id ?>)' class="tr_video">
-			<td class="nom_affiche"><?= $video->nom_affiche ?>
+		<tr onClick='openPlayer(<?= $video->id ?>)' class="tr_video">
+			<td class="nom_affiche">
+				<?= $video->nom_affiche ?>
 			</td>
 			<td class="type"><?= $video->type ?></td>
 			<td class="danses">
@@ -53,11 +54,3 @@ $randomId = generateRandom();
 		<?php } // end foreach tbody ?>
 	</tbody>
 </table>
-
-
-<script>
-function openDialog(id) {
-	$.mobile.changePage( "playerDialog.php?id=" + id, { role: "dialog" } );
-}
-
-</script>

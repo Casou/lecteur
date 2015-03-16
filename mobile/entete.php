@@ -52,13 +52,16 @@ header('Content-Type: text/html; charset=utf-8');
 	
 	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery.mobile-1.4.0.min.js"></script>
-	<script type="text/javascript" src="../js/common.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.10.0.custom.min.js"></script>
 	
 </head>
 
 <body>
+
+<div id="loadingPopup">
+	<img src="../style/images/loading_popup.gif" alt="Loading..." />
+</div>
 
 <div data-role="page" data-theme="a" id="divPage">
 	<div data-role="header" data-position="inline" data-theme="a">

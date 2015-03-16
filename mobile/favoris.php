@@ -37,7 +37,7 @@ $allDansesFavori = MetierVideo::getAllVideosWithAttributesFavori();
 				$evenement = $videoDTO->evenement;
 				$labelEvenement = "$evenement->date - $evenement->nom - $evenement->ville";
 			?>
-			<tr onClick='openDialog(<?= $video->id ?>)' class="tr_video">
+			<tr onClick='openPlayer(<?= $video->id ?>)' class="tr_video">
 				<td class="nom_affiche">
 					<?= $video->nom_affiche ?>
 					<br/>
@@ -73,13 +73,8 @@ $allDansesFavori = MetierVideo::getAllVideosWithAttributesFavori();
 
 </div>
 
-<script>
-function openDialog(id) {
-	$.mobile.changePage( "playerDialog.php?id=" + id, { role: "dialog" } );
-}
-
-</script>
-
 <?php
+include "playerPopup.php";
+
 include_once "pied.php";
 ?>

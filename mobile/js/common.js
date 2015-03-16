@@ -1,9 +1,9 @@
 function showLoadingPopup() {
-	
+	$('#loadingPopup').show();
 }
 
 function hideLoadingPopup() {
-	
+	$('#loadingPopup').hide();
 }
 
 function toSeconds(t) {

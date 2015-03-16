@@ -1,5 +1,12 @@
-#playerDialog .ui-dialog-contain .ui-content {
+#playerDialog-popup {
+	width: 80%;
+    left: 10%;
+    right: 10%
+}
+
+#playerDialog .ui-content {
 	background-color : white;
+	padding : 10px;
 }
 
 #playerDialog .ui-content h1 {

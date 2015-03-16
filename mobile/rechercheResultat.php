@@ -4,6 +4,7 @@ session_start();
 
 $pathToPhpRoot = "../";
 include_once $pathToPhpRoot."includes.php";
+$NB_VIDEOS_LIMIT = 50;
 
 ?>
 
@@ -21,9 +22,6 @@ function modifyCriteria() {
 	$('#div_recherche').show();
 }
 
-function openDialog(id) {
-	$.mobile.changePage( "playerDialog.php?id=" + id, { role: "dialog" } );
-}
 
 //-->
 </script>
@@ -32,8 +30,12 @@ function openDialog(id) {
 
 <?php 
 $formulaire = $_POST['formulaire'];
-$videos = MetierVideo::research($formulaire);
+$videos = MetierVideo::research($formulaire, $NB_VIDEOS_LIMIT);
 ?>
+
+<?php if (count($videos) == $NB_VIDEOS_LIMIT) { ?>
+<p class="research_limit">ATTENTION : Seuls les 50 premiers éléments sont affichés.</p>
+<?php } ?>
 
 <table id="table_resultat">
 	<thead>
@@ -53,7 +55,7 @@ $videos = MetierVideo::research($formulaire);
 			$evenement = $videoDTO->evenement;
 			$labelEvenement = "$evenement->date - $evenement->nom - $evenement->ville";
 		?>
-		<tr onClick='openDialog(<?= $video->id ?>)' class="tr_video">
+		<tr onClick='openPlayer(<?= $video->id ?>)' class="tr_video">
 			<td class="nom_affiche">
 				<?= $video->nom_affiche ?>
 				<br/>

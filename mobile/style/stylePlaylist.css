@@ -85,6 +85,11 @@ vertical-align : sub;
 	list-style-type : none;
 	padding : 10px;
 	height: 50px;
+	overflow : hidden;
+	white-space : nowrap;
+	-o-text-overflow: ellipsis; /* pour Opera 9 */
+	text-overflow: ellipsis; /* pour le reste du monde */
+	max-width : 100%;
 }
 
 #div_playlist_lecteur_menu ul li.selected,
