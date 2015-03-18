@@ -114,7 +114,18 @@ $randomId = generateRandom();
 	$(document).ready(function() {
 		$('#<?= $randomId ?>').dataTable( {
 			"bJQueryUI": true,
-			"iDisplayLength": -1,
+			"oLanguage": {
+				"sLengthMenu": "Afficher _MENU_ enregistrements par page",
+				"sZeroRecords": "Aucun enregistrement",
+				"sInfo": "Enregistrement n°_START_ à _END_ / _TOTAL_",
+				"sInfoEmpty": "Pas d'enregistrement à afficher",
+				"sInfoFiltered": "(filtré sur _MAX_ enregistrements)"
+			},
+			"iDisplayLength": <?= VIDEO_PAGINATION_DEFAULT ?>,
+			"aLengthMenu": [
+							 [<?= VIDEO_PAGINATION_NB ?>],
+							 [<?= VIDEO_PAGINATION_STRING ?>]
+						],
 			"aoColumns": [
 				{ "bSortable": false },
 				{ "bSortable": false },
@@ -129,6 +140,10 @@ $randomId = generateRandom();
 			"aaSorting": [[ 3, "asc" ]]
 		});
 
+		<?php if (count($videos) >  VIDEO_PAGINATION_DEFAULT ) { ?>
+			$('.categories .fg-toolbar').css('display', 'block');
+			$('#manageRawVideo .fg-toolbar').css('display', 'block');
+		<?php } ?>
 	});
 
 </script>

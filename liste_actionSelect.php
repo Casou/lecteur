@@ -1,9 +1,9 @@
 <?php
 
-include_once $pathToPhpRoot.'popupAllowUser.php';
-include_once $pathToPhpRoot.'popupAllowProfile.php';
-include_once $pathToPhpRoot.'popupPlaylist.php';
-include_once $pathToPhpRoot.'popupAttachTag.php';
+//include_once $pathToPhpRoot.'popupAllowUser.php';
+//include_once $pathToPhpRoot.'popupAllowProfile.php';
+//include_once $pathToPhpRoot.'popupPlaylist.php';
+//include_once $pathToPhpRoot.'popupAttachTag.php';
  
 $showAction = false;
 foreach($DROIT_ACTION as $droit) {
@@ -31,25 +31,83 @@ if($showAction) { ?>
 	</select>
 <?php } ?>
 
+<div id="popup_html"></div>
+
 <script type="text/javascript">
 	function masterCheckbox(id) {
 		$('#' + id + ' .check_video').prop('checked', $('#' + id + ' .masterCheckbox').prop('checked')); 
 	}
 
 	function popupUser() {
-		openAllowUserDialog($('.check_video:checked'));
+		showLoadingPopup();
+		$.ajax({
+			type: 'POST', 
+			url: '<?= $pathToPhpRoot ?>popupAllowUser.php',
+			dataType : 'html',
+			async : false,
+			success: function(data, textStatus, jqXHR) {
+				$('#popup_html').html(data);
+				openAllowUserDialog($('.check_video:checked'));
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Une erreur est survenue : \n" + jqXHR.responseText);
+			}
+		});
+		hideLoadingPopup();
 	}
 
 	function popupProfile() {
-		openAllowProfileDialog($('.check_video:checked'));
+		showLoadingPopup();
+		$.ajax({
+			type: 'POST', 
+			url: '<?= $pathToPhpRoot ?>popupAllowProfile.php',
+			dataType : 'html',
+			async : false,
+			success: function(data, textStatus, jqXHR) {
+				$('#popup_html').html(data);
+				openAllowProfileDialog($('.check_video:checked'));
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Une erreur est survenue : \n" + jqXHR.responseText);
+			}
+		});
+		hideLoadingPopup();
 	}
 
 	function popupPlaylist() {
-		openPlaylistDialog($('.check_video:checked'));
+		showLoadingPopup();
+		$.ajax({
+			type: 'POST', 
+			url: '<?= $pathToPhpRoot ?>popupPlaylist.php',
+			dataType : 'html',
+			async : false,
+			success: function(data, textStatus, jqXHR) {
+				$('#popup_html').html(data);
+				openPlaylistDialog($('.check_video:checked'));
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Une erreur est survenue : \n" + jqXHR.responseText);
+			}
+		});
+		hideLoadingPopup();
 	}
 
 	function popupTag() {
-		openTagVideoDialog($('.check_video:checked'));
+		showLoadingPopup();
+		$.ajax({
+			type: 'POST', 
+			url: '<?= $pathToPhpRoot ?>popupAttachTag.php',
+			dataType : 'html',
+			async : false,
+			success: function(data, textStatus, jqXHR) {
+				$('#popup_html').html(data);
+				openTagVideoDialog($('.check_video:checked'));
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("Une erreur est survenue : \n" + jqXHR.responseText);
+			}
+		});
+		hideLoadingPopup();
 	}
 	
 	$(document).ready(function() {

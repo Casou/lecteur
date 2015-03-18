@@ -17,9 +17,17 @@ Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
 
 $id_evenement = $_POST['evenement'];
 $id_danse = $_POST['danse'];
-$id_user = isset($_POST['id_user']) ? $_POST['id_user'] : $_SESSION['userId'];
 
-$videos = MetierVideo::getVideoByDanseAndEvenementWithAttributes($id_danse, $id_evenement, $id_user);
+
+if (isset($_POST['id_user'])) {
+	$id_user = $_POST['id_user'];
+	$forceVisible = true;
+} else {
+	$id_user = $_SESSION['userId'];
+	$forceVisible = false;
+}
+
+$videos = MetierVideo::getVideoByDanseAndEvenementWithAttributes($id_danse, $id_evenement, $id_user, $forceVisible);
 
 include $pathToPhpRoot."liste_tableauAjax.php";
 ?>

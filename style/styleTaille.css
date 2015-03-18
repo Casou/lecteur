@@ -25,6 +25,7 @@
 
 #manageTreatedVideoTable td.action {
 	width : 20%;
+	min-width : 90px;
 }
 
 

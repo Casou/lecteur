@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+$pathToPhpRoot = './';
+
+include_once $pathToPhpRoot."includes.php";
+Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+
 $usersSelect = MetierUser::getAllUser();
 ?>
 
@@ -110,7 +117,10 @@ $usersSelect = MetierUser::getAllUser();
 			modal: true,
 			width : 670,
 			height : 260,
-			resizable : false
+			resizable : false,
+			close : function(event, ui) {
+				$('#allowUserDialog').dialog( "destroy" );
+			}
 		});
 
 		$("#allowUserDialog button").button({

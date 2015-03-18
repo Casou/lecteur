@@ -46,7 +46,7 @@ function adminUser(id) {
 	showLoadingPopup();
 	$.ajax({
 		type: 'POST', 
-		url: 'adminUser', 
+		url: 'adminUser.php', 
 		dataType : 'html',
 		data: {
 			id : id

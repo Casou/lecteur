@@ -35,7 +35,7 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 						$img = $pathToPhpRoot."ressources/thumbnails/$video->nom_video.jpg";
 					}
 				?>
-				<li id="playlist_video_<?= $video->id ?>" class="playlist_video_li">
+				<li id="playlist_video_<?= $video->id ?>" class="playlist_video_li" title="<?= escapeDoubleQuote($video->nom_affiche) ?>">
 					<a href="#" onClick="launchVideo(<?= $video->id ?>); toggleMenu(); return false;">
 						<img src="<?= $img ?>" />
 						<span class="video_title"><?= $video->nom_affiche ?></span><br/>

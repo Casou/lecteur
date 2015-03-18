@@ -16,6 +16,9 @@ $evenementVideo = MetierEvenement::getEvenementByVideo($id, true);
 $allTags = MetierTag::getAllTag();
 $tagsVideo = MetierTag::getTagByVideo($id);
 
+$allPlaylists = MetierPlaylist::getAllPlaylist();
+$playlistsVideo = MetierPlaylist::getPlaylistForVideo($id);
+
 $passesVideo = MetierPasse::getPasseByVideo($id);
 
 $allProfesseurs = MetierProfesseur::getAllProfesseur();
@@ -30,6 +33,7 @@ $usersSelect = MetierUser::getAllUser();
 $usersAllowed = MetierUser::getUserAllowedForVideo(array($id), true);
 ?>
 
+<div id="message_front"></div>
 
 <div id="title">
 	<h1>Modification des propriétés : <?= $video->nom_video ?></h1>
@@ -132,7 +136,7 @@ $usersAllowed = MetierUser::getUserAllowedForVideo(array($id), true);
 				</div>
 				<?php } ?>
 			</td>
-			<td rowspan="3">
+			<td rowspan="4">
 				<select class="visible_by_select" id="visible_by_profile" name="profils[]" multiple="multiple" onClick="popupEditVideoProfilUser();">
 					<optgroup label="Visibles par (profils)">
 						<?php foreach ($profilAllowed as $profilDto) { 
@@ -199,6 +203,30 @@ $usersAllowed = MetierUser::getUserAllowedForVideo(array($id), true);
 			</td>
 		</tr>
 		
+		
+		<tr>
+			<th>
+				<label for="playlistAutocomplete">Playlists</label>
+			</th>
+			<td style="width : 150px;">
+				<input type="text" id="playlistAutocomplete" name="playlistInput" onKeyPress="cancelEntry(event);" maxlength="50" />
+			</td>
+			<td>
+				<div id="linkedPlaylists">
+				<?php foreach($playlistsVideo as $playlist) {	?>
+					<div id="playlist_<?= $playlist->id ?>" class="playlist">
+						<input type="hidden" name="playlist[]" value="<?= $playlist->id ?>" style="display : none;" />
+						<?= $playlist->nom ?> 
+						<a href="#" onClick="deletePlaylist(<?= $playlist->id ?>); return false;">
+							<img src="style/images/delete_cross.png" />
+						</a>
+					</div>
+				<?php } ?>
+				</div>
+			</td>
+		</tr>
+		
+		
 		<tr>
 			<th>
 				<label for="passesAutocomplete">Passes</label>
@@ -260,15 +288,17 @@ $usersAllowed = MetierUser::getUserAllowedForVideo(array($id), true);
 		<span class="required">*</span> Ces paramètres sont obligatoires.
 	</div>
 
-	<button id="quit" style="float : right;">Quitter</button>
-	
-	<?php if ($previousId != null) { ?>
-	<button id="saveAndPrevious">Sauvegarder et précédente</button>
-	<?php } ?>
-	<button id="saveAndQuit">Sauvegarder et quitter</button>
-	<?php if ($nextId != null) { ?>
-	<button id="saveAndNext">Sauvegarder et suivante</button>
-	<?php } ?>
+	<div>
+		<button id="quit" style="float : right;">Quitter</button>
+		
+		<?php if ($previousId != null) { ?>
+		<button id="saveAndPrevious">Sauvegarder et précédente</button>
+		<?php } ?>
+		<button id="saveAndQuit">Sauvegarder et quitter</button>
+		<?php if ($nextId != null) { ?>
+		<button id="saveAndNext">Sauvegarder et suivante</button>
+		<?php } ?>
+	</div>
 </form>
 
 
@@ -310,7 +340,10 @@ function save($quit) {
 			} else {
 				if ($quit) {
 					// redirect('manageVideos#video_' + $('#id_video').val());
-					window.close();
+					if (!window.close()) {
+						$('#message_front').html('Configuration Firefox : about:config' +
+							'<br />dom.allow_scripts_to_close_windows = true').show();
+					}
 				}
 			}
 		},
@@ -320,7 +353,7 @@ function save($quit) {
 			throw new Exception("Exception reçue lors du save");
 		}
 	});
-	
+
 	$('.visible_by_select option').each(function() {
 		$(this).attr('selected', false);
 	});
@@ -388,6 +421,20 @@ function addTagVideo(id, label) {
 			+ '<img src="style/images/delete_cross.png" /></a>'
 			+ '</div>');
 	$("#tagAutocomplete").val('');
+
+	checkProfileAffected();
+}
+
+function addPlaylistVideo(id, label) {
+	if (label == "") {
+		return;
+	}
+	$("#linkedPlaylists").append('<div id="playlist_' + id + '" class="playlist">'
+			+ '<input type="hidden" name="playlist[]" value="' + id + '" />'
+			+ label + ' <a href="#" onClick="deletePlaylist(' + id + '); return false;">'
+			+ '<img src="style/images/delete_cross.png" /></a>'
+			+ '</div>');
+	$("#playlistAutocomplete").val('');
 }
 
 function addProfesseurVideo(id, label) {
@@ -509,7 +556,17 @@ function deleteTag(id) {
 	}
 	
 	$('#tag_' + id).remove();
+	checkProfileAffected();
 }
+
+function deletePlaylist(id) {
+	if (!confirm('Voulez-vous supprimer cette playlist des propriétés de la vidéo ?')) {
+		return false;
+	}
+	
+	$('#playlist_' + id).remove();
+}
+
 
 function editPasse(baliseA) {
 	var div_parent = $(baliseA).parents('div.passe');
@@ -554,14 +611,22 @@ function setPlayerToTimer(idTimer) {
 
 
 
-
+var lockCheck = false;
+var checkAgain = false;
 function checkProfileAffected() {
+	if (lockCheck) {
+		checkAgain = true;
+		return;
+	}
+
+	$('.visible_by_select').attr('disabled', true);
+	lockCheck = true;
+	checkAgain = false;
 	$('#videoForm input[name=action]').val('checkProfileAffected');
 	$.ajax({
 		type: 'POST', 
 		url: 'ajaxController/manageController.php',
 		dataType : 'json',
-		async : false,
 		data: {
 			formulaire : $('#videoForm').serialize()
 		},
@@ -597,11 +662,18 @@ function checkProfileAffected() {
 							'</option>');
 					}
 				});
-				
+
+				lockCheck = false;
+				if (checkAgain) {
+					checkProfileAffected();
+				} else {
+					$('.visible_by_select').attr('disabled', false);
+				}
 			}
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
+			lockCheck = false;
 		}
 	});
 	
@@ -664,6 +736,24 @@ $(document).ready(function() {
 	  		} 
 			?> 
 		];
+
+	var playlists = [
+				<?php
+				$isFirst = true; 
+				foreach($allPlaylists as $playlist) {
+					if(!$isFirst) {
+						echo ", ";
+		  			}
+		  			?>
+					{
+						 value: "<?= $playlist->id ?>",
+						 label: "<?= $playlist->nom ?>"
+					}
+					<?php
+		  			$isFirst = false;
+		  		} 
+				?> 
+			];
 
 	var professeurs = [
 			<?php
@@ -735,6 +825,25 @@ $(document).ready(function() {
 		},
 	 	select: function( event, ui ) {
 	 		addTagVideo(ui.item.value, ui.item.label);
+			return false;
+		},
+		focus: function(event, ui) { 
+			event.preventDefault(); 
+			$(event.target).val(ui.item.label);
+		}
+	 });
+
+	$( "#playlistAutocomplete" ).autocomplete({
+		minLength: 0,
+		source: function( request, response ) {
+			var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+			response( $.grep( playlists, function( value ) {
+				value = value.label || value.value || value;
+				return matcher.test( value ) || matcher.test( normalize( value ) );
+			}) );
+		},
+	 	select: function( event, ui ) {
+	 		addPlaylistVideo(ui.item.value, ui.item.label);
 			return false;
 		},
 		focus: function(event, ui) { 

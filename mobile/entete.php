@@ -50,6 +50,8 @@ header('Content-Type: text/html; charset=utf-8');
 	<link rel="stylesheet" href="style/styleRecherche.css" />
 	<link rel="stylesheet" href="style/stylePlaylist.css" />
 	
+	<link rel="shortcut icon" HREF="../style/images/icone.png">
+	
 	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery.mobile-1.4.0.min.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>

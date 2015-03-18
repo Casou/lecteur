@@ -11,7 +11,7 @@ class MetierPlaylist {
 			return MetierPlaylist::getAllPlaylist();
 		}
 		
-		// Playlist crées par l'utilisateur + playlist qu'on peut modifier
+		// Playlist crï¿½es par l'utilisateur + playlist qu'on peut modifier
 		$sql = "select * from ".Playlist::getTableName()." where id_user = $id_user ".
 			" UNION ".
 			" select p.* from ".Playlist::getTableName()." p ".
@@ -24,7 +24,14 @@ class MetierPlaylist {
 	public static function getPlaylistCreatedByUser($id_user) {
 		return Database::getResultsObjects("select * from ".Playlist::getTableName()." where id_user = $id_user order by nom ASC", "Playlist");
 	}
-		
+	
+	public static function getPlaylistForVideo($id_video) {
+		$sql = "select p.* from ".Playlist::getTableName()." p ".
+			" inner join ".Playlist::getJoinVideoTableName()." pv on pv.id_playlist = p.id ".
+			" where pv.id_video = $id_video";
+		return Database::getResultsObjects($sql, "Playlist");
+	}
+	
 	public static function getPlaylistWithVideo($id_user, $id_playlist) {
 		$pl = Database::getResultsObjects("select * from ".Playlist::getTableName()." where id = $id_playlist", "Playlist");
 		$pl = $pl[0];
@@ -54,7 +61,9 @@ class MetierPlaylist {
 		foreach($array_do as $do) {
 			$dto = new VideoDTO();
 			$dto->video = $do;
-			$dto->evenement = MetierEvenement::getEvenementById($do->id_evenement);
+			if ($do->id_evenement != null) {
+				$dto->evenement = MetierEvenement::getEvenementById($do->id_evenement);
+			}
 			$array_dto[] = $dto;
 		}
 		
@@ -97,6 +106,18 @@ class MetierPlaylist {
 			}
 		}
 		
+		Database::commit();
+	}
+	
+	public static function linkVideoPlaylist($id_video, $playlists) {
+		Database::beginTransaction();
+		Database::executeUpdate("DELETE FROM ".Playlist::getJoinVideoTableName()." WHERE id_video=$id_video");
+		
+		foreach($playlists as $playlist) {
+			$sql = "INSERT INTO ".Playlist::getJoinVideoTableName()." (id_video, id_playlist) ".
+				" VALUES ($id_video, $playlist)";
+			Database::executeUpdate($sql);
+		}
 		Database::commit();
 	}
 	

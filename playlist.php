@@ -88,18 +88,19 @@ function showPlaylist(id) {
 		type: 'POST', 
 		url: 'playlist_lecteur.php', 
 		dataType : 'html',
+		async : false,
 		data: {
 			id : id
 		},
 		success: function(data, textStatus, jqXHR) {
-			$('#contenu_playlist').html(data);
-			hideLoadingPopup();
+			$('#contenu_playlist').html(data).css('margin-left', '0');
+			$('#liste_playlist').hide();
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
-			hideLoadingPopup();
 		}
 	});
+	hideLoadingPopup();
 }
 
 function editPlaylist(id) {

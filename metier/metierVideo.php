@@ -81,23 +81,25 @@ class MetierVideo {
 		return Database::getResultsObjects($sql, "Video");
 	}
 	
-	public static function getVideoByDanseAndEvenementWithAttributes($id_danse, $id_evenement, $id_user) {
-		// L'identifiant NO_EVENT_VIDEO_ID correspond aux vid�os sans �v�nement associ�es.
+	public static function getVideoByDanseAndEvenementWithAttributes($id_danse, $id_evenement, $id_user, $forceVisible = false) {
+		// L'identifiant NO_EVENT_VIDEO_ID correspond aux vidéos sans évènement associées.
 		if ($id_evenement == NO_EVENT_VIDEO_ID) {
 			$sql = "select v.* from ".Danse::getJoinVideoTableName()." dv ".
 					" inner join ".Video::getTableName()." v on v.id = dv.id_video ".
-					" inner join ".Video::getJoinAllowedTableName()." allw on v.id = allw.id_video ".
-					" inner join ".Danse::getJoinUserTableName()." ud on dv.id_danse = ud.id_danse ".
-					" where dv.id_danse = $id_danse and v.id_evenement is null ".
-					" 		and ud.id_user = $id_user".
+					" inner join ".Video::getJoinAllowedTableName()." allw on v.id = allw.id_video ";
+			if (!$forceVisible) {
+				$sql .= " inner join ".Danse::getJoinUserTableName()." ud on dv.id_danse = ud.id_danse and ud.id_user = $id_user ";
+			}
+			$sql .= " where dv.id_danse = $id_danse and v.id_evenement is null ".
 					"		and allw.id_user = $id_user";
 		} else {
 			$sql = "select v.* from ".Danse::getJoinVideoTableName()." dv ".
 					" inner join ".Video::getTableName()." v on v.id = dv.id_video ".
-					" inner join ".Video::getJoinAllowedTableName()." allw on v.id = allw.id_video ".
-					" inner join ".Danse::getJoinUserTableName()." ud on dv.id_danse = ud.id_danse ".
-					" where dv.id_danse = $id_danse and v.id_evenement = $id_evenement ".
-					" 		and ud.id_user = $id_user".
+					" inner join ".Video::getJoinAllowedTableName()." allw on v.id = allw.id_video ";
+			if (!$forceVisible) {
+				$sql .= " inner join ".Danse::getJoinUserTableName()." ud on dv.id_danse = ud.id_danse and ud.id_user = $id_user ";
+			}
+			$sql .= " where dv.id_danse = $id_danse and v.id_evenement = $id_evenement ".
 					"		and allw.id_user = $id_user";
 		}
 		$videos = Database::getResultsObjects($sql, "Video");
@@ -374,12 +376,12 @@ class MetierVideo {
 		
 		$fileNameCommand = utf8_decode($fileName);
 		
-		// On mets la vid�o brute dans la corbeille
+		// On mets la vidéo brute dans la corbeille
 		$filePath = "..".DIRECTORY_SEPARATOR.PATH_RAW_FILE.DIRECTORY_SEPARATOR.$fileNameCommand;
 		$newFilePath = "..".DIRECTORY_SEPARATOR.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$fileNameCommand;
 		rename($filePath, $newFilePath);
 
-		// On renomme le webm avec l'id de la vid�o
+		// On renomme le webm avec l'id de la vidéo
 		$filePathWebm = "..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$fileNameWebm;
 		$newFilePathWebm = "..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$newId.'_'.$fileNameWebm;
 		rename($filePathWebm, $newFilePathWebm);
@@ -392,7 +394,7 @@ class MetierVideo {
 		MetierEncodageEnCours::deleteEncodedVideo($fileName);
 		MetierVideo::insertVideo($newId.'_'.$fileNameWebm, $newId);
 		
-		// On cr�e un fichier de sous-titre vide
+		// On crée un fichier de sous-titre vide
 		touch("..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.escapeSpaces($newId.'_'.$fileNameWebm).'.srt');
 		
 		if ($duration != null) {
@@ -411,7 +413,7 @@ class MetierVideo {
 	private static function getVideoDuration($fileName) {
 		$path = "..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$fileName;
 		
-		Logger::debug("Recherche de la dur�e de la vid�o $path");
+		Logger::debug("Recherche de la durée de la vidéo $path");
 		
 		ob_start();
 		passthru("..".DIRECTORY_SEPARATOR.PATH_FFMPEG." -i \"$path\" 2>&1");
@@ -422,7 +424,7 @@ class MetierVideo {
 		$duration = $matches[1];
 		
 		$dureeEnSecondes = Fwk::parseDureeEnSecondes($duration);
-		Logger::debug("Dur�e trouv�e : $dureeEnSecondes secondes.");
+		Logger::debug("Durée trouvée : $dureeEnSecondes secondes.");
 		
 		return $dureeEnSecondes;
 	}
@@ -432,12 +434,12 @@ class MetierVideo {
 		$path = "..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$fileName;
 		$path_thumbnail = "..".DIRECTORY_SEPARATOR.PATH_THUMBNAIL.DIRECTORY_SEPARATOR.$fileName.'.jpg';
 		
-		Logger::debug("G�n�ration de l'aper�u");
+		Logger::debug("Génération de l'aperçu");
 		
 		// ffmpeg.exe -ss 00:15  -i %1 -vcodec mjpeg -vframes 3 -an -f rawvideo -s 240x160 "%output_path%\%~2.jpg" -y
 		passthru("..".DIRECTORY_SEPARATOR.PATH_FFMPEG." -ss 00:15 -i \"$path\" -vcodec mjpeg -vframes 3 -an -f rawvideo -s 240x160 \"$path_thumbnail\"");
 		
-		Logger::debug("Aper�u g�n�r� : ".$path_thumbnail);
+		Logger::debug("Aperéu généré : ".$path_thumbnail);
 	}
 	
 	
@@ -451,14 +453,14 @@ class MetierVideo {
 	}
 	
 	public static function saveVideoProperties($formulaire) {
-		// Toutes les entr�es du formulaire sont pars�es en variables
+		// Toutes les entrées du formulaire sont parsées en variables
 		Logger::debug("formulaire : ".print_r(($_POST['formulaire']), true));
 		// Only Free : Free rajoute des "\" automatiquement
 		parse_str(stripslashes($_POST['formulaire']));
 		
 		if (!isset($id) || !isset($nom_video) || !isset($nom_affiche)
 				|| !isset($type) || !isset($danse)) {
-			throw new Exception("Tous les param�tres n'ont pas �t� remplis.");
+			throw new Exception("Tous les paramètres n'ont pas été remplis.");
 		}
 		
 		if (!isset($id_evenement)) {
@@ -486,6 +488,11 @@ class MetierVideo {
 			$tag = array();
 		}
 		MetierTag::linkVideoTag($id, $tag);
+		
+		if (!isset($playlist)) {
+			$playlist = array();
+		}
+		MetierPlaylist::linkVideoPlaylist($id, $playlist);
 		
 		if (!isset($passe) || !isset($niveau) || !isset($timer_debut) || !isset($timer_fin)) {
 			$passe = array();
@@ -583,7 +590,7 @@ class MetierVideo {
 			$criteres["coeff"]["type"] = floatval($coeff_type);
 		}
 		
-		// Filtre sur les �v�nements
+		// Filtre sur les évènements
 		if (isset($evenement) && is_array($evenement)) {
 			$nbCriteres++;
 			
@@ -641,7 +648,7 @@ class MetierVideo {
 			$criteres["coeff"]["professeur"] = floatval($coeff_professeur);
 		}
 		
-		// Filtre sur les noms des vid�os
+		// Filtre sur les noms des vidéos
 		if (isset($nom_affiche) && trim($nom_affiche) != "") {
 			$nbCriteres++;
 			$allWords = explode_research_field($nom_affiche);
@@ -690,13 +697,13 @@ class MetierVideo {
 			$criteres["coeff"]["tag"] = floatval($coeff_tag);
 		}
 		
-		// Filtre sur les vid�os qui ont des passes
+		// Filtre sur les vidéos qui ont des passes
 		if (isset($only_no_passes)) {
 			$join .= " LEFT OUTER JOIN ".Passe::getTableName()." no_passes ON v.id = no_passes.id_video ";
 			$where .= " AND no_passes.id_video is null ";
 		}
 		
-		$where = substr($where, strlen($operator) + 2); // On retire le premier op�rateur
+		$where = substr($where, strlen($operator) + 2); // On retire le premier opérateur
 		$where = " WHERE v.type IS NOT NULL AND allw.id_user=".$_SESSION['userId']." AND ($where)";
 		
 		$sql .= $join.$where;
@@ -819,10 +826,54 @@ class MetierVideo {
 		return $nbCriteresOK / $nbCriteres;
 	}
 	
+	
+	
+	public static function majStatsThumbnail() {
+		global $pathToPhpRoot;
+		
+		$all_videos = MetierVideo::getAllVideo();
+		$errors = array();
+		$nb_errors = 0;
+		foreach ($all_videos as $video) {
+			if (!file_exists($pathToPhpRoot.PATH_THUMBNAIL."/$video->nom_video.jpg")) {
+				if (count($errors) <= NB_THUMBNAIL_ERRORS) {
+					$errors[] = $video;
+				}
+				$nb_errors++;
+			}
+		}
+		
+		$date_text = "[".date('d/m/Y')."]";
+		$text = "$date_text <b>".count($all_videos)."</b> vidéos : ";
+		if ($nb_errors == 0) {
+			$text .= "Tous les aperçus sont <b>OK</b>.";
+		} else {
+			$title = "";
+			if (count($errors) >= NB_THUMBNAIL_ERRORS) {
+				$title .= NB_THUMBNAIL_ERRORS." premières erreurs affichées\n";
+			}
+			foreach($errors as $error) {
+				$title .= "$error->nom_video \n";
+			}
+			$text .= "<b>$nb_errors</b> aperçus introuvables. <span style='cursor : help' title='$title'>[?]</span>";
+		}
+		
+		/*
+		$text = mb_convert_encoding($text, 'UTF-8', 'OLD-ENCODING');
+		file_put_contents($pathToPhpRoot.PATH_THUMBNAIL_FILE, $text);
+		*/
+		Fwk::writeInFile($pathToPhpRoot.PATH_THUMBNAIL_FILE, utf8_encode($text), 'w');
+		
+		return $text;
+	}
+	
+	
+	
+	
 	public static function deleteVideo($id) {
 		Database::beginTransaction();
 		
-		Logger::info("Suppression de la vid�o $id");
+		Logger::info("Suppression de la vidéo $id");
 		
 		$video = MetierVideo::getVideoById($id);
 		
@@ -835,9 +886,9 @@ class MetierVideo {
 		
 		$videoFilePath = "..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$video->nom_video;
 		if (file_exists($videoFilePath)) {
-			Logger::debug("Suppression du fichier vid�o : $videoFilePath");
+			Logger::debug("Suppression du fichier vidéo : $videoFilePath");
 			if (!unlink($videoFilePath)) {
-				throw new Exception("Le fichier \"$videoFilePath\" n'a pas pu �tre supprim�.");
+				throw new Exception("Le fichier \"$videoFilePath\" n'a pas pu être supprimé.");
 			}
 		}
 		
@@ -845,18 +896,18 @@ class MetierVideo {
 		if (file_exists($srtFilePath)) {
 			Logger::debug("Suppression du fichier SRT : $srtFilePath");
 			if (!unlink($srtFilePath)) {
-				throw new Exception("Le fichier de sous-titre \"$srtFilePath\" n'a pas pu �tre supprim�.");
+				throw new Exception("Le fichier de sous-titre \"$srtFilePath\" n'a pas pu être supprimé.");
 			}
 		}
 		
-		Logger::info("Suppression de la vid�o $id ==> OK");
+		Logger::info("Suppression de la vidéo $id ==> OK");
 		Database::commit();
 	}
 	
 	public static function deleteRawVideo($nom) {
 		if (!unlink("..".DIRECTORY_SEPARATOR.PATH_RAW_FILE.DIRECTORY_SEPARATOR.$nom)) {
 			throw new Exception("Le fichier \"..".DIRECTORY_SEPARATOR.PATH_RAW_FILE.DIRECTORY_SEPARATOR.$nom.
-					"\" n'a pas pu �tre supprim�.");
+					"\" n'a pas pu être supprimé.");
 		}
 	}
 	
@@ -869,7 +920,7 @@ class MetierVideo {
 						$fileName = $entry;
 						if (!unlink("..".DIRECTORY_SEPARATOR.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$fileName)) {
 							throw new Exception("Le fichier \"..".DIRECTORY_SEPARATOR.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$fileName.
-									"\" n'a pas pu �tre supprim�.");
+									"\" n'a pas pu être supprimé.");
 						}
 					}
 				}
@@ -880,7 +931,7 @@ class MetierVideo {
 		} else {
 			if (!unlink("..".DIRECTORY_SEPARATOR.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$nom)) {
 				throw new Exception("Le fichier \"..".DIRECTORY_SEPARATOR.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$nom.
-						"\" n'a pas pu �tre supprim�.");
+						"\" n'a pas pu être supprimé.");
 			}
 		}
 	}
@@ -889,7 +940,7 @@ class MetierVideo {
 		if (!rename("..".DIRECTORY_SEPARATOR.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$nom,
 				"..".DIRECTORY_SEPARATOR.PATH_RAW_FILE.DIRECTORY_SEPARATOR.$nom)) {
 			throw new Exception("Le fichier \"..".DIRECTORY_SEPARATOR.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$nom.
-					"\" n'a pas pu �tre d�plac�.");
+					"\" n'a pas pu être déplacé.");
 		}
 	}
 	
@@ -909,9 +960,9 @@ class MetierVideo {
 		$time = "??";
 		/*Ouverture du fichier en lecture seule*/
 		$handle = fopen($filePath, 'r');
-		/*Si on a r�ussi � ouvrir le fichier*/
+		/*Si on a réussi à ouvrir le fichier*/
 		if ($handle) {
-			/*Tant que l'on est pas � la fin du fichier*/
+			/*Tant que l'on est pas à la fin du fichier*/
 			while (!feof($handle)) {
 				/*On lit la ligne courante*/
 				$buffer = fgets($handle);
@@ -1020,7 +1071,7 @@ class MetierVideo {
 			$sql = "DELETE FROM ".Video::getJoinFavoriTableName().
 					" WHERE id_user = ".$_SESSION['userId']." and id_video = $idVideo";
 		} else {
-			throw new Exception("Action inconnue pour la m�thode changeFavori : $action");
+			throw new Exception("Action inconnue pour la méthode changeFavori : $action");
 		}
 		Database::executeUpdate($sql);
 	}

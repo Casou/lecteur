@@ -262,3 +262,39 @@ background-color : #DDD;
 -webkit-transition: background-color 0.5s; /* For Safari 3.1 to 6.0 */
 transition: background-color 0.5s;
 }
+
+
+.bouton_retour {
+	background-color : #54ABE6;
+	padding: 3px 15px;
+	text-align: center;
+	text-shadow: 0 1px 0 #444444;	
+	height : 25px;
+	margin : 0 0 15px -16px;
+	border-radius : 0 10px 10px 0;
+	border : 1px solid #007dd0;
+	width : 250px;
+}
+
+.bouton_retour:hover {
+	background-color : #007dd0;
+}
+
+.bouton_retour a {
+	text-decoration : none;
+	color : #FFF;
+	float : left;
+	width : 90%;
+	line-height : 25px;
+}
+
+.bouton_retour img {	
+	max-height : 25px;
+	float : left;
+	left : 5px;
+}
+
+.bouton_retour a {
+	color : #FFF;
+	font-weight : bold;
+}

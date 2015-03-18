@@ -65,7 +65,7 @@ class MetierProfil {
 		if ($critere->types_video != null && $critere->types_video != "") {
 			$types = explode(";", $critere->types_video);
 			foreach($types as $type) {
-				$where .= " (types_video like '$type;%' or types_video like '%;$type' or types_video = '$type') ";
+				$where .= " types_video like '$type;%' or types_video like '%;$type' or types_video = '$type' ";
 				$where .= " or ";	
 			}
 			$whereClause = true;
@@ -78,7 +78,7 @@ class MetierProfil {
 		if ($critere->danses != null && $critere->danses != "") {
 			$danses = explode(";", $critere->danses);
 			foreach($danses as $id_danse) {
-				$where .= " (danses like '$id_danse;%' or danses like '%;$id_danse' or danses = '$id_danse') ";
+				$where .= " danses like '$id_danse;%' or danses like '%;$id_danse' or danses = '$id_danse' ";
 				$where .= " or ";	
 			}
 			$whereClause = true;
@@ -91,7 +91,7 @@ class MetierProfil {
 		if ($critere->tags != null && $critere->tags != "") {
 			$tags = explode(";", $critere->tags);
 			foreach($tags as $id_tag) {
-				$where .= " (tags like '$id_tag;%' or tags like '%;$id_tag' or tags = '$id_tag') ";
+				$where .= " tags like '$id_tag;%' or tags like '%;$id_tag' or tags = '$id_tag' ";
 				$where .= " or ";	
 			}
 			$whereClause = true;
@@ -104,7 +104,7 @@ class MetierProfil {
 		if ($critere->evenements != null && $critere->evenements != "") {
 			$evenements = explode(";", $critere->evenements);
 			foreach($evenements as $id_evenement) {
-				$where .= " (evenements like '$id_evenement;%' or evenements like '%;$id_evenement' or evenements = '$id_evenement') ";
+				$where .= " evenements like '$id_evenement;%' or evenements like '%;$id_evenement' or evenements = '$id_evenement' ";
 				$where .= " or ";	
 			}
 			$whereClause = true;
@@ -123,6 +123,7 @@ class MetierProfil {
 			" where $where 1=1 ".
 			" UNION ".
 			" select * from ".Profil::getTableName()." where is_admin = 1";
+		//echo $sql;
 		return Database::getResultsObjects($sql, "Profil");
 	}
 	

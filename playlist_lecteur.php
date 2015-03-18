@@ -11,6 +11,11 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 
 ?>
 
+<div class="bouton_retour">
+	<img src="style/images/fleche_gauche.png" />
+	<a href="playlist.php">Retour aux playlists</a>
+</div>
+
 <div id="playlist_lecteur">
 	<div id="playlist_lecteur_titre">
 		<?= $playlistDTO->playlist->nom ?>
@@ -35,7 +40,9 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 				<a href="#" onClick="launchVideo(<?= $video->id ?>); return false;">
 					<img src="<?= $img ?>" />
 					<span class="video_title" title='<?= escapeSimpleQuoteHTML($video->nom_affiche) ?>'><?= $video->nom_affiche ?></span><br/>
+					<?php if ($evenement != null) { ?>
 					<span class="video_event" title='<?= escapeSimpleQuoteHTML($evenement->nom) ?>'><?= $evenement->nom ?></span>
+					<?php } ?>
 				</a>
 			</li>
 			<?php } ?>

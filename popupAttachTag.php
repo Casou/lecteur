@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+$pathToPhpRoot = './';
+
+include_once $pathToPhpRoot."includes.php";
+Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+
 $tagsSelect = MetierTag::getAllTag();
 ?>
 
@@ -110,7 +117,10 @@ $tagsSelect = MetierTag::getAllTag();
 			modal: true,
 			width : 670,
 			height : 260,
-			resizable : false
+			resizable : false,
+			close : function(event, ui) {
+				$('#attachTagDialog').dialog( "destroy" );
+			}
 		});
 
 		$("#attachTagDialog button").button({

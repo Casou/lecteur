@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+$pathToPhpRoot = './';
+
+include_once $pathToPhpRoot."includes.php";
+Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+
 $playlists = MetierPlaylist::getAllPlaylistAllowed($_SESSION['userId']);
 $playlist_created = array();
 $playlist_allowed = array();
@@ -64,7 +71,6 @@ foreach($playlists as $playlist) {
 	var id_video_playlist;
 
 	function openPlaylistDialog(ids) {
-		// console.log(ids);
 		showLoadingPopup();
 		
 		var ids_array = new Array();
@@ -120,7 +126,10 @@ foreach($playlists as $playlist) {
 			modal: true,
 			width : 670,
 			height : 200,
-			resizable : false
+			resizable : false,
+			close : function(event, ui) {
+				$('#usePlaylistDialog').dialog( "destroy" );
+			}
 		});
 
 		$("#usePlaylistDialog button").button({

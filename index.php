@@ -47,6 +47,19 @@ $NB_COLONNES = 4;
 </div>
 <?php } ?>
 
+<?php if (isset($_SESSION[DROIT_ADMIN])) { ?>
+<div id="stats_thumbnails">
+	<span id="stats_thumbnails_texte">
+	<?php if (file_exists(PATH_THUMBNAIL_FILE)) { 
+			echo file_get_contents(PATH_THUMBNAIL_FILE); 
+		} else { ?>
+			Pas encore de vérification des thumbnails.
+	<?php } ?>
+	</span>
+	<a href="#" onClick="majStatsThumbnail(); return false;"><img src="style/images/actualiser.png" /></a>
+</div>
+<?php } ?>
+
 <div id="indexStat" class="ui-widget ui-corner-all block">
 	<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
 		Statistiques
@@ -171,7 +184,27 @@ function switch_on(id, aTag) {
 			hideLoadingPopup();	
 		}
 	});
-	
+}
+
+function majStatsThumbnail() {
+	showLoadingPopup();
+	$.ajax({
+		type: 'POST', // Le type de ma requete
+		url: 'ajaxController/majStatsThumbnail.php', // L'url vers laquelle la requete sera envoyee
+		dataType : 'json',
+		async : false,
+		success: function(data, textStatus, jqXHR) {
+			if (data.status != 'OK') {
+				alert('[' + data.status + '] ' + data.message);
+			} else {
+				$('#stats_thumbnails_texte').html(data.message);
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			alert("Une erreur est survenue : \n" + jqXHR.responseText);
+		}
+	});
+	hideLoadingPopup();
 }
 
 
