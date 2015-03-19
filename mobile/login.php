@@ -50,6 +50,8 @@ if(isset($_POST['url'])) {
 	<link rel="stylesheet" href="style/style.css" />
 	<link rel="stylesheet" href="style/styleLogin.css" />
 	
+	<link rel="shortcut icon" HREF="../style/images/icone.png">
+	
 	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="js/jquery.mobile-1.4.0.min.js"></script>
 	

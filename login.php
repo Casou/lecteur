@@ -47,6 +47,8 @@ if(isset($_POST['url'])) {
 	<link rel="stylesheet" href="style/styleLogin.css" />
 	<link rel="stylesheet" href="style/jquery-ui-1.10.0.custom/css/redmond/jquery-ui-1.10.0.custom.css" />
 	
+	<link rel="shortcut icon" HREF="style/images/icone.png">
+	
 	<script type="text/javascript" src="style/jquery-ui-1.10.0.custom/js/jquery-1.9.0.js"></script>
 	<script type="text/javascript" src="style/jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.js"></script>
 	
