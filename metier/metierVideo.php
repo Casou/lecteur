@@ -284,6 +284,13 @@ class MetierVideo {
 		}
 		*/
 		
+		// On supprime les danses vides (sans vidéos)
+		foreach ($arrayAllVideos as $danse_nom => $dto) {
+			if (count($arrayAllVideos[$danse_nom]) == 0) {
+				unset($arrayAllVideos[$danse_nom]);
+			}
+		}
+		
 		return $arrayAllVideos;
 	}
 	
@@ -325,6 +332,12 @@ class MetierVideo {
 			ksort($arrayAllVideos[$key]);
 		}
 		*/
+		
+		foreach ($arrayAllVideos as $danse_nom => $dto) {
+			if (count($arrayAllVideos[$danse_nom]) == 0) {
+				unset($arrayAllVideos[$danse_nom]);
+			}
+		}
 	
 		return $arrayAllVideos;
 	}

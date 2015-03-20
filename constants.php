@@ -3,7 +3,7 @@
 define('APPLICATION_NAME', 'BiblioStages');
 define('APPLICATION_URL', 'lecteur');
 define('LOG_FILE_NAME', 'lecteur');
-define('APPLICATION_VERSION', '2.4.1');
+define('APPLICATION_VERSION', '2.4.2');
 // define('URL_APPLICATION', 'http://localhost/lecteur');
 define('URL_APPLICATION', 'http://basile.parent.free.fr/lecteur');
 define('ABSOLUTE_PATH', '/lecteur/');
