@@ -48,10 +48,11 @@ class MetierCritere {
 				$where = "WHERE id not in (select id_video from lct_allowed_video_user_calc where id_user = $id_user) ";
 			
 				$where_tmp = "";
-				$danses = $critere->danses == "" ? array() : explode(";", $critere->danses);
-				$types = $critere->types_video == "" ? array() : explode(";", $critere->types_video);
-				$tags = $critere->tags == "" ? array() : explode(";", $critere->tags);
-				$evenements = $critere->evenements == "" ? array() : explode(";", $critere->evenements);
+				
+				$danses = $critere->danses == "" || $critere->danses == "" ? array() : explode(";", $critere->danses);
+				$types = $critere->types_video == "" || $critere->types_video == "" ? array() : explode(";", $critere->types_video);
+				$tags = $critere->tags == "" || $critere->tags == "" ? array() : explode(";", $critere->tags);
+				$evenements = $critere->evenements == "" || $critere->evenements == "" ? array() : explode(";", $critere->evenements);
 				
 				if (count($danses) > 0) {
 					$where_tmp .= "(";

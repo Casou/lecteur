@@ -10,8 +10,8 @@ class Critere {
 	public $evenements;
 	
 	public function __construct() {
-		$this->types_video = array();
-		$this->danses = array();
+		$this->types_video = "";
+		$this->danses = "";
 		$this->tags = "";
 		$this->evenements = "";
 	}

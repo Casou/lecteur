@@ -60,6 +60,13 @@ try {
 			$ajaxReturnMessage = "Tables TMP recalculées";
 			$ajaxReturnStatus = AJAX_STATUS_OK;
 			break;
+		
+		case 'generateTmpForUser' :
+			$user = $_POST['id_user'];
+			MetierCritere::calculateAllowedVideos($user);
+			$ajaxReturnMessage = "Tables TMP recalculées";
+			$ajaxReturnStatus = AJAX_STATUS_OK;
+			break;
 			
 		case 'getAllUsers' :
 			MetierCritere::calculateAllowedVideosForAllUsers();

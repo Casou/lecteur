@@ -51,7 +51,7 @@ foreach($userDTO->profils as $profil) {
 			<div id="edit_user_profil">
 				<h2>Profils vidéo : </h2>
 				<div>
-					<select id="profil_available" multiple="multiple" size="4">
+					<select id="profil_available" multiple="multiple" size="6">
 						<?php if (count($profils) > 0) { 
 							foreach($profils as $profil) { 
 								if (in_array($profil->id, $profils_linked)) {
@@ -74,7 +74,7 @@ foreach($userDTO->profils as $profil) {
 				</div>
 				
 				<div>
-					<select id="profil_linked" name="profils[]" multiple="multiple" size="4">
+					<select id="profil_linked" name="profils[]" multiple="multiple" size="6">
 						<?php if (count($userDTO->profils) > 0) { 
 							foreach($userDTO->profils as $profil) { ?>
 							<option value="<?= $profil->id ?>"><?= $profil->nom ?></option>
@@ -85,6 +85,7 @@ foreach($userDTO->profils as $profil) {
 				
 				<?php if ($currentUser->id != null) { ?>
 				<button id="allowed_videos_button">Liste des vidéos visibles</button>
+				<button id="refresh_allowed_videos_button">Actualiser les vidéos visibles</button>
 				<?php } ?>
 			</div>
 			
@@ -199,7 +200,7 @@ function deleteUser(idUser) {
 
 function allowedVideosForUser() {
 	showLoadingPopup();
-	
+
 	$.ajax({
 		type: 'POST',
 		url: 'listeEvenements.php',
@@ -221,6 +222,29 @@ function allowedVideosForUser() {
 
 }
 
+
+function refreshAllowedVideosForUser() {
+	showLoadingPopup();
+
+	$.ajax({
+		type: 'POST',
+		url: 'ajaxController/manageAdminController.php',
+		dataType : 'json',
+		async : false,
+		data: {
+			formulaire : "action=generateTmpForUser",
+			id_user : <?= $currentUser->id ?>
+		},
+		success: function(data, textStatus, jqXHR) {
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			alert("Une erreur est survenue : \n" + jqXHR.responseText);
+		}
+	});
+
+	hideLoadingPopup();
+
+}
 
 
 
@@ -245,6 +269,15 @@ $(document).ready(function() {
 		}
 	}).click(function() {
 		allowedVideosForUser();
+	});
+
+	$('#refresh_allowed_videos_button').button( {
+		icons: {
+			primary : "ui-icon-refresh"
+		},
+		text : false
+	}).click(function() {
+		refreshAllowedVideosForUser();
 	});
 	
 

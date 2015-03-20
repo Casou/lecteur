@@ -9,6 +9,7 @@ class Logger {
 	private static $BALISE_FIN = "</pre>";
 	
 	private static $FILE = null;
+	private static $FILE_PATH = null;
 	
 	private static $log_levels = array (	
 		'DEBUG' => 10,
@@ -20,7 +21,12 @@ class Logger {
 	
 	public static function init($logFileName, $relativePathToRoot = './') {
 		if (Logger::$FILE == null) {
-			Logger::$FILE = fopen($relativePathToRoot."logs/".$logFileName."-".date('Y-m-d').".log", 'a');
+			if (!defined('PATH_LOG_FOLDER')) {
+				throw new Exception("La constante PATH_LOG_FOLDER n'a pas été définie", 500);
+			}
+			
+			Logger::$FILE_PATH = $relativePathToRoot.PATH_LOG_FOLDER."/".$logFileName."-".date('Y-m-d').".log";
+			Logger::$FILE = fopen(Logger::$FILE_PATH, 'a');
 		}
 	}
 	
@@ -96,6 +102,10 @@ class Logger {
 	
 	private static function getFormattedMessage($debugMode, $message) {
 		return "[$debugMode] ".date('d/m/Y G:i:s')." - ".$message;
+	}
+	
+	public static function getLogFilePath() {
+		return Logger::$FILE_PATH;
 	}
 	
 	
