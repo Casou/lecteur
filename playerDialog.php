@@ -52,8 +52,8 @@
 		$('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + fileName + ".srt"));
 		launchSubtitles();
 		$('#playerDialog').dialog("open");
-				$('#player')[0].play();
-				return false;
+		$('#player')[0].play();
+		return false;
 	}
 	*/
 

@@ -157,6 +157,35 @@ background-color : #FEE47B;
 }
 
 
+
+
+
+
+#playlist_lecteur .srt {
+	background : url("images/background_srt.png");
+    border-radius: 5px 5px 5px 5px;
+    border : 1px #AAAAAA solid;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold;
+    height: 35px;
+    padding: 2px 2%;
+    position: absolute;
+    text-align: center;
+    width: 500px;
+	margin-left : 50px;
+	margin-top : 300px;
+    z-index: 999999999;
+}
+
+#playerDialog .srt .text, #playlist_lecteur .srt .text {
+    opacity: 0.6;
+}
+
+
+
+
+
 #playlist_lecteur_passes {
 	width : 100%;
 	height : 150px;

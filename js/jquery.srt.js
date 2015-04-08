@@ -88,6 +88,7 @@ function playSubtitles(subtitleElement) {
         }
     }
     
+    console.log(subtitles);
     var videoId = $('#player_srt').attr('data-video');
     var currentSubtitle = -1;
     ival = setInterval(function() {

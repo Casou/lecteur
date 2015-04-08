@@ -24,6 +24,18 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 		<video id="playlist_player" width="640" height="360" controls>
 		</video>
 		
+		<div id="player_srt" class="srt"
+			data-video="playlist_player"
+			data-srt="<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>testSub.srt"
+			style="display : none;">
+			
+			<div class="text"></div>
+			
+			<a id="player_srt_close" href="#" onClick="$('#player_srt').hide(); $(this).hide(); return false;">
+				<img src="style/images/close_srt.png" />
+			</a>
+		</div>
+		
 		<input type="checkbox" id="read_continu" checked="checked" />
 		<label for="read_continu">Lecture automatique</label>
 		<ul>
@@ -59,16 +71,19 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 
 
 <script>
-	var array_video = new Array();
+	var array_video = {};
+	var array_length = 0;
 	<?php foreach ($playlistDTO->videos as $videoDTO) {
 		$video = $videoDTO->video; 
 	?>
-	array_video.push(<?= $video->id ?>);
+	array_video[array_length] = <?= $video->id ?>;
+	array_length++;
 	<?php } ?>
 
 	var idx_video_played = 0;
 
-	function launchVideo(id) {
+	function launchVideo(p_idx_video_played) {
+		var id = array_video[p_idx_video_played];
 		showLoadingPopup();
 		$.ajax({
 			type: 'POST', 
@@ -84,11 +99,9 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 					var videoDto = data.infos['video'];
 					
 					// $('.playlist_lecteur_titre_video').html(videoDto.video.nom_affiche);
-					$('#playlist_player')[0].src = '<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video;
-					/*
-					$('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video + ".srt"));
-					$('#shareVideo input').val('<?= URL_APPLICATION ?>/showVideo.php?id=' + videoDto.video.code_partage);
-					*/
+					// $('#playlist_player')[0].src = '<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video;
+					$('#playlist_player')[0].src = '<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>1183_Big Apple - Sequence 15.mp4.webm';
+					// $('#shareVideo input').val('<?= URL_APPLICATION ?>/showVideo.php?id=' + videoDto.video.code_partage);
 	
 					$('#playlist_lecteur_passes table').html('');
 					for (var i = 0; i < videoDto.passes.length; i++) {
@@ -108,15 +121,13 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 					$('.playlist_video_li').removeClass('selected');
 					$('#playlist_video_' + videoDto.video.id).addClass('selected');
 					
-					// launchSubtitles();
-					$('#playlist_player').bind("ended", function() {
-						if ($('#read_continu').is(':checked')) {
-							playNext();
-						}
-				    });
+					// $('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video + ".srt"));
+					$('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>1183_Big Apple - Sequence 15.mp4.webm.srt'));
+					launchSubtitles();
 					$('#playlist_player')[0].play();
+					idx_video_played = p_idx_video_played;
+					hideLoadingPopup();
 				}
-				hideLoadingPopup();
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert("Une erreur est survenue : \n" + jqXHR.responseText);
@@ -127,8 +138,8 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 
 	function playNext() {
 		idx_video_played++;
-		if (array_video.length > idx_video_played) {
-			launchVideo(array_video[idx_video_played]);
+		if (array_length > idx_video_played) {
+			launchVideo(idx_video_played);
 		}
 	}
 	
@@ -138,16 +149,22 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 	}
 	
 	$(document).ready(function() {
-		if (array_video.length == 0) {
+		if (array_length == 0) {
 			alert('Playlist vide');
 			return;
 		}
 		
-		if (array_video.length > idx_video_played) {
-			launchVideo(array_video[idx_video_played]);
+		if (array_length > idx_video_played) {
+			launchVideo(idx_video_played);
 		} else {
 			alert('Indice de vidéo inconnu : ' + idx_video_played);
 		}
+
+		$('#playlist_player').bind("ended", function() {
+			if ($('#read_continu').is(':checked')) {
+				playNext();
+			}
+	    });
 	});
 
 </script>
