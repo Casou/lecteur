@@ -12,7 +12,7 @@ if (!isset($_POST['id_user_monitored'])) {
 	header('Content-Type: text/html; charset=utf-8');
 	
 	include_once $pathToPhpRoot."includes.php";
-	Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+	Logger::init($pathToPhpRoot);
 
 	$id_user = $_POST['id_user_monitored'];
 	$allDansesEvenements = MetierEvenement::getAllEvenementWithVideoCount($id_user, true);

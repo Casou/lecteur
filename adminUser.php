@@ -4,7 +4,7 @@ session_start();
 $pathToPhpRoot = './';
 
 include_once $pathToPhpRoot."includes.php";
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 if (isset($_POST['id']) && $_POST['id'] != null) {
 	$id = $_POST['id'];
@@ -25,7 +25,12 @@ foreach($userDTO->profils as $profil) {
 
 ?>
 
-<div class="ui-widget ui-corner-all block">
+<div class="bouton_retour">
+	<img src="style/images/fleche_gauche.png" />
+	<a href="#" onClick="adminUserList(); return false;">Retour aux utilisateurs</a>
+</div>
+
+<div id="admin_user" class="ui-widget ui-corner-all block">
 	<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
 		<?php if($currentUser->id != null) { ?>
 			Modification de <?= $currentUser->login ?>
@@ -46,6 +51,20 @@ foreach($userDTO->profils as $profil) {
 			<div>
 				<label for="password">Mot de passe : </label>
 				<input type="text" name="password" id="password" value="<?= $currentUser->password ?>" />
+			</div>
+			<div>
+				<label for="log_level">Niveau de log : </label>
+				<select name="log_level" id="log_level">
+					<option value="" id="log_level_select_default_option">--Défaut--</option>
+					<?php foreach($LOG_LEVELS_MAP as $key => $label) { 
+						$selected = "";
+						if ($key == $currentUser->log_level) {
+							$selected = "selected";
+						}
+					?>
+					<option value="<?= $key ?>" <?= $selected ?>><?= $label ?></option>
+					<?php } ?>
+				</select>
 			</div>
 			
 			<div id="edit_user_profil">
@@ -155,16 +174,14 @@ function saveUser() {
 				alert('[' + data.status + '] ' + data.message);
 			} else {
 				adminUserList();
-				adminUser(data.infos['id']);
+				// adminUser(data.infos['id']);
 			}
-			hideLoadingPopup();	
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
-			hideLoadingPopup();	
 		}
 	});
-
+	hideLoadingPopup();
 }
 
 function deleteUser(idUser) {
@@ -173,7 +190,6 @@ function deleteUser(idUser) {
 	}
 
 	showLoadingPopup();
-
 	$.ajax({
 		type: 'POST',
 		url: 'ajaxController/manageAdminController.php',
@@ -193,14 +209,12 @@ function deleteUser(idUser) {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
 		}
 	});
-
 	hideLoadingPopup();
 }
 
 
 function allowedVideosForUser() {
 	showLoadingPopup();
-
 	$.ajax({
 		type: 'POST',
 		url: 'listeEvenements.php',
@@ -217,15 +231,12 @@ function allowedVideosForUser() {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
 		}
 	});
-
 	hideLoadingPopup();
-
 }
 
 
 function refreshAllowedVideosForUser() {
 	showLoadingPopup();
-
 	$.ajax({
 		type: 'POST',
 		url: 'ajaxController/manageAdminController.php',
@@ -241,9 +252,7 @@ function refreshAllowedVideosForUser() {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
 		}
 	});
-
 	hideLoadingPopup();
-
 }
 
 

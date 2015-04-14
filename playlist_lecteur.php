@@ -3,7 +3,7 @@ session_start();
 
 $pathToPhpRoot = './';
 include_once $pathToPhpRoot."includes.php";
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $id_playlist = $_POST['id'];
 

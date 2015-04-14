@@ -13,7 +13,7 @@ if (!isset($_POST['prof']) || !isset($_POST['danse'])) {
 	exit;
 }
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $id_prof = $_POST['prof'];
 $id_danse = $_POST['danse'];

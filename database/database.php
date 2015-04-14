@@ -124,7 +124,7 @@ class Database {
 			if (mysql_query($sql, Database::$CONNEXION) === false) {
 				Logger::error("Erreur lors de l'exécution de la requête : $sql\n".
 						print_r(mysql_error(), true));
-				print_r(mysql_error());
+				throw new Exception(print_r(mysql_error(), true));
 			}
 			/*
  			if (Database::getPdo()->exec($sql) === false) {
@@ -136,8 +136,8 @@ class Database {
 			*/
 		} catch (Exception $e) {
 // 		} catch (PDOException $e) {
-			print "<h1>Erreur lors de l'exécution de la mise à jour.</h1>".
-					"Requête : $sql<br/><br/>" . $e->getMessage() . "<br/>";
+			print "<h1>Erreur lors de l'exécution de la mise à jour.</h1>\n".
+					"Requête : $sql<br/><br/>\n\n" . $e->getMessage() . "<br/>";
 // 			Database::getPdo()->rollback();
 			die();
 		}

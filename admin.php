@@ -20,11 +20,7 @@ $users = MetierUser::getAllUser();
 	</ul>
 </div>
 
-<div id="admin_left_div">
-</div>
-
-
-<div id="editDiv">
+<div id="content_div">
 
 </div>
 
@@ -34,94 +30,58 @@ $users = MetierUser::getAllUser();
 
 <script>
 
-function adminUser(id) {
-	showLoadingPopup();
-	$.ajax({
-		type: 'POST', 
-		url: 'adminUser.php', 
-		dataType : 'html',
-		data: {
-			id : id
-		},
-		success: function(data, textStatus, jqXHR) {
-			$('#editDiv').html(data);
-			hideLoadingPopup();
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			alert("Une erreur est survenue : \n" + jqXHR.responseText);
-			hideLoadingPopup();
-		}
-	});
-}
-
-function adminProfil(id) {
-	showLoadingPopup();
-	$.ajax({
-		type: 'POST', 
-		url: 'adminProfil.php', 
-		dataType : 'html',
-		data: {
-			id : id
-		},
-		success: function(data, textStatus, jqXHR) {
-			$('#editDiv').html(data);
-			hideLoadingPopup();
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			alert("Une erreur est survenue : \n" + jqXHR.responseText);
-			hideLoadingPopup();
-		}
-	});
-}
-
 
 function adminActionList() {
-	$('#editDiv').html('');
+	showLoadingPopup();
+	$('#content_div').html('');
 	$.ajax({
 		type: 'POST', 
 		url: 'adminActionList.php', 
 		dataType : 'html',
 		async : false,
 		success: function(data, textStatus, jqXHR) {
-			$('#admin_left_div').html(data);
+			$('#content_div').html(data);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
 		}
 	});
+	hideLoadingPopup();
 }
 
 
 function adminUserList() {
-	$('#editDiv').html('');
+	showLoadingPopup();
 	$.ajax({
 		type: 'POST', 
 		url: 'adminUserList.php', 
 		dataType : 'html',
 		async : false,
 		success: function(data, textStatus, jqXHR) {
-			$('#admin_left_div').html(data);
+			$('#content_div').html(data);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
 		}
 	});
+	hideLoadingPopup();
 }
 
 function adminProfilList() {
-	$('#editDiv').html('');
+	showLoadingPopup();
 	$.ajax({
 		type: 'POST', 
 		url: 'adminProfilList.php', 
 		dataType : 'html',
 		async : false,
 		success: function(data, textStatus, jqXHR) {
-			$('#admin_left_div').html(data);
+			$('#content_div').html(data);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			alert("Une erreur est survenue : \n" + jqXHR.responseText);
 		}
 	});
+	hideLoadingPopup();
 }
 
 /*

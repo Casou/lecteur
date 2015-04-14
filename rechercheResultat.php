@@ -4,7 +4,7 @@ header('HTTP/1.1 200 OK');
 
 $pathToPhpRoot = './';
 include $pathToPhpRoot.'includes.php';
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $formulaire = $_POST['formulaire'];
 $videos = MetierVideo::research($formulaire);

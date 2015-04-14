@@ -14,7 +14,7 @@ if (!isset($_POST['formulaire'])) {
 	exit;
 }
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $formulaire = $_POST['formulaire'];
 parse_str($formulaire);
@@ -81,10 +81,26 @@ try {
 			break;
 			
 			
+		case 'deleteLog' :
+			$todays_log = isset($todays_log) ? $todays_log = true : $todays_log = false; 
+			if (!isset($userToPurge)) {
+				$userToPurge = array();
+			}
+			MetierLog::deleteLog($todays_log, $userToPurge);
+			$ajaxReturnMessage = "Log supprimés";
+			$ajaxReturnStatus = AJAX_STATUS_OK;
+			break;
+		case 'saveDefaultLogLevel' :
+			MetierLog::changeDefaultLogLevel($default_log_level);
+			$ajaxReturnMessage = "Niveau de log changé";
+			$ajaxReturnStatus = AJAX_STATUS_OK;
+			break;
+			
 		default :
 			break;
 	}
 } catch (Exception $e) {
+	Logger::error($e->getMessage());
 	Database::rollback();
 	$ajaxReturnStatus = AJAX_STATUS_KO;
 	$ajaxReturnMessage = $e->getMessage();

@@ -5,7 +5,7 @@ header('Content-Type: text/html; charset=utf-8');
 
 $pathToPhpRoot = './';
 include_once $pathToPhpRoot."includes.php";
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $id_playlist = $_POST['id'];
 

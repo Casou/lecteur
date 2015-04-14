@@ -16,5 +16,6 @@ include_once "metierDroitCategorie.php";
 include_once "metierAccordeonCouleur.php";
 include_once "metierPlaylist.php";
 include_once "metierPlaylistUserRights.php";
+include_once "metierLog.php";
 
 ?>

@@ -8,7 +8,7 @@ include_once $pathToPhpRoot."ajaxController/ajaxResponseObject.php";
 
 header('Content-Type: text/html; charset=utf-8');
 
-//Logger::init(LOG_FILE_NAME, "../");
+//Logger::init("../");
 
 $id = $_POST['id'];
 

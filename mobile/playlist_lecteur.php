@@ -19,6 +19,8 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 	<div id="div_playlist_lecteur">
 		<video id="playlist_player" width="640" height="360" controls>
 		</video>
+	</div>
+	<div id="div_playlist_lecteur_menu_min_div">
 		<div id="div_playlist_lecteur_menu_min">
 			<a href="#" onClick="toggleMenu(); return false;">
 				<img src="style/images/playlist.png" />

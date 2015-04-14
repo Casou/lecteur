@@ -14,7 +14,7 @@ if (!isset($_POST['formulaire'])) {
 	exit;
 }
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $formulaire = stripslashes($_POST['formulaire']);
 parse_str($formulaire);

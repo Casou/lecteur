@@ -184,6 +184,105 @@ margin-bottom : 20px;
 
 
 
+
+
+
+
+
+
+
+/* ******************************************************
+********************** ADMIN USERS **********************
+********************************************************* */
+#user_list_div {
+	margin-top : 20px;
+}
+
+#user_list_div table {
+	margin : 0 0 10px 0;
+	width : 100%;
+}
+
+#user_list_div td, #user_list_div th {
+	border : 1px #4297d7 solid;
+}
+
+#user_list_div td {
+	color : #436FF1;
+}
+
+.user_list_edit, .user_list_connection, .user_log_level {
+	text-align : center;
+}
+
+.user_list_connection {
+	cursor : help;
+}
+
+@media (max-width: 1000px) {
+	.user_list_connection_hour {
+		display : none;
+	}
+}
+
+@media (max-width: 850px) {
+	.user_list_connection_ip {
+		display : none;
+	}
+}
+
+#user_list_div ul {
+	list-style-type : none;
+	margin : 0;
+	padding : 0;
+}
+
+
+#admin_user #log_level_select_default_option {
+	font-style : italic;
+}
+
+
+
+
+
+
+
+/* *******************************************************
+********************** ADMIN ACTION **********************
+********************************************************** */
+.admin_action_log_management {
+	margin-bottom : 15px;
+}
+
+.admin_action_log_management li {
+	margin : 0;
+}
+
+.admin_action_log_management button {
+	margin-top : 25px;
+	display : block;
+}
+
+#admin_action_log_delete #todays_log {
+	background-color: #dadada;
+    border: 1px solid #999;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    padding: 2px 20px 2px 15px;
+}
+
+
+
+
+
+
+
+
+
 .accordeon-blue.ui-state-default {
 	// background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_glass_85_dfeffc_1x400.png") repeat-x scroll 50% 50% #EE322A;
 }

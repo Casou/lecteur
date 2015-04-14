@@ -3,7 +3,7 @@
 header('Content-Type: text/html; charset=utf-8');
 
 include_once "includes.php";
-Logger::init(LOG_FILE_NAME);
+Logger::init();
 
 ini_set("max_execution_time", 0); //temps infini d'exécution
 

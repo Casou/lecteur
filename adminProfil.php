@@ -4,7 +4,7 @@ session_start();
 $pathToPhpRoot = './';
 
 include_once $pathToPhpRoot."includes.php";
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 if (isset($_POST['id']) && $_POST['id'] != null) {
 	$id = $_POST['id'];

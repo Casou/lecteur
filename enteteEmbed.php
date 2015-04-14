@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: text/html; charset=utf-8');
 
 include_once "includes.php";
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 if (isset($_GET["action"])) {
 	$action = $_GET["action"];

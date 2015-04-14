@@ -23,6 +23,8 @@ class MetierUser {
 		foreach($dto->droits as $droit) {
 			$dto->droitsNom[] = $droit->nom;
 		}
+		$dto->profils = MetierProfil::getProfilByUser($user->id);
+		$dto->logConnexion = MetierLog::getAllConnexionForLogin($user->login);
 		return $dto;
 	}
 	
@@ -175,6 +177,12 @@ class MetierUser {
 		$_SESSION["userId"] = $user->id;
 		$_SESSION["userLogged"] = $user->id;
 		
+		if ($user->log_level == null || $user->log_level == "") {
+			$_SESSION["log_level"] = $user->log_level;
+		} else {
+			$_SESSION["log_level"] = FwkParameter::getParameter(PARAM_CONTEXT_LOG, PARAM_ID_LOG_DEFAULT_LEVEL);
+		}
+		
 		$user = MetierUser::getUserDTO($user);
 		foreach($user->droits as $droit) {
 			$_SESSION[$droit->nom] = $droit->label;
@@ -220,10 +228,12 @@ class MetierUser {
 		
 		Database::beginTransaction();
 		
+		$log_level_sql = ($log_level == '') ? "null" : "'$log_level'";
+		
 		if ($id == '') {
 			
-			$sql = "INSERT INTO ".User::getTableName()." (login, password) VALUES ";
-			$sql .= "('$login', '$password')";
+			$sql = "INSERT INTO ".User::getTableName()." (login, password, log_level) VALUES ";
+			$sql .= "('$login', '$password', $log_level_sql)";
 			Database::executeUpdate($sql);
 			$id = Database::getMaxId(User::getTableName());
 			
@@ -232,9 +242,9 @@ class MetierUser {
 			Database::executeUpdate($sql);
 			
 		} else {
-	
+			
 			$sql = "UPDATE ".User::getTableName()." SET login='".$login."', ";
-			$sql .= "password='".$password."' WHERE id=$id";
+			$sql .= "password='".$password."', log_level=$log_level_sql WHERE id=$id";
 			Database::executeUpdate($sql);
 			
 			$sql = "DELETE FROM ".Droit::getJoinUserTableName()." WHERE id_user=$id";

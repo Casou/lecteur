@@ -3,7 +3,7 @@
 $pathToPhpRoot = './';
 $pathToHtmlRoot = "./";
 include_once $pathToPhpRoot."includes.php";
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $users = MetierUser::getAllUser();
 

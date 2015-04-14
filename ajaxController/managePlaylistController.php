@@ -8,7 +8,7 @@ $pathToPhpRoot = "../";
 include_once $pathToPhpRoot."includes.php";
 include_once "ajaxResponseObject.php";
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $action = $_POST['action'];
 

@@ -3,7 +3,7 @@
 class MetierProfil {
 	
 	public static function getAllProfil() {
-		return Database::getResultsObjects("select * from ".Profil::getTableName(), "Profil");
+		return Database::getResultsObjects("select * from ".Profil::getTableName()."  order by nom asc", "Profil");
 	}
 	
 	public static function getProfilById($id) {
@@ -24,7 +24,7 @@ class MetierProfil {
 	public static function getProfilByUser($id_user) {
 		$sql = "select distinct p.* from ".Profil::getTableName()." p ".
 			" inner join ".User::getJoinProfilTableName()." up on p.id = up.id_profil ".
-			" where up.id_user = $id_user";
+			" where up.id_user = $id_user order by p.nom asc";
 		return Database::getResultsObjects($sql, "Profil");
 	}
 	

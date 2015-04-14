@@ -1,6 +1,6 @@
 <?php
 
-define('APPLICATION_NAME', 'BiblioStages');
+define('APPLICATION_NAME', 'lecteur');
 define('APPLICATION_URL', 'lecteur');
 define('LOG_FILE_NAME', 'lecteur');
 define('APPLICATION_VERSION', '2.4.2');
@@ -89,6 +89,15 @@ DEFINE('DEFAULT_EVENT_COLOR_LIBELLE', "Default color");
 DEFINE('DEFAULT_EVENT_COLOR_CSS', 'accordeon-blue');
 
 DEFINE('NO_EVENT_VIDEO_ID', -1);
+
+
+
+
+/* ******************************************
+ * *************** PARAMETRES ***************
+ * ****************************************** */
+DEFINE('PARAM_CONTEXT_LOG', 'LOG');
+DEFINE('PARAM_ID_LOG_DEFAULT_LEVEL', 'LOG_DEFAULT_LEVEL');
 
 
 ?>

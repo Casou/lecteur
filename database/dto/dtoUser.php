@@ -6,6 +6,7 @@ class UserDTO {
 	public $droits;
 	public $droitsNom;
 	public $profils;
+	public $logConnexion;
 
 	public function __construct() {
 		$this->droitsNom = array();

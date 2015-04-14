@@ -13,7 +13,7 @@ include_once($pathToPhpRoot."/".$pathToFwkFiles.'/modele/DoVersion.php');
 
 include_once($pathToPhpRoot."/".$pathToFwkFiles.'/metier/fwk.php');
 include_once($pathToPhpRoot."/".$pathToFwkFiles.'/metier/fwkParameter.php');
-include_once($pathToPhpRoot."/".$pathToFwkFiles.'/metier/logger.php');
+include_once($pathToPhpRoot."/".$pathToFwkFiles.'/metier/fwkLogger.php');
 
 
 ?>

@@ -12,7 +12,7 @@ if (!isset($_POST['fileToConvert'])) {
 	exit;
 }
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 ini_set("max_execution_time", 0); //temps infini d'exécution
 

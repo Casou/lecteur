@@ -12,7 +12,7 @@ if (!isset($_POST['fileToConvert'])) {
 	exit;
 }
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $fileName = htmlspecialchars_decode(resetSimpleQuote(utf8_decode($_POST['fileToConvert'])));
 $filePath = "..".DIRECTORY_SEPARATOR.PATH_RAW_FILE.DIRECTORY_SEPARATOR."$fileName.log";

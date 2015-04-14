@@ -126,6 +126,7 @@ vertical-align : sub;
 
 #playlist_lecteur_passes {
 	padding : 0 10px 10px 10px;
+	margin-top : 55px;
 }
 
 #playlist_lecteur_passes a {

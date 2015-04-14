@@ -14,7 +14,7 @@ if (!isset($_POST['fileToConvert'])) {
 	exit;
 }
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $fileName = htmlspecialchars_decode(resetSimpleQuote($_POST['fileToConvert']));
 

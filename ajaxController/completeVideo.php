@@ -4,7 +4,7 @@ $pathToPhpRoot = "../";
 include_once $pathToPhpRoot."includes.php";
 include_once "ajaxResponseObject.php";
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 if (!isset($_POST['fileToComplete'])) {
 	header('HTTP/1.1 400 Missing Parameter');

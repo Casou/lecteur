@@ -13,7 +13,7 @@ if (!isset($_POST['action'])) {
 	exit;
 }
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $action = $_POST['action'];
 // parse_str($formulaire);

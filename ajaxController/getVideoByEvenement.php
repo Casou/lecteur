@@ -13,7 +13,7 @@ if (!isset($_POST['evenement']) || !isset($_POST['danse'])) {
 	exit;
 }
 
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 $id_evenement = $_POST['evenement'];
 $id_danse = $_POST['danse'];

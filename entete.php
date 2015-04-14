@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: text/html; charset=utf-8');
 
 include_once "includes.php";
-Logger::init(LOG_FILE_NAME, $pathToPhpRoot);
+Logger::init($pathToPhpRoot);
 
 if (isset($_GET["action"])) {
 	$action = $_GET["action"];
@@ -29,6 +29,10 @@ if ($isPhone && !isset($_COOKIE["forcePC"])) {
 
 if (isset($_POST["login"]) && isset($_POST["password"])) {
 	$user = MetierUser::login($_POST["login"], $_POST["password"]);
+	Logger::reinit($pathToPhpRoot);
+	Logger::info("---------------------- Nouvelle session : ".Fwk::getIp()." ----------------------");
+	Logger::info("------------------------- ".date('d/m/y H:i:s')." -------------------------");
+	MetierLog::addConnexion($_POST["login"]);
 	if ($user == null) {
 		Fwk::redirect("login.php?message=1");
 	}
