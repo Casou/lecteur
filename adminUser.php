@@ -244,7 +244,7 @@ function refreshAllowedVideosForUser() {
 		async : false,
 		data: {
 			formulaire : "action=generateTmpForUser",
-			id_user : <?= $currentUser->id ?>
+			id_user : <?= $currentUser->id == null ? "null" : $currentUser->id ?>
 		},
 		success: function(data, textStatus, jqXHR) {
 		},
