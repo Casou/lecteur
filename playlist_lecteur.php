@@ -83,14 +83,13 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 	var idx_video_played = 0;
 
 	function launchVideo(p_idx_video_played) {
-		var id = array_video[p_idx_video_played];
 		showLoadingPopup();
 		$.ajax({
 			type: 'POST', 
 			url: 'ajaxController/manageController.php',
 			dataType : 'json',
 			data: {
-				formulaire : "action=getVideoWithPasses&id=" + id
+				formulaire : "action=getVideoWithPasses&id=" + p_idx_video_played
 			},
 			success: function(data, textStatus, jqXHR) {
 				if (data.status != 'OK') {
@@ -138,7 +137,7 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 	function playNext() {
 		idx_video_played++;
 		if (array_length > idx_video_played) {
-			launchVideo(idx_video_played);
+			launchVideo(array_video[idx_video_played]);
 		}
 	}
 	
@@ -154,7 +153,7 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 		}
 		
 		if (array_length > idx_video_played) {
-			launchVideo(idx_video_played);
+			launchVideo(array_video[idx_video_played]);
 		} else {
 			alert('Indice de vidéo inconnu : ' + idx_video_played);
 		}
