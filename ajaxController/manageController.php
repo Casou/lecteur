@@ -182,6 +182,14 @@ try {
 			break;
 			
 			
+			
+		case 'updateTabOrder' :
+			MetierDanse::saveDanseOrderForUser($ids, $_SESSION['userId']);
+			$ajaxReturnMessage = "L'ordre des onglets a été sauvegardé";
+			$ajaxReturnStatus = AJAX_STATUS_OK;
+			break;
+			
+			
 		default :
 			break;
 	}
@@ -198,7 +206,7 @@ if ($ajaxReturnStatus == AJAX_STATUS_OK) {
 }
 
 $response = new AjaxResponseObject($ajaxReturnStatus, $ajaxReturnMessage, $infos);
-echo json_encode_utf8($response);
+echo Fwk::json_encode_utf8($response);
 exit;
 
 ?>

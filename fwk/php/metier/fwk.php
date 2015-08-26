@@ -1,5 +1,11 @@
 <?php
 
+if (!isset($pathToPhpRoot)) {
+	throw new Exception('Variable pathToPhpRoot non initialisée pour le framework');
+}
+
+include_once $pathToPhpRoot."fwk/php/metier/JSON.php";
+
 class Fwk {
 	
 	const REQUEST_METHOD_GET = 'GET';
@@ -13,6 +19,10 @@ class Fwk {
 	
 	
 	
+	
+	/* *******************************************************
+	*********************** FILE_SYSTEM **********************
+	********************************************************** */
 	public static function execInBackground($path, $exe, $args = "") { 
 //	    global $conf; 
 	    
@@ -32,6 +42,22 @@ class Fwk {
 	    	throw new Exception("Fwk::execInBackground => File not exists : ".$path . $exe);
 	    }
 	} 
+	
+	// Fonction non testée !!!
+	public static function countFilesInFolder($folder) {
+		/* $files pour "lister" les fichiers - 
+			Mise en place de *.* pour dire que ce dossier contient une extension (par exemple .jpg, .php, etc... */
+		$files = glob("$folder/*.*");
+		return count($files);
+	}
+	
+	public static function isWindowsBasedServer() {
+		return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+	}
+	
+	
+	
+	
 	
 	/* ******************************************************
 	************************** ECHO *************************
@@ -120,6 +146,17 @@ class Fwk {
 	
 	
 	
+	public static function json_encode_utf8($var) {
+		$json = new Services_JSON();
+		return $json->encode($var);
+	}
+	
+	
+	
+	
+	
+	
+	
 	/* ******************************************************
 	************************ ENCRYPT ************************
 	********************************************************* */
@@ -129,6 +166,13 @@ class Fwk {
 			.Fwk::$ENCRYPT_SALT 
 			.substr($string, strlen($string) / 2, strlen($string))));
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -203,8 +247,25 @@ class Fwk {
 		return str_pad($string, $pad_length, $pad_string, STR_PAD_RIGHT);
 	}
 	
+	public static function escapeSimpleQuote($str) {
+		return str_replace("'", "\'", $str);
+	}
 	
+	public static function escapeDoubleQuote($str) {
+		return str_replace('"', '\"', $str);
+	}
 	
+	public static function stripSpaces($str, $replaceChar = "_") {
+		return str_replace(" ", $replaceChar, $str);
+	}
+	
+	public static function replaceAccents($string) {
+		return str_replace( array(	'à','á','â','ã','ä','ç','è','é','ê','ë','ì','í','î','ï','ñ','ò','ó','ô','õ','ö','ù','ú','û','ü','ý','ÿ',
+									'À','Á','Â','Ã','Ä','Ç','È','É','Ê','Ë','Ì','Í','Î','Ï','Ñ','Ò','Ó','Ô','Õ','Ö','Ù','Ú','Û','Ü','Ý'),
+							array(	'a','a','a','a','a','c','e','e','e','e','i','i','i','i','n','o','o','o','o','o','u','u','u','u','y','y',
+									'A','A','A','A','A','C','E','E','E','E','I','I','I','I','N','O','O','O','O','O','U','U','U','U','Y'),
+							$string);
+	} 
 	
 	
 	
@@ -217,6 +278,10 @@ class Fwk {
 		}
 	    return $addTo;
 	}
+	 
+	 
+	 
+	 
 	 
 	
 	
@@ -246,18 +311,6 @@ class Fwk {
 		$allDays = Fwk::getAllDaysOfWeek($week, $year);
 		
 		$lundi = new DateTime($allDays[0]);
-		/*
-		//generate all the days
-for($i=0;$i<7;$i++)
-{
-if($day_off_set > 7-$today)
-{
-$day_off_set = -($today-1);
-}
-$days[$day_names[$today+$day_off_set]] = date("Y-m-d",time()+(60*60*24*(7+$day_off_set)));
-$day_off_set++;
-}
-*/
 
 		if ($numberOfWeeks > 0) {
 			$lundiSemaineSuivante = $lundi->modify("+$numberOfWeeks week");
@@ -356,6 +409,20 @@ $day_off_set++;
 		return $dureeParsee;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	/* ******************************************************
@@ -467,7 +534,13 @@ $day_off_set++;
 		$var_nav = explode(' ',$_SERVER['HTTP_USER_AGENT']);
 		$navigateur[0] = $var_nav[0];
 		
-		if (preg_match("@MSIE 9@", $_SERVER["HTTP_USER_AGENT"])) {
+		if (preg_match("@Trident@", $_SERVER["HTTP_USER_AGENT"])) {
+			$navigateur[1] = " MSIE 11";
+			$navigateur[2] = 11;
+		} else if (preg_match("@MSIE 10@", $_SERVER["HTTP_USER_AGENT"])) {
+			$navigateur[1] = " MSIE 10";
+			$navigateur[2] = 10;
+		} else if (preg_match("@MSIE 9@", $_SERVER["HTTP_USER_AGENT"])) {
 			$navigateur[1] = " MSIE 9";
 			$navigateur[2] = 9;
 		} else if (preg_match("@MSIE 8@", $_SERVER["HTTP_USER_AGENT"])) {
@@ -520,6 +593,11 @@ $day_off_set++;
 	public static function isUsingIE6OrLess() {
 		$navigateur = Fwk::getNavigateur();
 		return strpos($navigateur[1], "MSIE") && $navigateur[2] <= 6;
+	}
+	
+	public static function isUsingIEVersionOrLess($version) {
+		$navigateur = Fwk::getNavigateur();
+		return strpos($navigateur[1], "MSIE") && $navigateur[2] <= $version;
 	}
 	
 	
@@ -605,12 +683,29 @@ $day_off_set++;
 	}
 	
 	public static function getFileName($filePath) {
+		if (Fwk::indexOf($filePath, "/") === FALSE && Fwk::indexOf($filePath, "\\") === FALSE) {	
+			return $filePath;
+		}
 		$path = Fwk::formatePath($filePath);
 		return substr($path, Fwk::lastIndexOf($path, "/") + 1);
 	}
 	
+	public static function getFilePath($filePath) {
+		$path = Fwk::formatePath($filePath);
+		return substr($path, 0, Fwk::lastIndexOf($path, "/") + 1);
+	}
+	
+	public static function getFileNameWithoutExtension($filePath) {
+		$fileName = Fwk::getFileName($filePath);
+		if (Fwk::indexOf($fileName, ".") === FALSE) {
+			return $fileName;
+		} else {
+			return substr($fileName, 0, Fwk::lastIndexOf($fileName, "."));
+		}
+	}
+	
 	public static function formatePath($filePath) {
-		return str_replace("\\", "/", realpath($filePath));
+		return str_replace("\\", "/", $filePath);
 	}
 	
 	public static function deleteFile($filePath) {

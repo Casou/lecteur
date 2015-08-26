@@ -3,6 +3,23 @@
 	float : left;
 }
 
+#liste_playlist button {
+	width : 47%;
+	margin : 0 1% 8px 1%;
+	font-size : 10px;
+}
+
+#createFolder div, #createPlaylist div {
+	text-align : center;
+	font-size : 16px;
+	line-height : 46px;
+}
+
+#createFolder button, #createPlaylist button {
+	float : right;
+}
+
+
 #contenu_playlist {
 	margin-left : 290px;
 }
@@ -14,18 +31,33 @@
 	background-color : white;
 }
 
-.playlist_list_ul {
-	display : block;
-}
 
 .playlist_list .playlist_list_title,
+#playlist_folder_properties h2,
 #playlist_video_list_order h2,
 #playlist_video_list_rights h2  {
 	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png") repeat-x scroll 50% 50% #5c9ccc;
 	font-weight : bold;
+	text-shadow : 0 0 2px white, 0 0 3px white;
 	text-align : center;
 	font-size : 16px;
 	padding : 2px 0 4px;
+}
+
+.playlist_list_content {
+	display : block;
+	max-height : 250px;
+	overflow-y : auto;
+	overflow-x : hidden;
+}
+
+.playlist_list_ul {
+	float : left; /* Pour l'effet de slide */
+	width : 100%;
+}
+
+.playlist_list .playlist_list_title {
+	cursor : pointer;
 }
 
 .playlist_list ul {
@@ -36,15 +68,25 @@
 
 .playlist_list ul li {
 	margin : 0;
+	float : left;
+	width : 100%;
+	background-color : white;
+}
+
+.playlist_list ul li.ui-draggable-dragging {
+	z-index : 9999999;
+	border : 1px solid #999;
+	opacity : 0.5;
 }
 
 .playlist_list ul li a {
 	float : left;
-	width : 85%;
+	width : 88%;
 	padding : 0 0 0 10px;
-	line-height : 24px;
+	line-height : 26px;
 	box-sizing: border-box;
 	color : black;
+	
 }
 
 .playlist_list ul li a:hover {
@@ -62,14 +104,66 @@ background-color : #FEE47B;
 }
 
 .playlist_list ul li a.playlist_list_edit {
-	float : right;
-	width : 15%;
+	float : left;
+	width : 12%;
 	cursor : pointer;
+	text-align : center;
+	padding : 0;
 }
 
 .playlist_list ul li .playlist_creator {
 	font-style : italic;
 	font-size : 12px;
+}
+
+
+.playlist_list ul li img {
+	vertical-align : middle;
+}
+
+.playlist_list ul li .nbVideos {
+	font-size : 10px;
+	font-weight : bold;
+	
+	opacity : 0.8;
+	
+	display : inline-block;
+	min-width : 16px;
+	min-height : 16px;
+	line-height : 16px;
+	border : 1px solid #3f9fff;
+	border-radius : 20px;
+	text-align : center;
+	color : white;
+	vertical-align : text-top;
+	cursor : help;
+	
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3f9fff+0,1381ef+44,036bd3+100 */
+	background: #3f9fff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #3f9fff 0%, #1381ef 44%, #036bd3 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3f9fff), color-stop(44%,#1381ef), color-stop(100%,#036bd3)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #3f9fff 0%,#1381ef 44%,#036bd3 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #3f9fff 0%,#1381ef 44%,#036bd3 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #3f9fff 0%,#1381ef 44%,#036bd3 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #3f9fff 0%,#1381ef 44%,#036bd3 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f9fff', endColorstr='#036bd3',GradientType=0 ); /* IE6-9 */
+		
+}
+
+.playlist_list ul li.empty .nbVideos {
+	color : #444;
+	border-color : #bbb;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e1e1e1+0,d8d8d8+44,d1d1d1+100 */
+	background: #e1e1e1; /* Old browsers */
+	background: -moz-linear-gradient(top,  #e1e1e1 0%, #d8d8d8 44%, #d1d1d1 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e1e1e1), color-stop(44%,#d8d8d8), color-stop(100%,#d1d1d1)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #e1e1e1 0%,#d8d8d8 44%,#d1d1d1 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #e1e1e1 0%,#d8d8d8 44%,#d1d1d1 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #e1e1e1 0%,#d8d8d8 44%,#d1d1d1 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #e1e1e1 0%,#d8d8d8 44%,#d1d1d1 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1e1e1', endColorstr='#d1d1d1',GradientType=0 ); /* IE6-9 */
+
+
 }
 
 
@@ -81,12 +175,30 @@ background-color : #FEE47B;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 #playlist_lecteur {
 	margin : auto;
 	background : black;
 	color : white;
 	width : 950px;
 	border : 1px solid #777;
+}
+
+#playlist_lecteur #playlist_lecteur_video #player {
+	float : left;
+	width : 640px;
 }
 
 #playlist_lecteur #playlist_lecteur_titre {
@@ -185,6 +297,9 @@ background-color : #FEE47B;
 
 
 
+#playlist_form {
+	margin-top : 32px;
+}
 
 #playlist_lecteur_passes {
 	width : 100%;
@@ -195,7 +310,7 @@ background-color : #FEE47B;
 }
 
 
-
+#playlist_folder_properties, 
 #playlist_video_list_order,
 #playlist_video_list_rights {
 	background : white;
@@ -205,6 +320,7 @@ background-color : #FEE47B;
 	box-shadow : 2px 2px 2px #aaa, 4px 4px 4px #aaa;
 }
 
+#playlist_folder_properties h2,
 #playlist_video_list_order h2,
 #playlist_video_list_rights h2 {
 	margin : 0; // margin : 0 0 10px 0;
@@ -266,7 +382,9 @@ background-color : #FEE47B;
 }
 
 
-
+#playlist_folder_properties div {
+	padding : 5px 10px;
+} 
 
 
 

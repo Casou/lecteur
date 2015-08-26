@@ -33,9 +33,12 @@ if ($video == null) {
 </div>
 
 <div id="playerDiv" style="width : 100%; margin-top : 15px; text-align : center;">
+	<div id="player">Chargement de la vidéo...</div>
+	<!-- 
 	<video id="player" title="Prévisualisation" width="640" height="360" controls>
 		<source src="<?= changeBackToSlash(PATH_CONVERTED_FILE)."/".escapeDoubleQuote($video->nom_video) ?>" type="video/webm" />
 	</video>
+	-->
 </div>
 
 <form action="#" onSubmit="return false;" id="videoForm">
@@ -151,8 +154,13 @@ function checkTimer(timer) {
 }
 
 function playerGoto(time) {
-	$t = toSeconds(time);
-	document.getElementById("player").currentTime = $t;
+	var t = toSeconds(time);
+	//document.getElementById("player").currentTime = t;
+	
+	jwplayer("player").seek(t);
+	// Coupe et remet les sous-titres pour les recharger (sinon bug en cas de relecture de la vidéo)
+	jwplayer("player").setCurrentCaptions(0);
+	jwplayer("player").setCurrentCaptions(1);
 }
 
 function changeFavori(videoId) {
@@ -185,6 +193,40 @@ function changeFavori(videoId) {
 	});
 	hideLoadingPopup();
 }
+
+$(document).ready(function() {
+	jwplayer("player").setup({
+		file: encodeURI('<?= APPLICATION_ABSOLUTE_URL.PATH_CONVERTED_FILE."/".escapeDoubleQuote($video->nom_video) ?>'),
+		image: encodeURI('<?= APPLICATION_ABSOLUTE_URL.PATH_CONVERTED_FILE."/".escapeDoubleQuote($video->nom_video) ?>.jpg'),
+		width : '600px',
+		height : '100%',
+		tracks: [{ 
+			file: encodeURI(escapeSpaces('<?= APPLICATION_ABSOLUTE_URL.PATH_CONVERTED_FILE."/".escapeDoubleQuote($video->nom_video) ?>.vtt')), 
+			label: "French",
+			kind: "captions",
+			"default": true 
+		}],
+		skin: {
+			name: "lecteur",
+		},
+	    captions: {
+	        color: '#FFFFFF',
+	        fontFamily : 'Tahoma, Arial, serif',
+	        backgroundOpacity: 50,
+	        edgeStyle : 'dropshadow'
+	    }
+	});
+	var statusBeforeSeek = null;
+	jwplayer("player").on('seek', function() {
+		statusBeforeSeek = jwplayer("player").getState();
+	});
+	jwplayer("player").on('seeked', function() {
+		if (statusBeforeSeek == 'paused') {
+			jwplayer("player").pause(true);
+		}
+		statusBeforeSeek = null;
+	});
+});
 
 </script>
 

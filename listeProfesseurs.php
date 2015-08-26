@@ -5,6 +5,9 @@ include_once $pathToPhpRoot."entete.php";
 
 $allDansesProfesseurs = MetierVideo::getAllVideosWithAttributesForDanseProfesseur();
 
+$danseOrder = MetierDanse::getDansesOrderedByUserPreference($_SESSION['userId']);
+$dansesName = MetierDanse::getAllDanseName();
+
 ?>
 
 <div id="title">
@@ -13,11 +16,14 @@ $allDansesProfesseurs = MetierVideo::getAllVideosWithAttributesForDanseProfesseu
 
 <div id="danses" class="listeDiv">
 	 <ul>
-	 	<?php 
-		foreach ($allDansesProfesseurs as $nom_danse => $arrayProfesseurs) {
+	 	<?php
+	 	foreach($danseOrder as $danseOrd) {
+	 		if (isset($allDansesProfesseurs[$danseOrd->id])) {
+	 			$id_danse = $danseOrd->id;
 		?>
-		<li><a href="#tabs-<?= formatId($nom_danse) ?>" onClick="$('.action_check').attr('checked', false);"><?= $nom_danse ?></a></li>
+		<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>" onClick="$('.action_check').attr('checked', false);"><?= $dansesName[$id_danse] ?></a></li>
 		<?php
+			}
 		} 
 		?>
 	</ul>
@@ -27,9 +33,9 @@ $allDansesProfesseurs = MetierVideo::getAllVideosWithAttributesForDanseProfesseu
 	?>
 
 	<?php 
-	foreach ($allDansesProfesseurs as $nom_danse => $arrayProfesseurs) {
+	foreach ($allDansesProfesseurs as $id_danse => $arrayProfesseurs) {
 	?>
-		<div id="tabs-<?= formatId($nom_danse) ?>" class="professeurs categories">
+		<div id="tabs-<?= $id_danse ?>" class="professeurs categories">
 		<?php 
 		foreach ($arrayProfesseurs as $professeur) {
 			$nbVideos = $professeur["cpt"];
@@ -88,6 +94,30 @@ $allDansesProfesseurs = MetierVideo::getAllVideosWithAttributesForDanseProfesseu
 		*/
 
 		$('#danses').tabs();
+		$('#danses .ui-tabs-nav').sortable({
+	        axis: "x",
+	        update: function() {
+				var csv = "";
+				$("#danses > ul > li > a").each(function(i){
+					csv += ( csv == "" ? "" : "," ) + this.id.substring(6);
+				});
+				console.log(csv);
+				$('#danses').tabs( "refresh" );
+				$.ajax({
+					type: 'POST', // Le type de ma requete
+					url: 'ajaxController/manageController.php', // L'url vers laquelle la requete sera envoyee
+					dataType : 'json',
+					data: {
+						formulaire : "action=updateTabOrder&ids=" + csv
+					},
+					async : true,
+					success: function(data, textStatus, jqXHR) { },
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert("Une erreur est survenue lors de la sauvegarde de l'ordre des onglets : \n" + jqXHR.responseText);
+					}
+				});
+	        }
+		});
 
 		if ($(".action_select").length == 0) {
 			$('.check').hide();

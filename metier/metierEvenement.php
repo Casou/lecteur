@@ -125,8 +125,8 @@ class MetierEvenement {
 				$danses = MetierDanse::getDanseActivatedByEvenement($evenement->id, $id_user);
 			}
 			foreach ($danses as $danse) {
-				if (!isset($dansesEvenements[$danse->nom])) {
-					$dansesEvenements[$danse->nom] = array();
+				if (!isset($dansesEvenements[$danse->id])) {
+					$dansesEvenements[$danse->id] = array();
 				}
 				
 				$nbVideos = MetierVideo::getNbVideosByEvenementAndDanse($evenement->id, $danse->id, $id_user);
@@ -137,7 +137,7 @@ class MetierEvenement {
 					$dto->danse = $danse;
 					$dto->couleur = MetierAccordeonCouleur::getAccordeonCouleurById($evenement->couleur);
 					$dto->nbVideos = $nbVideos;
-					$dansesEvenements[$danse->nom][] = $dto;
+					$dansesEvenements[$danse->id][] = $dto;
 				}
 			}
 		}
@@ -152,14 +152,14 @@ class MetierEvenement {
 				$dto->danse = $danse;
 				$dto->couleur = MetierAccordeonCouleur::getDefaultColor();
 				$dto->nbVideos = $nbVideosSansEvenements;
-				$dansesEvenements[$danse->nom][] = $dto;
+				$dansesEvenements[$danse->id][] = $dto;
 			}
 		}
 		
 		// On supprime les danses vides (sans vidéos)
-		foreach ($dansesEvenements as $danse_nom => $dto) {
-			if (count($dansesEvenements[$danse_nom]) == 0) {
-				unset($dansesEvenements[$danse_nom]);
+		foreach ($dansesEvenements as $danse_id => $dto) {
+			if (count($dansesEvenements[$danse_id]) == 0) {
+				unset($dansesEvenements[$danse_id]);
 			}
 		}
 		

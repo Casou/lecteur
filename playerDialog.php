@@ -4,8 +4,8 @@
 <div id="playerDialog" title="Visualisation" style="text-align : center">
 	<input type="hidden" id="video_viewed" />
 
-	<video id="player" title="Prévisualisation" width="640" height="360" controls>
-	</video>
+	
+	<!-- <video id="player" title="Prévisualisation" width="640" height="360" controls></video>
 	
 	<div id="player_srt" class="srt"
 		data-video="player"
@@ -18,6 +18,11 @@
 			<img src="style/images/close_srt.png" />
 		</a>
 	</div>
+	-->
+	
+	<div id="player">Chargement de la vidéo...</div>
+	
+	
 	
 	<div id="playerPasses">
 		<table>
@@ -41,8 +46,12 @@
 <script type="text/javascript">
 
 	function playerGoto(time) {
-		$t = toSeconds(time);
-		document.getElementById("player").currentTime = $t;
+		var t = toSeconds(time);
+		// $("#player video")[0].currentTime = t;
+		jwplayer("player").seek(t);
+		// Coupe et remet les sous-titres pour les recharger (sinon bug en cas de relecture de la vidéo)
+		jwplayer("player").setCurrentCaptions(0);
+		jwplayer("player").setCurrentCaptions(1);
 	}
 
 	/*
@@ -87,11 +96,47 @@
 					alert('[' + data.status + '] ' + data.message);
 				} else {
 					var videoDto = data.infos['video'];
-					
+
+					// Titre de la popup
 					$('#playerDialog').parent().children('.ui-dialog-titlebar').children('.ui-dialog-title').html(videoDto.video.nom_affiche);
+					
+					/*
 					$('#player')[0].src = '<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video;
 					$('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video + ".srt"));
-					$('#shareVideo input').val('<?= URL_APPLICATION ?>/showVideo.php?id=' + videoDto.video.code_partage);
+					*/
+					jwplayer("player").setup({
+						file: encodeURI('<?= APPLICATION_ABSOLUTE_URL.changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video),
+						image: encodeURI('<?= APPLICATION_ABSOLUTE_URL.changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video + ".jpg"),
+						width : '95%',
+						height : '350px',
+						tracks: [{ 
+							file: encodeURI(escapeSpaces('<?= APPLICATION_ABSOLUTE_URL.changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video + ".vtt")), 
+							label: "French",
+							kind: "captions",
+							"default": true 
+						}],
+						skin: {
+							name: "lecteur",
+						},
+					    captions: {
+					        color: '#FFFFFF',
+					        fontFamily : 'Tahoma, Arial, serif',
+					        backgroundOpacity: 50,
+					        edgeStyle : 'dropshadow'
+					    }
+					});
+					var statusBeforeSeek = null;
+					jwplayer("player").on('seek', function() {
+						statusBeforeSeek = jwplayer("player").getState();
+					});
+					jwplayer("player").on('seeked', function() {
+						if (statusBeforeSeek == 'paused') {
+							jwplayer("player").pause(true);
+						}
+						statusBeforeSeek = null;
+					});
+
+					$('#shareVideo input').val('<?= APPLICATION_ABSOLUTE_URL ?>showVideo.php?id=' + videoDto.video.code_partage);
 
 					$('#playerPasses table').html('');
 					for (var i = 0; i < videoDto.passes.length; i++) {
@@ -108,9 +153,10 @@
 						$('#playerPasses table').append(html);
 					}
 
-					launchSubtitles();
+					// launchSubtitles();
 					$('#playerDialog').dialog("open");
-					$('#player')[0].play();
+					// jwplayer("player").play(true);
+					// $('#player video')[0].play();
 
 					$('#video_viewed').val(id);
 					reinitActionButtons();
@@ -132,9 +178,9 @@
 			autoOpen: false,
 			modal: true,
 			width : 670,
-			height : 650,
+			height : 635,
 			close : function() {
-				$('#player')[0].pause();
+				// $('#player')[0].pause();
 				window.clearInterval(ival);
 			}
 		});

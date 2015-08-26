@@ -45,6 +45,7 @@ Temporary Items
 # Exclusions spécifiques au projet
 *.webm
 *.srt
+*.vtt
 ressources/raw_videos/*
 ressources/raw_videos_bin/*
 ressources/thumbnails/*

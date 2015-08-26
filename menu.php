@@ -16,13 +16,20 @@ include_once $pathToPhpRoot.'popupTag.php';
 	<ul id="menu_list">
 		<li class="level_1">
 			<a href="index.php" id="menu_accueil">
+				<img src="style/images/home.png" />
 				Accueil
 			</a>
 		</li>
-		<?php if (isset($_SESSION[DROIT_CONSULT])) { ?>
+	<?php if (isset($_SESSION[DROIT_CONSULT])) { ?>
 		<li class="level_1">
-			Lister
+			Rechercher
 		</li>
+			<li class="level_2">
+				<a href="recherche.php">
+					<img src="style/images/search.png" />
+					Recherche vidéo
+				</a>
+			</li>
 			<li class="level_2">
 				<a href="listeEvenements.php">
 					Danse / Évènement
@@ -47,12 +54,6 @@ include_once $pathToPhpRoot.'popupTag.php';
 			</li>
 			<?php } ?>
 		
-		<li class="level_1">
-			<a href="recherche.php">
-				Rechercher
-			</a>
-		</li>
-		
 		<?php if(isset($_SESSION[DROIT_ACTION_USE_PLAYLIST])) { ?>
 		<li class="level_1">
 			<a href="playlist.php">
@@ -61,39 +62,51 @@ include_once $pathToPhpRoot.'popupTag.php';
 		</li>
 		<?php } ?>
 		
-		<?php } ?>
-		
-		<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
+	<?php } ?>
+	
+	<?php if (isset($_SESSION[DROIT_ADMIN]) || $_SESSION["user"] == "admin") { ?>
 		<li class="level_1">
-			Gérer
+			Administrer
 		</li>
 			<li class="level_2">
+				<a href="admin.php">
+					<img src="style/images/param_mini.png" />
+					Administration
+				</a>
+			</li>
+		
+		<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
+			<li class="level_2">
 				<a href="#" onClick="showPopup('danseDialog'); return false;">
-					Danses
+					Gérer les danses
 				</a>
 			</li>
 			<li class="level_2">
 				<a href="#" onClick="showPopup('profDialog'); return false;">
-					Professeurs
+					Gérer les profs
 				</a>
 			</li>
 			<li class="level_2">
 				<a href="#" onClick="showPopup('evtDialog'); return false;">
-					Evènements
+					Gérer les évts
 				</a>
 			</li>
 			<li class="level_2">
 				<a href="#" onClick="showPopup('tagDialog'); return false;">
-					Tags
+					Gérer les tags
 				</a>
 			</li>
-		<?php } ?>
+	<?php } ?>
+	<?php } ?>
+	
 			
 		
-		<?php if (isset($_SESSION[DROIT_UPLOAD])) { ?>
+	<?php if (isset($_SESSION[DROIT_UPLOAD]) || isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
 		<li class="level_1">
-			Convertion
+			Gestion vidéos
 		</li>
+	<?php } ?>
+	<?php if (isset($_SESSION[DROIT_UPLOAD])) { ?>
 			<li class="level_2">
 				<a href="upload.php">
 					Upload
@@ -116,26 +129,19 @@ include_once $pathToPhpRoot.'popupTag.php';
 				</a>
 			</li>
 			<?php } ?>
-		<?php } ?>
+	<?php } ?>
 		
 		
 		
 		<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
-		<li class="level_1">
+		<li class="level_2 videoDispo">
 			<a href="manageVideos.php">
+				<img src="style/images/video.png" />
 				Vidéos dispo
 			</a>
 		</li>
 		<?php } ?>
 		
-		
-		<?php if (isset($_SESSION[DROIT_ADMIN]) || $_SESSION["user"] == "admin") { ?>
-		<li class="level_1">
-			<a href="admin.php">
-				Administrer
-			</a>
-		</li>
-		<?php } ?>
 		
 		<?php if ($_SESSION["userLogged"] != $_SESSION["userId"]) { ?>
 		<li class="level_1">
@@ -145,7 +151,7 @@ include_once $pathToPhpRoot.'popupTag.php';
 		</li>
 		<?php } ?>
 		
-		<li class="level_1 deconnexion">
+		<li class="level_1 deconnexion red_button">
 			<a href="login.php?action=disconnect">
 				Déconnexion
 			</a>

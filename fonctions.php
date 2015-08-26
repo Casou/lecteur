@@ -1,10 +1,5 @@
 <?php
 
-function json_encode_utf8($var) {
-	$json = new Services_JSON();
-	return $json->encode($var);
-}
-
 function endsWith($haystack, $needle) {
 	return strtoupper(substr($haystack, -strlen($needle))) == strtoupper($needle);
 }
@@ -38,7 +33,7 @@ function formatFileName($fileName) {
 	return stripAccents($fileName);
 }
 
-function formatId($name) {
+function removeSpaces($name) {
 	return str_replace(" ", "_", stripAccents($name));
 }
 

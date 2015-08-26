@@ -51,23 +51,33 @@ $users = MetierUser::getAllUserDTO();
 						$lastConnexion = "<span title='$titleLog'>$lastConnexion</span>";
 					}
 					
+					$is_admin = false;
+					$first =  true;
+					$profilString = "";
+					foreach($profils as $profil) {
+						if (!$first) {
+							$profilString .= ", ";
+						}
+						if ($profil->nom == 'Admin') {
+							$is_admin = true;
+						}
+						$profilString .= $profil->nom;
+						$first = false;
+					}
+					
 					$log_level = ($user->log_level == null) ? "<i>Défaut</i>" : $LOG_LEVELS_MAP[$user->log_level];
 				?>
 					<tr>
 						<td class="user_list_login">
-							<img src="style/images/user_blue.png" alt="User" alt="Utilisateur" />
+							<?php if ($is_admin) { ?>
+								<img src="style/images/user_purple.png" alt="User" alt="Utilisateur" />
+							<?php } else { ?>
+								<img src="style/images/user_blue.png" alt="User" alt="Utilisateur" />
+							<?php } ?>
 							<?= $user->login ?>
 						</td>
 						<td class="user_list_profile">
-							<?php
-							$first =  true; 
-							foreach($profils as $profil) { 
-								if (!$first) {
-									echo ", ";
-								}
-								echo $profil->nom;
-								$first = false;
-							} ?>
+							<?= $profilString ?>
 						</td>
 						<td class="user_list_connection"><?= $lastConnexion ?></td>
 						<td class="user_log_level"><?= $log_level ?></td>

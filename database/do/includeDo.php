@@ -14,6 +14,7 @@ include_once "doDroit.php";
 include_once "doDroitCategorie.php";
 include_once "doAccordeonCouleur.php";
 include_once "doPlaylist.php";
+include_once "doPlaylistFolder.php";
 include_once "doPlaylistUserRights.php";
 include_once "doConnexion.php";
 

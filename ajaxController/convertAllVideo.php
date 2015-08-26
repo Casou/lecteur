@@ -62,7 +62,7 @@ foreach ($waitingVideos as $video) {
 header('HTTP/1.1 200 OK');
 
 $response = new AjaxResponseObject(AJAX_STATUS_OK, "Encodage terminé");
-echo json_encode_utf8($response);
+echo Fwk::json_encode_utf8($response);
 exit;
 
 ?>

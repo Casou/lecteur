@@ -11,18 +11,67 @@ class MetierPlaylist {
 			return MetierPlaylist::getAllPlaylist();
 		}
 		
-		// Playlist cr�es par l'utilisateur + playlist qu'on peut modifier
+		// Playlist créées par l'utilisateur + playlist qu'on peut modifier
 		$sql = "select * from ".Playlist::getTableName()." where id_user = $id_user ".
 			" UNION ".
 			" select p.* from ".Playlist::getTableName()." p ".
 			" inner join ".PlaylistUserRights::getTableName()." pur on p.id = pur.id_playlist ".
-			" where pur.id_user = $id_user and pur.can_write = 1 ".
+			" where pur.id_user = $id_user and type_playlist = 'PLAYLIST' and pur.can_write = 1 ".
 			" ORDER BY nom ASC;";
 		return Database::getResultsObjects($sql, "Playlist");
 	}
 	
-	public static function getPlaylistCreatedByUser($id_user) {
-		return Database::getResultsObjects("select * from ".Playlist::getTableName()." where id_user = $id_user order by nom ASC", "Playlist");
+	public static function getPlaylistCreatedByUser($id_user, $id_folder = null) {
+		if ($id_folder == null) {
+			$sql = "select * from ".Playlist::getTableName()." where id_user = $id_user and id_folder is null order by nom ASC";
+		} else {
+			$sql = "select * from ".Playlist::getTableName()." where id_user = $id_user and id_folder = $id_folder order by nom ASC";
+		}
+		return Database::getResultsObjects($sql, "Playlist");
+	}
+	
+	public static function getPlaylistDTONotCreatedByUserAndFolder($id_user, $id_folder) {
+		$sql = "select * from ".Playlist::getTableName()." where id_user != $id_user and id_folder = $id_folder order by nom ASC";
+		return Database::getResultsObjects($sql, "Playlist");
+	}
+	
+	public static function getPlaylistDTOCreatedByUser($id_user, $id_folder = null) {
+		if ($id_folder == null) {
+			$sql = "select * from ".Playlist::getTableName()." where id_user = $id_user and id_folder is null order by nom ASC";
+		} else {
+			$sql = "select * from ".Playlist::getTableName()." where id_user = $id_user and id_folder = $id_folder order by nom ASC";
+		}
+		
+		return MetierPlaylist::buildPlaylistDTOFromSql($id_user, $sql);
+	}
+	
+	public static function getPlaylistDTONotCreatedByUser($id_user, $id_folder) {
+		$sql = "select * from ".Playlist::getTableName()." where id_user != $id_user and id_folder = $id_folder order by nom ASC";
+		return MetierPlaylist::buildPlaylistDTOFromSql($id_user, $sql);
+	}
+	
+	private static function buildPlaylistDTOFromSql($id_user, $sql) {
+		$playlists = Database::getResultsObjects($sql, "Playlist");
+		$dtos = array();
+		foreach ($playlists as $playlist) {
+			
+			$dto = MetierPlaylistUserRights::getPlaylistDTO($id_user, $playlist);
+			/*
+			$dto = new PlaylistDTO();
+			$dto->can_read = true;
+			$dto->can_read_plus = true;
+			$dto->can_share = true;
+			$dto->can_write = true;
+				
+			$dto->creator = null;
+			$dto->nbVideos = count(MetierPlaylist::getVideoForPlaylist($playlist->id, $dto->can_read_plus));
+			*/
+			$dto->playlist = $playlist;
+				
+			$dtos[] = $dto;
+		}
+			
+		return $dtos;
 	}
 	
 	public static function getPlaylistForVideo($id_video) {
@@ -73,7 +122,7 @@ class MetierPlaylist {
 	
 	public static function savePlaylistPreferences($formulaire) {
 		$formulaire = parse_str($formulaire);
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		if (isset($idvideo) && count($idvideo) > 0) {
 			$order = 1;
@@ -85,7 +134,7 @@ class MetierPlaylist {
 			}
 		}
 		
-		Database::executeUpdate("DELETE FROM ".PlaylistUserRights::getTableName()." WHERE id_playlist = $id_playlist");
+		Database::executeUpdate("DELETE FROM ".PlaylistUserRights::getTableName()." WHERE id_playlist = $id_playlist AND type_playlist = 'PLAYLIST'");
 		if (isset($id_user) && count($id_user) > 0) {
 			foreach ($id_user as $id) {
 				$readVariable = 'read_check_'.$id;
@@ -99,18 +148,18 @@ class MetierPlaylist {
 				$share = (isset($$shareVariable)) ? 1 : 0;
 				
 				if (($read + $write + $share) > 0) {
-					$sql = "INSERT INTO ".PlaylistUserRights::getTableName()." (id_playlist, id_user, can_read, can_read_plus, can_write, can_share)".
-						" VALUES ($id_playlist, $id, $read, $read_plus, $write, $share)";
+					$sql = "INSERT INTO ".PlaylistUserRights::getTableName()." (id_playlist, type_playlist, id_user, can_read, can_read_plus, can_write, can_share)".
+						" VALUES ($id_playlist, 'PLAYLIST', $id, $read, $read_plus, $write, $share)";
 					Database::executeUpdate($sql);
 				}
 			}
 		}
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	public static function linkVideoPlaylist($id_video, $playlists) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		Database::executeUpdate("DELETE FROM ".Playlist::getJoinVideoTableName()." WHERE id_video=$id_video");
 		
 		foreach($playlists as $playlist) {
@@ -118,7 +167,7 @@ class MetierPlaylist {
 				" VALUES ($id_video, $playlist)";
 			Database::executeUpdate($sql);
 		}
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	
@@ -134,7 +183,7 @@ class MetierPlaylist {
 	}
 	
 	public static function saveVideoToPlaylist($id_playlist, $nom_playlist, $ids_video) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		if ($nom_playlist != "") {
 			$id_playlist = MetierPlaylist::insertPlaylist($nom_playlist, $_SESSION['userId']);
@@ -146,7 +195,7 @@ class MetierPlaylist {
 			Database::executeUpdate($sql);
 		}
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	
@@ -157,13 +206,13 @@ class MetierPlaylist {
 	}
 	
 	public static function deletePlaylist($id_playlist) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		Database::executeUpdate("DELETE FROM ".Playlist::getJoinVideoTableName()." WHERE id_playlist = $id_playlist");
-		Database::executeUpdate("DELETE FROM ".PlaylistUserRights::getTableName()." WHERE id_playlist = $id_playlist");
+		Database::executeUpdate("DELETE FROM ".PlaylistUserRights::getTableName()." WHERE id_playlist = $id_playlist and type_playlist = 'PLAYLIST'");
 		Database::executeUpdate("DELETE FROM ".Playlist::getTableName()." WHERE id = $id_playlist");
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 		
 }

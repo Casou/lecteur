@@ -101,18 +101,19 @@ class MetierTag {
 	
 	
 	public static function linkVideoTag($id_video, $id_tags) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		Database::executeUpdate("DELETE FROM ".Tag::getJoinVideoTableName()." WHERE id_video = $id_video");
 		
 		foreach ($id_tags as $tag) {
 			$sql = "INSERT INTO ".Tag::getJoinVideoTableName()."(id_tag, id_video) VALUES  ($tag, $id_video)";
 			Database::executeUpdate($sql);
 		}
-		Database::commit();
+		
+		if ($hasTransaction) Database::commit();
 	}
 	
 	public static function saveAttachedTagsForVideo($id_videos, $tags) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		$in_clause_video = "";
 		foreach($id_videos as $id_video) {
 			if ($in_clause_video != "") {
@@ -154,7 +155,7 @@ class MetierTag {
 				}
 			}
 		}
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	
@@ -165,10 +166,10 @@ class MetierTag {
 	}
 	
 	public static function deleteTag($id) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		Database::executeUpdate("DELETE FROM ".Tag::getJoinVideoTableName()." WHERE id_tag = $id");
 		Database::executeUpdate("DELETE FROM ".Tag::getTableName()." WHERE id = $id");
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	

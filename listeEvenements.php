@@ -20,6 +20,8 @@ if (!isset($_POST['id_user_monitored'])) {
 	$includeSelect = false;
 }
 
+$danseOrder = MetierDanse::getDansesOrderedByUserPreference($id_user);
+$dansesName = MetierDanse::getAllDanseName(true);
 ?>
 
 <div id="title">
@@ -29,10 +31,13 @@ if (!isset($_POST['id_user_monitored'])) {
 <div id="danses" class="listeDiv">
 	 <ul>
 	 	<?php 
-		foreach ($allDansesEvenements as $nom_danse => $evenements) {
+	 	foreach($danseOrder as $danseOrd) {
+	 		if (isset($allDansesEvenements[$danseOrd->id])) {
+	 			$id_danse = $danseOrd->id;
 		?>
-		<li><a href="#tabs-<?= formatId($nom_danse) ?>" onClick="$('.action_check').attr('checked', false);"><?= $nom_danse ?></a></li>
+		<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>" onClick="$('.action_check').attr('checked', false);"><?= $dansesName[$id_danse] ?></a></li>
 		<?php
+	 		}
 		} 
 		?>
 	</ul>
@@ -44,9 +49,9 @@ if (!isset($_POST['id_user_monitored'])) {
 	?>
 
 	<?php 
-	foreach ($allDansesEvenements as $nom_danse => $evenements) {
+	foreach ($allDansesEvenements as $id_danse => $evenements) {
 	?>
-		<div id="tabs-<?= formatId($nom_danse) ?>" class="evenements categories">
+		<div id="tabs-<?= $id_danse ?>" class="evenements categories">
 				
 		<?php 
 		foreach ($evenements as $evenementDTO) {
@@ -95,6 +100,29 @@ if (!isset($_POST['id_user_monitored'])) {
 		});
 
 		$('#danses').tabs();
+		$('#danses .ui-tabs-nav').sortable({
+	        axis: "x",
+	        update: function() {
+				var csv = "";
+				$("#danses > ul > li > a").each(function(i){
+					csv += ( csv == "" ? "" : "," ) + this.id.substring(6);
+				});
+				$('#danses').tabs( "refresh" );
+				$.ajax({
+					type: 'POST', // Le type de ma requete
+					url: 'ajaxController/manageController.php', // L'url vers laquelle la requete sera envoyee
+					dataType : 'json',
+					data: {
+						formulaire : "action=updateTabOrder&ids=" + csv
+					},
+					async : true,
+					success: function(data, textStatus, jqXHR) { },
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert("Une erreur est survenue lors de la sauvegarde de l'ordre des onglets : \n" + jqXHR.responseText);
+					}
+				});
+	        }
+		});
 
 		if ($(".action_select").length == 0) {
 			$('.check').hide();

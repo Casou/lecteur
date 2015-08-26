@@ -81,7 +81,7 @@ try {
 }
 
 $response = new AjaxResponseObject($ajaxReturnStatus, $ajaxReturnMessage, $infos);
-echo json_encode_utf8($response);
+echo Fwk::json_encode_utf8($response);
 exit;
 
 ?>

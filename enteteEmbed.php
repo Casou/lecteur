@@ -64,7 +64,7 @@ if (!isset($_SESSION["user"])) {
 	<script type="text/javascript" src="js/jquery.dataTables-1.9.4.min.js"></script>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/h5utils.js"></script>
-	<script type="text/javascript" src="js/jquery.srt.js"></script>
+	<!--  <script type="text/javascript" src="js/jquery.srt.js"></script> -->
 	<script type="text/javascript" src="js/globalize.js"></script>
 	<script type="text/javascript" src="js/globalize.culture.fr-FR.js"></script>
 	
@@ -79,6 +79,9 @@ if (!isset($_SESSION["user"])) {
 		<?php } ?>
 		};
 	</script>
+	
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/jwskin-lecteur.css" />
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>tools/jwplayer/jwplayer_7.js"></script>
 	
 </head>
 

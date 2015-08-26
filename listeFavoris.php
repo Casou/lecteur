@@ -6,6 +6,8 @@ include_once $pathToPhpRoot."entete.php";
 
 $allDansesFavori = MetierVideo::getAllVideosWithAttributesFavori();
 
+$danseOrder = MetierDanse::getDansesOrderedByUserPreference($_SESSION['userId']);
+$dansesName = MetierDanse::getAllDanseName();
 
 ?>
 
@@ -16,10 +18,13 @@ $allDansesFavori = MetierVideo::getAllVideosWithAttributesFavori();
 <div id="danses" class="listeDiv">
 	 <ul>
 	 	<?php 
-		foreach ($allDansesFavori as $nom_danse => $videos) {
+	 	foreach($danseOrder as $danseOrd) {
+	 		if (isset($allDansesFavori[$danseOrd->id])) {
+	 			$id_danse = $danseOrd->id;
 		?>
-		<li><a href="#tabs-<?= formatId($nom_danse) ?>"><?= $nom_danse ?></a></li>
-		<?php
+		<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>"><?= $dansesName[$id_danse] ?></a></li>
+	 	<?php 	
+	 		}
 		} 
 		?>
 	</ul>
@@ -29,9 +34,9 @@ $allDansesFavori = MetierVideo::getAllVideosWithAttributesFavori();
 	?>
 
 	<?php 
-	foreach ($allDansesFavori as $nom_danse => $videos) {
+	foreach ($allDansesFavori as $id_danse => $videos) {
 	?>
-		<div id="tabs-<?= formatId($nom_danse) ?>" class="favoris categories">
+		<div id="tabs-<?= $id_danse ?>" class="favoris categories">
 		<?php 
 		if (count($videos) == 0) {
 			echo "<h2>Pas de vidéo</h2>";
@@ -151,6 +156,29 @@ function masterCheckbox(id) {
 		});
 
 		$('#danses').tabs();
+		$('#danses .ui-tabs-nav').sortable({
+	        axis: "x",
+	        update: function() {
+				var csv = "";
+				$("#danses > ul > li > a").each(function(i){
+					csv += ( csv == "" ? "" : "," ) + this.id.substring(6);
+				});
+				$('#danses').tabs( "refresh" );
+				$.ajax({
+					type: 'POST', // Le type de ma requete
+					url: 'ajaxController/manageController.php', // L'url vers laquelle la requete sera envoyee
+					dataType : 'json',
+					data: {
+						formulaire : "action=updateTabOrder&ids=" + csv
+					},
+					async : true,
+					success: function(data, textStatus, jqXHR) { },
+					error: function(jqXHR, textStatus, errorThrown) {
+						alert("Une erreur est survenue lors de la sauvegarde de l'ordre des onglets : \n" + jqXHR.responseText);
+					}
+				});
+	        }
+		});
 
 
 		if ($(".action_select").length == 0) {

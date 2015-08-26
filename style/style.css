@@ -11,7 +11,8 @@
 
 
 body {
-	background : url("images/banderolle-2.jpg") no-repeat center fixed; 
+	// background : url("images/banderolle-2.jpg") no-repeat center fixed; 
+	background : url("images/nouveau_theme/plancher.jpg") repeat top left fixed;
 }
 
 a {
@@ -43,6 +44,10 @@ font-size : 12px;
 padding : 2px 5px;
 }
 
+.ui-dialog {
+	box-shadow : 0 0 10px #444, 0 0 20px #444;
+}
+
 .ui-dialog .ui-dialog-titlebar {
 	padding : 5px 10px;	
 }
@@ -58,6 +63,19 @@ padding : 2px 5px;
 .required, .error {
 	color : red;
 	font-weight : bold;
+}
+
+.red_button .ui-state-default, .red_button.ui-state-default {
+	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_55_ee322a_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	border-color : #EE322A;
+	color : white;
+}
+.red_button.ui-state-default .ui-icon {
+	background-image : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_d8e7f3_256x240.png");
+}
+
+abbr {
+	cursor : help;
 }
 
 
@@ -260,6 +278,13 @@ padding : 2px 5px;
 	margin-right : 15px;
 }
 
+#menu_list li img {
+	max-height : 16px;
+	vertical-align : sub;
+	-webkit-filter: drop-shadow(0 0 3px white);
+  	filter: drop-shadow(0 0 3px white);
+}
+
 #menu_list li,
 #menu_list li a {
 	text-decoration : none;
@@ -276,11 +301,6 @@ padding : 2px 5px;
 
 :root *>#menu_list li a:hover {
 	text-decoration : none !important; /* Hack IE 6, 7, 8 */
-}
-
-#menu .deconnexion .ui-state-default {
-	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_55_ee322a_500x100.png") repeat-x scroll 50% 50% #EE322A;
-	border-color : #EE322A;
 }
 
 #menu_list li.deconnexion a {
@@ -745,11 +765,6 @@ padding : 2px 5px;
 }
 
 
-
-
-#showVideoTable a {
-	color : black;
-}
 
 
 #version {

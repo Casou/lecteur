@@ -30,6 +30,6 @@ foreach($videos as $video) {
 
 
 $response = new AjaxResponseObject(AJAX_STATUS_OK, $scripts);
-echo json_encode_utf8($response);
+echo Fwk::json_encode_utf8($response);
 exit;
 ?>

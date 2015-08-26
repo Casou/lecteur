@@ -112,19 +112,19 @@ class MetierCritere {
 		}
 		
 		// On ajoute les vidéos ajoutées à la main à des profils
-		$sql = "INSERT INTO ".Video::getJoinAllowedTableName()." (id_video, id_user) SELECT id_video, $id_user".
+		$sql = "INSERT IGNORE INTO ".Video::getJoinAllowedTableName()." (id_video, id_user) SELECT id_video, $id_user".
 					" from ".Video::getJoinAllowedManualToProfileTableName()." p ".
 					" inner join ".User::getJoinProfilTableName()." usr on p.id_profil = usr.id_profil ". 
 					" WHERE usr.id_user = $id_user".
-					" and id_video not in (select id_video from lct_allowed_video_user_calc where id_user = $id_user)";
+					" and p.id_video not in (select id_video from lct_allowed_video_user_calc where id_user = $id_user)";
 		Database::executeUpdate($sql);
 		
 		
 		// On ajoute les vidéos ajoutées à la main à des utilisateurs
-		$sql = "INSERT INTO ".Video::getJoinAllowedTableName()." (id_video, id_user) SELECT id_video, $id_user".
+		$sql = "INSERT IGNORE INTO ".Video::getJoinAllowedTableName()." (id_video, id_user) SELECT id_video, $id_user".
 					" from ".Video::getJoinAllowedManualTableName()." usr ".
 					" WHERE usr.id_user = $id_user". 
-					" and id_video not in (select id_video from lct_allowed_video_user_calc where id_user = $id_user)";
+					" and usr.id_video not in (select id_video from lct_allowed_video_user_calc where id_user = $id_user)";
 		Database::executeUpdate($sql);
 		
 	}

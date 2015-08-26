@@ -50,9 +50,13 @@ class MetierPasse {
 		
 		// Ecriture du fichier de sous-titre
 		Logger::debug("Ecriture du fichier de sous-titre");
-		$srtFileName = "$nom_video.srt";
-		$srtFile = fopen("..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.escapeSpaces($srtFileName), 'w');
-		$numeroSrt = 1;
+// 		$srtFileName = "$nom_video.srt";
+		$vttFileName = "$nom_video.vtt";
+		$vttFile = fopen("..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.escapeSpaces($vttFileName), 'w');
+		Fwk::writeInOpenedFile($vttFile, "WEBVTT");
+		Fwk::writeInOpenedFile($vttFile, "");
+		
+// 		$numeroSrt = 1;
 		for ($i = 0; $i < count($passes); $i++) {
 			$nom = stripslashes($passes[$i]);
 			$niveau = $niveaux[$i];
@@ -83,17 +87,17 @@ class MetierPasse {
 			Database::executeUpdate($sql);
 			
 			if ($timer) {
-				Logger::debug("Passe $numeroSrt; $timer_debut,000 --> $timer_fin,000 : ".utf8_encode($nom));
+// 				Logger::debug("Passe $numeroSrt; $timer_debut,000 --> $timer_fin,000 : ".utf8_encode($nom));
 				
-				Fwk::writeInOpenedFile($srtFile, "$numeroSrt");
-				Fwk::writeInOpenedFile($srtFile, "$timer_debut,000 --> $timer_fin,000");
-				Fwk::writeInOpenedFile($srtFile, utf8_encode($nom));
-				Fwk::writeInOpenedFile($srtFile, "");
+// 				Fwk::writeInOpenedFile($vttFile, "$numeroSrt");
+				Fwk::writeInOpenedFile($vttFile, "$timer_debut.000 --> $timer_fin.000");
+				Fwk::writeInOpenedFile($vttFile, utf8_encode($nom));
+				Fwk::writeInOpenedFile($vttFile, "");
 				
-				$numeroSrt++;
+// 				$numeroSrt++;
 			}
 		}
-		fclose($srtFile);
+		fclose($vttFile);
 	}
 	
 	public static function removeLinkVideoPasse($id_video) {

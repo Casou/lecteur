@@ -3,9 +3,8 @@
 define('APPLICATION_NAME', 'lecteur');
 define('APPLICATION_URL', 'lecteur');
 define('LOG_FILE_NAME', 'lecteur');
-define('APPLICATION_VERSION', '2.4.2');
+define('APPLICATION_VERSION', '2.4.3');
 // define('URL_APPLICATION', 'http://localhost/lecteur');
-define('URL_APPLICATION', 'http://basile.parent.free.fr/lecteur');
 define('ABSOLUTE_PATH', '/lecteur/');
 
 
@@ -15,12 +14,12 @@ DEFINE('ENCODING_STATE_ENDED_WITH_ERRORS', 5);
 DEFINE('ENCODING_STATE_ENDED_OK', 6);
 
 
-DEFINE('PATH_RAW_FILE', 'ressources'.DIRECTORY_SEPARATOR.'raw_videos');
-DEFINE('PATH_RAW_FILE_BIN', 'ressources'.DIRECTORY_SEPARATOR.'raw_videos_bin');
-DEFINE('PATH_CONVERTED_FILE', 'ressources'.DIRECTORY_SEPARATOR.'video_traitees');
-DEFINE('PATH_FFMPEG', 'ressources'.DIRECTORY_SEPARATOR.'ffmpeg.exe');
-DEFINE('PATH_THUMBNAIL', 'ressources'.DIRECTORY_SEPARATOR.'thumbnails');
-DEFINE('PATH_THUMBNAIL_FILE', 'ressources'.DIRECTORY_SEPARATOR.'stats_thumbnails.txt');
+DEFINE('PATH_RAW_FILE', 'ressources/raw_videos');
+DEFINE('PATH_RAW_FILE_BIN', 'ressources/raw_videos_bin');
+DEFINE('PATH_CONVERTED_FILE', 'ressources/video_traitees');
+DEFINE('PATH_FFMPEG', 'ressources/ffmpeg.exe');
+DEFINE('PATH_THUMBNAIL', 'ressources/thumbnails');
+DEFINE('PATH_THUMBNAIL_FILE', 'ressources/stats_thumbnails.txt');
 DEFINE('NB_THUMBNAIL_ERRORS', 20);
 DEFINE('PATH_LOG_FOLDER', 'logs');
 

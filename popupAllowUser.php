@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $pathToPhpRoot = './';
 
 include_once $pathToPhpRoot."includes.php";

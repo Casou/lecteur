@@ -30,12 +30,12 @@ include_once $pathToPhpRoot.'popupAllowProfile.php';
 		
 		<div class="playlist_action_bar">
 			<?php if(isset($_SESSION[DROIT_ACTION_ALLOW_USER])) { ?>
-			<input type="button" onClick="popupUser(); return false;" value="Affecter tout à un utilisateur" />
+			<input type="button" onClick="popupUser(); return false;" value="Affecter tout à un utilisateur" title="Rendre toutes les vidéos de la playlist visible pour un utilisateur" />
 			<?php } ?>
 			<?php if(isset($_SESSION[DROIT_ACTION_ALLOW_PROFILE])) { ?>
-			<input type="button" onClick="popupProfile(); return false;" value="Affecter tout à un profil" />
+			<input type="button" onClick="popupProfile(); return false;" value="Affecter tout à un profil" title="Rendre toutes les vidéos de la playlist visible pour un profil" />
 			<?php } ?>
-			<input type="button" onClick="deletePlaylist(); return false;" value="Supprimer" />
+			<input type="button" onClick="deletePlaylist(); return false;" value="Supprimer" style="background-color : #FFDADA;" />
 		</div>
 		
 		<ul id="playlist_video_list">

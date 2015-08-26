@@ -253,7 +253,7 @@ class MetierVideo {
 		foreach ($allDanses as $danse) {
 			$niveaux = MetierPasse::getNiveauxByDanse($danse->id);
 			
-			$arrayAllVideos[$danse->nom] = $niveaux;
+			$arrayAllVideos[$danse->id] = $niveaux;
 			/*
 			$arrayAllVideos[$danse->nom] = array();
 			$videosDo = MetierVideo::getVideoByDanse($danse->id);
@@ -285,9 +285,9 @@ class MetierVideo {
 		*/
 		
 		// On supprime les danses vides (sans vidéos)
-		foreach ($arrayAllVideos as $danse_nom => $dto) {
-			if (count($arrayAllVideos[$danse_nom]) == 0) {
-				unset($arrayAllVideos[$danse_nom]);
+		foreach ($arrayAllVideos as $danse_id => $dto) {
+			if (count($arrayAllVideos[$danse_id]) == 0) {
+				unset($arrayAllVideos[$danse_id]);
 			}
 		}
 		
@@ -302,7 +302,7 @@ class MetierVideo {
 	
 		$arrayAllVideos = array();
 		foreach ($allDanses as $danse) {
-			$arrayAllVideos[$danse->nom] = MetierProfesseur::getProfesseursByDanse($danse->id);
+			$arrayAllVideos[$danse->id] = MetierProfesseur::getProfesseursByDanse($danse->id);
 		}
 		/*
 		foreach ($allDanses as $danse) {
@@ -333,9 +333,9 @@ class MetierVideo {
 		}
 		*/
 		
-		foreach ($arrayAllVideos as $danse_nom => $dto) {
-			if (count($arrayAllVideos[$danse_nom]) == 0) {
-				unset($arrayAllVideos[$danse_nom]);
+		foreach ($arrayAllVideos as $danse_id => $dto) {
+			if (count($arrayAllVideos[$danse_id]) == 0) {
+				unset($arrayAllVideos[$danse_id]);
 			}
 		}
 	
@@ -347,7 +347,7 @@ class MetierVideo {
 	
 		$arrayAllVideos = array();
 		foreach ($allDanses as $danse) {
-			$arrayAllVideos[$danse->nom] = array();
+			$arrayAllVideos[$danse->id] = array();
 			$videosDo = MetierVideo::getVideoFavoriByDanse($danse->id);
 				
 			foreach($videosDo as $do) {
@@ -357,11 +357,11 @@ class MetierVideo {
 // 					$dto->evenement = MetierEvenement::getEventStatic();
 // 				}
 	
-				$arrayAllVideos[$danse->nom][] = $dto;
+				$arrayAllVideos[$danse->id][] = $dto;
 			}
 			
-			if (count($arrayAllVideos[$danse->nom]) == 0) {
-				unset($arrayAllVideos[$danse->nom]);
+			if (count($arrayAllVideos[$danse->id]) == 0) {
+				unset($arrayAllVideos[$danse->id]);
 			}
 		}
 	
@@ -378,7 +378,7 @@ class MetierVideo {
 	
 	
 	public static function completeVideo($fileName, $duration = null) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		$fileNameWebm = formatFileName($fileName);
 		if (!endsWith($fileName, ".webm")) {
@@ -408,7 +408,7 @@ class MetierVideo {
 		MetierVideo::insertVideo($newId.'_'.$fileNameWebm, $newId);
 		
 		// On crée un fichier de sous-titre vide
-		touch("..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.escapeSpaces($newId.'_'.$fileNameWebm).'.srt');
+		touch("..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.escapeSpaces($newId.'_'.$fileNameWebm).'.vtt');
 		
 		if ($duration != null) {
 			$duree = $duration;
@@ -420,7 +420,7 @@ class MetierVideo {
 		$sql = "UPDATE lct_video SET duree=$duree WHERE id = $newId;";
 		Database::executeUpdate($sql);
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	private static function getVideoDuration($fileName) {
@@ -480,7 +480,7 @@ class MetierVideo {
 			$id_evenement = 'NULL';
 		}
 		
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		Logger::debug(">> nom_video : $nom_video => ".escapeString(stripslashes($nom_video)));
 		
@@ -530,7 +530,7 @@ class MetierVideo {
 		}
 		MetierUser::saveUserAllowedForVideo(array($id), $users, true);
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	
@@ -884,7 +884,7 @@ class MetierVideo {
 	
 	
 	public static function deleteVideo($id) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		Logger::info("Suppression de la vidéo $id");
 		
@@ -905,16 +905,16 @@ class MetierVideo {
 			}
 		}
 		
-		$srtFilePath = "..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.escapeSpaces($video->nom_video).".srt";
-		if (file_exists($srtFilePath)) {
-			Logger::debug("Suppression du fichier SRT : $srtFilePath");
-			if (!unlink($srtFilePath)) {
-				throw new Exception("Le fichier de sous-titre \"$srtFilePath\" n'a pas pu être supprimé.");
+		$vttFilePath = "..".DIRECTORY_SEPARATOR.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.escapeSpaces($video->nom_video).".vtt";
+		if (file_exists($vttFilePath)) {
+			Logger::debug("Suppression du fichier VTT : $vttFilePath");
+			if (!unlink($vttFilePath)) {
+				throw new Exception("Le fichier de sous-titre \"$vttFilePath\" n'a pas pu être supprimé.");
 			}
 		}
 		
 		Logger::info("Suppression de la vidéo $id ==> OK");
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	public static function deleteRawVideo($nom) {
@@ -962,7 +962,7 @@ class MetierVideo {
 		if (!file_exists($filePath)) {
 			if ($returnKOIfFileDoesntExists) {
 				$response = new AjaxResponseObject(AJAX_STATUS_KO, "Le fichier $filePath n'existe pas.");
-				echo json_encode_utf8($response);
+				echo Fwk::json_encode_utf8($response);
 				exit;
 			}
 			return null;

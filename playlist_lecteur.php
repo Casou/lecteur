@@ -21,8 +21,8 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 		<?= $playlistDTO->playlist->nom ?>
 	</div>
 	<div id="playlist_lecteur_video">
-		<video id="playlist_player" width="640" height="360" controls>
-		</video>
+		<div id="player">Chargement de la vidéo...</div>
+		<!--  <video id="playlist_player" width="640" height="360" controls></video>
 		
 		<div id="player_srt" class="srt"
 			data-video="playlist_player"
@@ -35,6 +35,7 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 				<img src="style/images/close_srt.png" />
 			</a>
 		</div>
+		-->
 		
 		<input type="checkbox" id="read_continu" checked="checked" />
 		<label for="read_continu">Lecture automatique</label>
@@ -98,8 +99,41 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 					var videoDto = data.infos['video'];
 					
 					// $('.playlist_lecteur_titre_video').html(videoDto.video.nom_affiche);
-					$('#playlist_player')[0].src = '<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video;
-					// $('#shareVideo input').val('<?= URL_APPLICATION ?>/showVideo.php?id=' + videoDto.video.code_partage);
+					// $('#playlist_player')[0].src = '<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video;
+					// $('#shareVideo input').val('<?= APPLICATION_ABSOLUTE_URL ?>showVideo.php?id=' + videoDto.video.code_partage);
+					jwplayer("player").setup({
+						file: encodeURI('<?= APPLICATION_ABSOLUTE_URL.PATH_CONVERTED_FILE."/" ?>' + videoDto.video.nom_video),
+						image: encodeURI('<?= APPLICATION_ABSOLUTE_URL.PATH_CONVERTED_FILE."/" ?>' + videoDto.video.nom_video +'.jpg'),
+						width : '',
+						height : '100%',
+						tracks: [{ 
+							file: encodeURI(escapeSpaces('<?= APPLICATION_ABSOLUTE_URL.PATH_CONVERTED_FILE."/" ?>' + videoDto.video.nom_video + '.vtt')), 
+							label: "French",
+							kind: "captions",
+							"default": true 
+						}],
+						skin: {
+							name: "lecteur",
+						},
+					    captions: {
+					        color: '#FFFFFF',
+					        fontFamily : 'Tahoma, Arial, serif',
+					        backgroundOpacity: 50,
+					        edgeStyle : 'dropshadow'
+					    }
+					});
+					var statusBeforeSeek = null;
+					jwplayer("player").on('seek', function() {
+						statusBeforeSeek = jwplayer("player").getState();
+					});
+					jwplayer("player").on('seeked', function() {
+						if (statusBeforeSeek == 'paused') {
+							jwplayer("player").pause(true);
+						}
+						statusBeforeSeek = null;
+					});
+					
+					
 	
 					$('#playlist_lecteur_passes table').html('');
 					for (var i = 0; i < videoDto.passes.length; i++) {
@@ -120,9 +154,9 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 					$('#playlist_video_' + videoDto.video.id).addClass('selected');
 					
 					// $('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>' + videoDto.video.nom_video + ".srt"));
-					$('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>1183_Big Apple - Sequence 15.mp4.webm.srt'));
-					launchSubtitles();
-					$('#playlist_player')[0].play();
+					// $('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>1183_Big Apple - Sequence 15.mp4.webm.srt'));
+					// launchSubtitles();
+					// $('#playlist_player video')[0].play();
 					idx_video_played = p_idx_video_played;
 					hideLoadingPopup();
 				}
@@ -135,6 +169,7 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 	}
 
 	function playNext() {
+		console.log("play next");
 		idx_video_played++;
 		if (array_length > idx_video_played) {
 			launchVideo(array_video[idx_video_played]);
@@ -143,7 +178,11 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_pla
 	
 	function playerGoto(time) {
 		$t = toSeconds(time);
-		document.getElementById("playlist_player").currentTime = $t;
+		// document.getElementById("playlist_player").currentTime = $t;
+		jwplayer("player").seek(t);
+		// Coupe et remet les sous-titres pour les recharger (sinon bug en cas de relecture de la vidéo)
+		jwplayer("player").setCurrentCaptions(0);
+		jwplayer("player").setCurrentCaptions(1);
 	}
 	
 	$(document).ready(function() {

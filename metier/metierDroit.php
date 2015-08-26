@@ -17,7 +17,7 @@ class MetierDroit {
 	public static function saveDroit($formulaire) {
 		parse_str($formulaire);
 		
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		$users = MetierUser::getAllUser();
 		$droits = MetierDroit::getAllDroit();
@@ -36,7 +36,7 @@ class MetierDroit {
 			}	
 		}
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 }

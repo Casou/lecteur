@@ -21,7 +21,7 @@ $command = $_POST['command'];
 
 if (trim($command) == "") {
 	$response = new AjaxResponseObject(AJAX_STATUS_KO, "La commande de conversion est vide");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 }
 
@@ -59,13 +59,13 @@ if ($rv == 0) {
 	MetierEncodageEnCours::updateEncodingState($fileName, ENCODING_STATE_ENDED_OK);
 	
 	$response = new AjaxResponseObject(AJAX_STATUS_OK, "Encodage terminé avec succès");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 } else {
 	MetierEncodageEnCours::updateEncodingState($fileName, ENCODING_STATE_ENDED_WITH_ERRORS);
 	
 	$response = new AjaxResponseObject(AJAX_STATUS_KO, "Encodage terminé avec erreur. Voir le fichier de log.");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 }
 

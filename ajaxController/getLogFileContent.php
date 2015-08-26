@@ -29,7 +29,7 @@ $response = new AjaxResponseObject(AJAX_STATUS_OK, $logFile['fileContent'],
 				'time' => $logFile['time'],
 				'progress' => $logFile['progress']));
 
-echo json_encode_utf8($response);
+echo Fwk::json_encode_utf8($response);
 exit;
 
 

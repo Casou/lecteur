@@ -17,4 +17,8 @@ class Danse {
 		return "lct_user_danse";
 	}
 	
+	public static function getJoinUserOrderTableName() {
+		return "lct_user_danse_order";
+	}
+	
 }

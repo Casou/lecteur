@@ -30,11 +30,11 @@ try {
 
 if ($ok) {
 	$response = new AjaxResponseObject(AJAX_STATUS_OK, "Vidéo transférée");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 } else {
 	$response = new AjaxResponseObject(AJAX_STATUS_KO, "Une erreur s'est produite.");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 }
 

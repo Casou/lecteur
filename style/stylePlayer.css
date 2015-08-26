@@ -1,3 +1,8 @@
+#player {
+	margin : auto;
+	min-height : 350px;
+}
+
 .playerDialog_div {
 	padding : 0;
 }

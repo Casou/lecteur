@@ -5,6 +5,7 @@ class Playlist {
 	public $id;
 	public $nom;
 	public $id_user; // Propriétaire
+	public $id_folder;
 	
 	public static function getTableName() {
 		return "lct_playlist";

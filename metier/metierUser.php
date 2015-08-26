@@ -107,7 +107,7 @@ class MetierUser {
 	}
 	
 	public static function saveUserAllowedForVideo($ids_video, $users, $delete_existing = true) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		$in_clause_video = "";
 		foreach($ids_video as $id_video) {
@@ -154,7 +154,7 @@ class MetierUser {
 			}
 		}
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	
@@ -226,7 +226,7 @@ class MetierUser {
 	public static function saveUser($formulaire) {
 		parse_str($formulaire);
 		
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		$log_level_sql = ($log_level == '') ? "null" : "'$log_level'";
 		
@@ -238,6 +238,10 @@ class MetierUser {
 			$id = Database::getMaxId(User::getTableName());
 			
 			$sql = "INSERT INTO ".Danse::getJoinUserTableName()." (id_user, id_danse) ".
+					"SELECT $id, id FROM ".Danse::getTableName();
+			Database::executeUpdate($sql);
+			
+			$sql = "INSERT INTO ".Danse::getJoinUserOrderTableName()." (id_user, id_danse) ".
 					"SELECT $id, id FROM ".Danse::getTableName();
 			Database::executeUpdate($sql);
 			
@@ -270,13 +274,13 @@ class MetierUser {
 			}
 		}
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 		
 		return $id;
 	}
 	
 	public static function deleteUser($id) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		$sql = "DELETE FROM ".Droit::getJoinUserTableName()." WHERE id_user=$id;";
 		Database::executeUpdate($sql);
@@ -287,7 +291,10 @@ class MetierUser {
 		$sql = "DELETE FROM ".Danse::getJoinUserTableName()." WHERE id_user=$id";
 		Database::executeUpdate($sql);
 		
-		Database::commit();
+		$sql = "DELETE FROM ".Danse::getJoinUserOrderTableName()." WHERE id_user=$id";
+		Database::executeUpdate($sql);
+		
+		if ($hasTransaction) Database::commit();
 	}
 	
 }

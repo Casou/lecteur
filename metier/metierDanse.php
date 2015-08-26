@@ -14,6 +14,15 @@ class MetierDanse {
 				"Danse");
 	}
 	
+	public static function getAllDanseName($skipSession = false) {
+		$danses = MetierDanse::getAllDanse($skipSession);
+		$dansesName = array();
+		foreach ($danses as $danse) {
+			$dansesName[$danse->id] = $danse->nom;
+		}
+		return $dansesName;
+	}
+	
 	public static function getAllowedDanse() {
 		return Database::getResultsObjects(
 				"SELECT distinct d.* FROM ".Video::getJoinAllowedTableName()." allw_vid ".
@@ -126,7 +135,12 @@ class MetierDanse {
 		Database::executeUpdate($sql);
 		
 		$idDanse = Database::getMaxId(Danse::getTableName());
+		
 		$sql = "INSERT INTO ".Danse::getJoinUserTableName()." (id_user, id_danse) ".
+				"SELECT id, $idDanse FROM ".User::getTableName();
+		Database::executeUpdate($sql);
+		
+		$sql = "INSERT INTO ".Danse::getJoinUserOrderTableName()." (id_user, id_danse) ".
 				"SELECT id, $idDanse FROM ".User::getTableName();
 		Database::executeUpdate($sql);
 		
@@ -150,6 +164,7 @@ class MetierDanse {
 	public static function deleteDanse($id) {
 		Database::executeUpdate("DELETE FROM ".Danse::getTableName()." WHERE id = $id;");
 		Database::executeUpdate("DELETE FROM ".Danse::getJoinUserTableName()." WHERE id_danse = $id");
+		Database::executeUpdate("DELETE FROM ".Danse::getJoinUserOrderTableName()." WHERE id_danse = $id");
 	}
 	
 	public static function linkVideoDanse($id_video, $danses) {
@@ -165,7 +180,33 @@ class MetierDanse {
 	}
 	
 	public static function removeLinkVideoDanse($id_video) {
-		Database::executeUpdate("DELETE FROM ".Danse::getJoinVideoTableName()." WHERE id_video = $id_video;");
+		Database::executeUpdate("DELETE FROM ".Danse::getJoinVideoTableName()." WHERE id_video = $id_video");
+	}
+	
+	
+	public static function saveDanseOrderForUser($danse_order, $user_id) {
+		$hasTransaction = Database::beginTransaction();
+		
+		$danses = explode(",", $danse_order);
+		$ordre = 1;
+		$dansesUpdated = "";
+		foreach ($danses as $id_danse) {
+			$dansesUpdated .= (($dansesUpdated == "") ? "" : ",");
+			Database::executeUpdate("UPDATE ".Danse::getJoinUserOrderTableName()." set ordre = $ordre where id_danse = $id_danse and id_user = $user_id");
+			$dansesUpdated .= $id_danse;
+			$ordre++;
+		}
+		
+		Database::executeUpdate("UPDATE ".Danse::getJoinUserOrderTableName()." set ordre = 99 where id_danse not in ($dansesUpdated) and id_user = $user_id");
+		
+		if ($hasTransaction) Database::commit();
+	}
+	
+	public static function getDansesOrderedByUserPreference($user_id) {
+		return Database::getResultsObjects("SELECT d.* FROM ".Danse::getTableName()." d ".
+				"INNER JOIN ".Danse::getJoinUserOrderTableName()." udo on d.id = udo.id_danse "
+				."WHERE id_user = $user_id ORDER BY udo.ordre ASC", 
+				"Danse");
 	}
 	
 }

@@ -41,23 +41,23 @@ if ($video->etat == ENCODING_STATE_RUNNING) {
 	}
 	
 	$response = new AjaxResponseObject(AJAX_STATUS_RUNNING, "Encodage en cours", array('progress' => $progress, 'resting' => $resting));
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 } else if ($video->etat == ENCODING_STATE_WAITING) {
 	$response = new AjaxResponseObject(AJAX_STATUS_RUNNING, "Encodage en attente");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 } else if ($video->etat == ENCODING_STATE_ENDED_WITH_ERRORS) {
 	$response = new AjaxResponseObject(AJAX_STATUS_WARNING, "Encodage terminé avec erreurs");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 } else if ($video->etat == ENCODING_STATE_ENDED_OK) {
 	$response = new AjaxResponseObject(AJAX_STATUS_OK, "Encodage terminé");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 	exit;
 } else {
 	$response = new AjaxResponseObject(AJAX_STATUS_KO, "Le fichier '$fileName' est dans un statut inconnu.");
-	echo json_encode_utf8($response);
+	echo Fwk::json_encode_utf8($response);
 // 	header('HTTP/1.1 500 Unknown status');
 // 	echo "Le fichier '$fileName' est dans un statut inconnu : ".$video->etat;
 	exit;

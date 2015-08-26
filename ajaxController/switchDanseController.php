@@ -19,7 +19,7 @@ $switchOn = $_POST['switch_on'] == "true";
 MetierDanse::switchOn($id_user, $id_danse, $switchOn);
 
 $response = new AjaxResponseObject(AJAX_STATUS_OK, "Statut de la danse changé");
-echo json_encode_utf8($response);
+echo Fwk::json_encode_utf8($response);
 exit;
 
 

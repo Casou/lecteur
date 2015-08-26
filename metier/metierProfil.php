@@ -133,7 +133,7 @@ class MetierProfil {
 	
 	
 	public static function saveProfilsAllowedForVideo($ids_video, $profils, $delete_existing = true) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		$in_clause_video = "";
 		foreach($ids_video as $id_video) {
@@ -171,7 +171,7 @@ class MetierProfil {
 			}
 		}
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 	
@@ -181,7 +181,7 @@ class MetierProfil {
 		$criteres = isset($_POST['criteres']) ? $_POST['criteres'] : array();
 		$is_admin = $_POST['is_admin'] == "true" ? 1 : 0; 
 		
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		if ($id == '') {
 			
@@ -256,13 +256,13 @@ class MetierProfil {
 			}
 		}
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 		
 		return $id;
 	}
 	
 	public static function deleteProfil($id) {
-		Database::beginTransaction();
+		$hasTransaction = Database::beginTransaction();
 		
 		$sql = "DELETE FROM ".User::getJoinProfilTableName()." WHERE id_Profil = $id;";
 		Database::executeUpdate($sql);
@@ -276,7 +276,7 @@ class MetierProfil {
 		$sql = "DELETE FROM ".Profil::getTableName()." WHERE id = $id;";
 		Database::executeUpdate($sql);
 		
-		Database::commit();
+		if ($hasTransaction) Database::commit();
 	}
 	
 }

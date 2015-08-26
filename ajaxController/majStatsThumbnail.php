@@ -16,7 +16,7 @@ try {
 	$response = new AjaxResponseObject(AJAX_STATUS_KO, $e->getMessage());
 }
 
-echo json_encode_utf8($response);
+echo Fwk::json_encode_utf8($response);
 exit;
 
 ?>
