@@ -11,8 +11,7 @@
 
 
 body {
-	// background : url("images/banderolle-2.jpg") no-repeat center fixed; 
-	background : url("images/nouveau_theme/plancher.jpg") repeat top left fixed;
+	background : url("images/banderolle-2.jpg") no-repeat center fixed; 
 }
 
 a {
@@ -65,7 +64,8 @@ padding : 2px 5px;
 	font-weight : bold;
 }
 
-.red_button .ui-state-default, .red_button.ui-state-default {
+.red_button .ui-state-default, .red_button.ui-state-default,
+.red_button .ui-state-default:hover, .red_button.ui-state-default:hover {
 	background : url("jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_55_ee322a_500x100.png") repeat-x scroll 50% 50% #EE322A;
 	border-color : #EE322A;
 	color : white;
@@ -261,9 +261,16 @@ abbr {
 	text-align : right;
 }
 
+#menu_list ul {
+	list-style-type : none;
+	margin : 0;
+	padding : 0;
+	width : 100%;
+}
+
 #menu_list li.level_1 {
 	font-size : 20px;
-	margin : 10px 10px 0 0;
+	margin : 10px 0 0 0;
 	padding-top : 10px;
 	font-weight : bold;
 }
@@ -275,7 +282,7 @@ abbr {
 #menu_list li.level_2 {
 	font-size : 16px;
 	margin-bottom : 2px;
-	margin-right : 15px;
+	font-weight : normal;
 }
 
 #menu_list li img {

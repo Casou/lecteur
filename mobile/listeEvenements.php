@@ -10,7 +10,7 @@ if(!isset($_GET['id_danse'])) {
 
 $id_danse = $_GET['id_danse'];
 
-$allEvenements = MetierEvenement::getAllEvenementWithVideoCountByDanse($id_danse, $_SESSION['userId']);
+$allEvenements = MetierEvenement::getAllEvenementWithVideoCountByDanse($id_danse, CONNECTED_USER_ID);
 ?>
 
 <div id="evenements" data-role="collapsible-set">

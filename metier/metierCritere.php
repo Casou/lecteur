@@ -29,7 +29,7 @@ class MetierCritere {
 	
 	public static function calculateAllowedVideos($id_user = null) {
 		if ($id_user == null) {
-			$id_user = $_SESSION['userId'];
+			$id_user = CONNECTED_USER_ID;
 		}
 		
 		// Remise à zéro des vidéos
@@ -131,10 +131,10 @@ class MetierCritere {
 	
 	public static function allowedAllVideos($id_user = null) {
 		if ($id_user == null) {
-			$id_user = $_SESSION['userId'];
+			$id_user = CONNECTED_USER_ID;
 		}
 		Logger::debug('CONNECTION ADMIN');
-		Database::executeUpdate("DELETE FROM ".Video::getJoinAllowedTableName()." where id_user = ".$_SESSION['userId']);
+		Database::executeUpdate("DELETE FROM ".Video::getJoinAllowedTableName()." where id_user = ".CONNECTED_USER_ID);
 		Database::executeUpdate("INSERT INTO ".Video::getJoinAllowedTableName()." (id_video, id_user) SELECT id, $id_user".
 			" from ".Video::getTableName());
 	}

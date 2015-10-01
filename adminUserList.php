@@ -70,9 +70,9 @@ $users = MetierUser::getAllUserDTO();
 					<tr>
 						<td class="user_list_login">
 							<?php if ($is_admin) { ?>
-								<img src="style/images/user_purple.png" alt="User" alt="Utilisateur" />
+								<img src="style/images/user_purple.png" alt="User" alt="Utilisateur" class="img_admin" />
 							<?php } else { ?>
-								<img src="style/images/user_blue.png" alt="User" alt="Utilisateur" />
+								<img src="style/images/user_blue.png" alt="User" alt="Utilisateur" class="img_user" />
 							<?php } ?>
 							<?= $user->login ?>
 						</td>

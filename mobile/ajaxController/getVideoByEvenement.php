@@ -16,7 +16,7 @@ if (!isset($_POST['evenement']) || !isset($_POST['danse'])) {
 $id_evenement = $_POST['evenement'];
 $id_danse = $_POST['danse'];
 
-$videos = MetierVideo::getVideoByDanseAndEvenementWithAttributes($id_danse, $id_evenement, $_SESSION['userId']);
+$videos = MetierVideo::getVideoByDanseAndEvenementWithAttributes($id_danse, $id_evenement, CONNECTED_USER_ID);
 
 include "../liste_tableauAjax.php";
 ?>

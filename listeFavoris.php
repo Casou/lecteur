@@ -6,7 +6,7 @@ include_once $pathToPhpRoot."entete.php";
 
 $allDansesFavori = MetierVideo::getAllVideosWithAttributesFavori();
 
-$danseOrder = MetierDanse::getDansesOrderedByUserPreference($_SESSION['userId']);
+$danseOrder = MetierDanse::getDansesOrderedByUserPreference(CONNECTED_USER_ID);
 $dansesName = MetierDanse::getAllDanseName();
 
 ?>

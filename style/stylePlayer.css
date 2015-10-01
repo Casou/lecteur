@@ -41,6 +41,12 @@
     opacity: 0.6;
 }
 
+#playerDiv {
+	width : 100%; 
+	margin-top : 15px; 
+	text-align : center;
+}
+
 #playerPasses {
 	text-align : left;
 	height : 197px;

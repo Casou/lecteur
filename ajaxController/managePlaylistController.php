@@ -63,12 +63,12 @@ try {
 		
 		
 		case 'addPlaylistFolder' :
-			MetierPlaylistFolder::savePlaylistFolder(null, $_POST['nom_playlist_folder'], $_SESSION['userId']);
+			MetierPlaylistFolder::savePlaylistFolder(null, $_POST['nom_playlist_folder'], CONNECTED_USER_ID);
 			$ajaxReturnMessage = "Dossier de playlists sauvegardé";
 			$ajaxReturnStatus = AJAX_STATUS_OK;
 			break;
 		case 'addPlaylist' :
-			MetierPlaylist::insertPlaylist($_POST['nom_playlist'], $_SESSION['userId']);
+			MetierPlaylist::insertPlaylist($_POST['nom_playlist'], CONNECTED_USER_ID);
 			$ajaxReturnMessage = "Nouvelle playlist sauvegardée";
 			$ajaxReturnStatus = AJAX_STATUS_OK;
 			break;

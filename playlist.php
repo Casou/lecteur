@@ -3,12 +3,12 @@ $pathToPhpRoot = './';
 include_once $pathToPhpRoot."entete.php";
 
 /*
-$playlists_created = MetierPlaylist::getPlaylistCreatedByUser($_SESSION['userId']);
-$playlists_folder_created = MetierPlaylistFolder::getPlaylistFolderCreatedByUser($_SESSION['userId']);
+$playlists_created = MetierPlaylist::getPlaylistCreatedByUser(CONNECTED_USER_ID);
+$playlists_folder_created = MetierPlaylistFolder::getPlaylistFolderCreatedByUser(CONNECTED_USER_ID);
 */
 
 
-// $playlists_granted = MetierPlaylistUserRights::getPlaylistDTOSharedWithUser($_SESSION['userId']);
+// $playlists_granted = MetierPlaylistUserRights::getPlaylistDTOSharedWithUser(CONNECTED_USER_ID);
 ?>
 <div id="title">
 	<h1>Playlists</h1>
@@ -139,7 +139,7 @@ function showPlaylist(id) {
 			id : id
 		},
 		success: function(data, textStatus, jqXHR) {
-			$('#contenu_playlist').html(data).css('margin-left', '0');
+			$('#contenu_playlist').html(data).addClass('fullWidth');
 			$('#liste_playlist').hide();
 		},
 		error: function(jqXHR, textStatus, errorThrown) {

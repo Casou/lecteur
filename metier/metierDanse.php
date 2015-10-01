@@ -10,7 +10,7 @@ class MetierDanse {
 		return Database::getResultsObjects(
 				"SELECT * FROM ".Danse::getTableName()." d ".
 				"INNER JOIN ".Danse::getJoinUserTableName()." ud ON ud.id_danse = d.id ".
-				"WHERE id_user=".$_SESSION['userId'], 
+				"WHERE id_user=".CONNECTED_USER_ID, 
 				"Danse");
 	}
 	
@@ -28,7 +28,7 @@ class MetierDanse {
 				"SELECT distinct d.* FROM ".Video::getJoinAllowedTableName()." allw_vid ".
 				"INNER JOIN ".Danse::getJoinVideoTableName()." vd on vd.id_video = allw_vid.id_video ".
 				"INNER JOIN ".Danse::getTableName()." d on d.id = vd.id_danse ".
-				"WHERE id_user=".$_SESSION['userId'], 
+				"WHERE id_user=".CONNECTED_USER_ID, 
 				"Danse");
 	}
 

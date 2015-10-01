@@ -52,33 +52,36 @@ if (!isset($_SESSION["user"])) {
 	<title>Cours et stages</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	<link rel="stylesheet" href="style/jquery-ui-1.10.0.custom/css/redmond/jquery-ui-1.10.0.custom.css" />
-	<link rel="stylesheet" href="style/html5demos.css" />
-	<link rel="stylesheet" href="style/style.css" />
-	<link rel="stylesheet" href="style/styleDatatable.css" />
-	<link rel="stylesheet" href="style/styleTaille.css" />
-	<link rel="stylesheet" href="style/stylePlayer.css" />
-	<link rel="stylesheet" href="style/styleAdmin.css" />
-	<link rel="stylesheet" href="style/stylePlaylist.css" />
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/jquery-ui-1.10.0.custom/css/redmond/jquery-ui-1.10.0.custom.css" />
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/html5demos.css" />
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/style.css" />
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/styleDatatable.css" />
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/styleTaille.css" />
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/stylePlayer.css" />
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/styleAdmin.css" />
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/stylePlaylist.css" />
 	
-	<link rel="shortcut icon" HREF="style/images/icone.png">
+	<link rel="shortcut icon" HREF="<?= APPLICATION_ABSOLUTE_URL ?>style/images/icone.png">
 	
-	<script type="text/javascript" src="style/jquery-ui-1.10.0.custom/js/jquery-1.9.0.js"></script>
-	<script type="text/javascript" src="style/jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.js"></script>
-	<script type="text/javascript" src="js/jquery.dataTables-1.9.4.min.js"></script>
-	<script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="js/h5utils.js"></script>
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>style/jquery-ui-1.10.0.custom/js/jquery-1.9.0.js"></script>
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>style/jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.js"></script>
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>js/jquery.dataTables-1.9.4.min.js"></script>
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>js/common.js"></script>
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>js/h5utils.js"></script>
 	<!-- <script type="text/javascript" src="js/jquery.srt.js"></script> -->
-	<script type="text/javascript" src="js/globalize.js"></script>
-	<script type="text/javascript" src="js/globalize.culture.fr-FR.js"></script>
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>js/globalize.js"></script>
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>js/globalize.culture.fr-FR.js"></script>
 	
 	<?php if (isset($_SESSION[DROIT_LOG_AS]) || $_SESSION["userLogged"] != $_SESSION["userId"]) { ?>
-	<script type="text/javascript" src="js/logAs.js"></script>
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>js/logAs.js"></script>
 	<?php } ?>
 	
 	
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/jwskin-lecteur.css" />
 	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>tools/jwplayer/jwplayer_7.js"></script>
+	
+	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/nouveau_theme/style_wood.css" />
+	<link rel="text/javascript" href="<?= APPLICATION_ABSOLUTE_URL ?>js/nouveau_theme.js" />
 
 	<script>
 		var niveauLibelle = {
@@ -88,6 +91,7 @@ if (!isset($_SESSION["user"])) {
 		};
 	</script>
 	
+	
 </head>
 
 <body>
@@ -95,8 +99,8 @@ if (!isset($_SESSION["user"])) {
 <?php include "menu.php"; ?>
 
 <div id="loadingPopup">
-	<img src="style/images/loading_popup.gif" alt="Loading..." />
+	<img src="<?= APPLICATION_ABSOLUTE_URL ?>style/images/loading_popup.gif" alt="Loading..." />
 </div>
 
-<div id="bodyContent">
-
+<div id="bodyWrap">
+	<div id="bodyContent">

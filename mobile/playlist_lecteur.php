@@ -3,7 +3,7 @@ $title = "Playlists";
 include_once "entete.php";
 
 $id_playlist = $_GET['id'];
-$playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_playlist);
+$playlistDTO = MetierPlaylist::getPlaylistWithVideo(CONNECTED_USER_ID, $id_playlist);
 
 ?>
 

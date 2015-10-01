@@ -9,7 +9,7 @@ class MetierPasse {
 	public static function getNbPasse() {
 		$sql = "select count(distinct nom) as compte from ".Passe::getTableName()." p ".
 			" INNER JOIN ".Video::getJoinAllowedTableName()." allw ON p.id_video = allw.id_video ".
-			" WHERE allw.id_user=".$_SESSION['userId'];
+			" WHERE allw.id_user=".CONNECTED_USER_ID;
 		$results = Database::getResults($sql);
 		return $results[0]["compte"];
 	}
@@ -26,7 +26,7 @@ class MetierPasse {
 			" from ".Danse::getJoinVideoTableName()." dv ".
 			" inner join ".Passe::getTableName()." p on dv.id_video = p.id_video ".
 			" inner join ".Video::getJoinAllowedTableName()." allw on p.id_video = allw.id_video ".
-			" where dv.id_danse = $id_danse and allw.id_user = ".$_SESSION['userId'].
+			" where dv.id_danse = $id_danse and allw.id_user = ".CONNECTED_USER_ID.
 			" group by niveau, dv.id_danse ".
 			" ORDER BY niveau ASC;";
 		$results = Database::getResults($sql);

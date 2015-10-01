@@ -9,12 +9,12 @@ if ($id_current_folder == "") {
 
 	if ($mode == "CREATED") {
 // 				echo "<li>1</li>";
-		$playlist_folders = MetierPlaylistFolder::getPlaylistFolderCreatedByUser($_SESSION['userId']);
-		$playlist_items = MetierPlaylist::getPlaylistDTOCreatedByUser($_SESSION['userId']);
+		$playlist_folders = MetierPlaylistFolder::getPlaylistFolderCreatedByUser(CONNECTED_USER_ID);
+		$playlist_items = MetierPlaylist::getPlaylistDTOCreatedByUser(CONNECTED_USER_ID);
 	} else { // GRANTED
 // 				echo "<li>2</li>";
-		$playlist_folders = MetierPlaylistUserRights::getFolderDTOSharedWithUser($_SESSION['userId']);
-		$playlist_items = MetierPlaylistUserRights::getPlaylistDTOSharedWithUser($_SESSION['userId']);
+		$playlist_folders = MetierPlaylistUserRights::getFolderDTOSharedWithUser(CONNECTED_USER_ID);
+		$playlist_items = MetierPlaylistUserRights::getPlaylistDTOSharedWithUser(CONNECTED_USER_ID);
 	}
 
 } else {
@@ -22,11 +22,11 @@ if ($id_current_folder == "") {
 	if ($mode == "CREATED") {
 // 				echo "<li>3</li>";
 		$playlist_folders = array();
-		$playlist_items = MetierPlaylist::getPlaylistDTOCreatedByUser($_SESSION['userId'], $id_current_folder);
+		$playlist_items = MetierPlaylist::getPlaylistDTOCreatedByUser(CONNECTED_USER_ID, $id_current_folder);
 	} else { // GRANTED
 // 				echo "<li>4</li>";
 		$playlist_folders = array();
-		$playlist_items = MetierPlaylist::getPlaylistDTONotCreatedByUser($_SESSION['userId'], $id_current_folder);
+		$playlist_items = MetierPlaylist::getPlaylistDTONotCreatedByUser(CONNECTED_USER_ID, $id_current_folder);
 	}
 
 

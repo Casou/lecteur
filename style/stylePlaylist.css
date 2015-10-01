@@ -21,7 +21,11 @@
 
 
 #contenu_playlist {
-	margin-left : 290px;
+	margin : 32px 0 0 290px;
+}
+
+#contenu_playlist.fullWidth {
+	margin : 15px 0 0 0;
 }
 
 .playlist_list {
@@ -297,9 +301,6 @@ background-color : #FEE47B;
 
 
 
-#playlist_form {
-	margin-top : 32px;
-}
 
 #playlist_lecteur_passes {
 	width : 100%;
@@ -366,7 +367,7 @@ background-color : #FEE47B;
 }
 
 #playlist_video_list_rights table {
-	margin : 0 0 10px 15px;
+	margin : 10px;
 }
 
 #playlist_video_list_rights table tr {

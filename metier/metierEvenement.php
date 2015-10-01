@@ -32,7 +32,7 @@ class MetierEvenement {
 		$allDo = Database::getResultsObjects("select distinct evt.* from ".Evenement::getTableName()." evt ".
 			" inner join ".Video::getTableName()." v on v.id_evenement = evt.id ".
 			" inner join ".Video::getJoinAllowedTableName()." allw_vid on v.id = allw_vid.id_video ".
-			" WHERE id_user=".$_SESSION['userId']. 
+			" WHERE id_user=".CONNECTED_USER_ID. 
 			" order by evt.date asc", "Evenement");
 		if (!$formatDate) {
 			return $allDo;

@@ -52,6 +52,9 @@ if(isset($_POST['url'])) {
 	<script type="text/javascript" src="style/jquery-ui-1.10.0.custom/js/jquery-1.9.0.js"></script>
 	<script type="text/javascript" src="style/jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.js"></script>
 	
+	<link rel="stylesheet" href="style/nouveau_theme/style_wood.css" />
+	<link rel="text/javascript" href="js/nouveau_theme.js" />
+	
 	<script>
 		$(document).ready(function() {
 			$('#loginSubmit').button().click(function() {

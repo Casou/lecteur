@@ -5,7 +5,7 @@ $includeSelect = true;
 if (!isset($_POST['id_user_monitored'])) {
 	include_once $pathToPhpRoot."entete.php";
 	
-	$id_user = $_SESSION['userId'];
+	$id_user = CONNECTED_USER_ID;
 	$allDansesEvenements = MetierEvenement::getAllEvenementWithVideoCount($id_user);
 } else {
 	session_start();

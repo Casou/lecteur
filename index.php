@@ -56,7 +56,7 @@ $NB_COLONNES = 4;
 			Pas encore de vérification des thumbnails.
 	<?php } ?>
 	</span>
-	<a href="#" onClick="majStatsThumbnail(); return false;"><img src="style/images/actualiser.png" /></a>
+	<a href="#" onClick="majStatsThumbnail(); return false;"><img src="style/images/actualiser.png" class="refresh_icon" /></a>
 </div>
 <?php } ?>
 

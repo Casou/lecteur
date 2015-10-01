@@ -17,7 +17,7 @@ class MetierStat {
 				INNER JOIN ".Video::getJoinAllowedTableName()." allw ON v.id = allw.id_video
 				INNER JOIN ".Danse::getJoinVideoTableName()." vd ON v.id = vd.id_video
 				INNER JOIN ".Danse::getTableName()." d ON d.id = vd.id_danse
-				WHERE allw.id_user=".$_SESSION['userId']."
+				WHERE allw.id_user=".CONNECTED_USER_ID."
 				GROUP BY d.id, d.nom, v.type
 				ORDER BY d.id;";
 		

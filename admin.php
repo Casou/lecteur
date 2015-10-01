@@ -8,7 +8,7 @@ $users = MetierUser::getAllUser();
 
 ?>
 
-<div id="title">
+<div id="title" class="admin_title">
 	<h1>Administrer l'application</h1>
 </div>
 

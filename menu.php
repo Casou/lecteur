@@ -14,45 +14,63 @@ include_once $pathToPhpRoot.'popupTag.php';
 	</h1>
 	
 	<ul id="menu_list">
-		<li class="level_1">
+		<li class="level_1" id="menu_accueil_li">
 			<a href="index.php" id="menu_accueil">
-				<img src="style/images/home.png" />
-				Accueil
+				<span class="menu_item_img">
+					<img src="style/images/home.png" />
+				</span>
+				<span class="menu_item_text">
+					Accueil
+				</span>
 			</a>
 		</li>
 	<?php if (isset($_SESSION[DROIT_CONSULT])) { ?>
-		<li class="level_1">
-			Rechercher
-		</li>
-			<li class="level_2">
-				<a href="recherche.php">
-					<img src="style/images/search.png" />
-					Recherche vidéo
-				</a>
-			</li>
-			<li class="level_2">
-				<a href="listeEvenements.php">
-					Danse / Évènement
-				</a>
-			</li>
-			<li class="level_2">
-				<a href="listeNiveaux.php">
-					Danse / Niveau
-				</a>
-			</li>
-			<li class="level_2">
-				<a href="listeProfesseurs.php">
-					Danse / Prof
-				</a>
-			</li>
+		<li class="level_1 selected">
+			<a href="#" onClick="return false;">
+				Rechercher
+			</a>
+		
+			<ul class="menu_list_level_2">
+				<li class="level_2">
+					<a href="recherche.php">
+						<span class="menu_item_img">
+							<img src="style/images/search.png" />
+						</span>
+						<span class="menu_item_text">
+							Recherche vidéo
+						</span>
+					</a>
+				</li>
+				<li class="level_2">
+					<a href="listeEvenements.php">
+						Danse / Évènement
+					</a>
+				</li>
+				<li class="level_2">
+					<a href="listeNiveaux.php">
+						Danse / Niveau
+					</a>
+				</li>
+				<li class="level_2">
+					<a href="listeProfesseurs.php">
+						Danse / Prof
+					</a>
+				</li>
 			<?php if (isset($_SESSION[DROIT_CAN_BOOKMARK])) { ?>
-			<li class="level_2">
-				<a href="listeFavoris.php">
-					<img src="style/images/favori.png" />
-					Favoris
-				</a>
-			</li>
+				<li class="level_2">
+					<a href="listeFavoris.php">
+						<span class="menu_item_img">
+							<img src="style/images/favori.png" />
+						</span>
+						<span class="menu_item_text">
+							Favoris
+						</span>
+					</a>
+				</li>
 			<?php } ?>
+			</ul>
+		</li>
+		
 		
 		<?php if(isset($_SESSION[DROIT_ACTION_USE_PLAYLIST])) { ?>
 		<li class="level_1">
@@ -66,81 +84,103 @@ include_once $pathToPhpRoot.'popupTag.php';
 	
 	<?php if (isset($_SESSION[DROIT_ADMIN]) || $_SESSION["user"] == "admin") { ?>
 		<li class="level_1">
-			Administrer
-		</li>
-			<li class="level_2">
-				<a href="admin.php">
-					<img src="style/images/param_mini.png" />
-					Administration
-				</a>
-			</li>
+			<a href="#" onClick="return false;">
+				Administrer
+			</a>
+			
+			<ul class="menu_list_level_2">
+				<li class="level_2">
+					<a href="admin.php">
+						<span class="menu_item_img">
+							<img src="style/images/param_mini.png" />
+						</span>
+						<span class="menu_item_text">
+							Administration
+						</span>
+					</a>
+				</li>
 		
-		<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
-			<li class="level_2">
-				<a href="#" onClick="showPopup('danseDialog'); return false;">
-					Gérer les danses
-				</a>
-			</li>
-			<li class="level_2">
-				<a href="#" onClick="showPopup('profDialog'); return false;">
-					Gérer les profs
-				</a>
-			</li>
-			<li class="level_2">
-				<a href="#" onClick="showPopup('evtDialog'); return false;">
-					Gérer les évts
-				</a>
-			</li>
-			<li class="level_2">
-				<a href="#" onClick="showPopup('tagDialog'); return false;">
-					Gérer les tags
-				</a>
-			</li>
-	<?php } ?>
+			<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
+				<li class="level_2">
+					<a href="#" onClick="showPopup('danseDialog'); return false;">
+						Gérer les danses
+					</a>
+				</li>
+				<li class="level_2">
+					<a href="#" onClick="showPopup('profDialog'); return false;">
+						Gérer les profs
+					</a>
+				</li>
+				<li class="level_2">
+					<a href="#" onClick="showPopup('evtDialog'); return false;">
+						Gérer les évènements
+					</a>
+				</li>
+				<li class="level_2">
+					<a href="#" onClick="showPopup('tagDialog'); return false;">
+						Gérer les tags
+					</a>
+				</li>
+			<?php } ?>
+			</ul>
+		</li>
 	<?php } ?>
 	
 			
 		
-	<?php if (isset($_SESSION[DROIT_UPLOAD]) || isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
+		<?php if (isset($_SESSION[DROIT_UPLOAD]) || isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
 		<li class="level_1">
-			Gestion vidéos
-		</li>
-	<?php } ?>
-	<?php if (isset($_SESSION[DROIT_UPLOAD])) { ?>
-			<li class="level_2">
-				<a href="upload.php">
-					Upload
-				</a>
-			</li>
-			<li class="level_2">
-				<a href="manageRawVideos.php">
-					Vidéos brutes
-				</a>
-			</li>
-			<li class="level_2">
-				<a href="manageVideosBin.php">
-					Corbeille
-				</a>
-			</li>
-			<?php if (isset($_SESSION[DROIT_ADMIN]) || $_SESSION["user"] == "admin") { ?>
-			<li class="level_2">
-				<a href="export.php">
-					Exporter
-				</a>
-			</li>
-			<?php } ?>
-	<?php } ?>
-		
-		
-		
-		<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
-		<li class="level_2 videoDispo">
-			<a href="manageVideos.php">
-				<img src="style/images/video.png" />
-				Vidéos dispo
+			<a href="#" onClick="return false;">
+				Gestion vidéos
 			</a>
+			<ul class="menu_list_level_2">
+		<?php } ?>
+			<?php if (isset($_SESSION[DROIT_UPLOAD])) { ?>
+			
+				<!-- 
+				<li class="level_2">
+					<a href="upload.php">
+						Upload
+					</a>
+				</li>
+				-->
+				<li class="level_2">
+					<a href="manageRawVideos.php">
+						Vidéos brutes
+					</a>
+				</li>
+				<li class="level_2">
+					<a href="manageVideosBin.php">
+						Corbeille
+					</a>
+				</li>
+				<?php if (isset($_SESSION[DROIT_ADMIN]) || $_SESSION["user"] == "admin") { ?>
+				<li class="level_2">
+					<a href="export.php">
+						Exporter
+					</a>
+				</li>
+				<?php } ?>
+			<?php } ?>
+		
+			<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
+				<li class="level_2 videoDispo">
+					<a href="manageVideos.php">
+						<span class="menu_item_img">
+							<img src="style/images/video.png" />
+						</span>
+						<span class="menu_item_text">
+							Vidéos dispo
+						</span>
+					</a>
+				</li>
+			<?php } ?>
+			
+		<?php if (isset($_SESSION[DROIT_UPLOAD]) || isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
+			</ul>
 		</li>
 		<?php } ?>
+		
 		
 		
 		<?php if ($_SESSION["userLogged"] != $_SESSION["userId"]) { ?>

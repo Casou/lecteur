@@ -6,12 +6,12 @@ $pathToPhpRoot = './';
 include_once $pathToPhpRoot."includes.php";
 Logger::init($pathToPhpRoot);
 
-$playlists = MetierPlaylist::getAllPlaylistAllowed($_SESSION['userId']);
+$playlists = MetierPlaylist::getAllPlaylistAllowed(CONNECTED_USER_ID);
 $playlist_created = array();
 $playlist_allowed = array();
 $id_user_map = array();
 foreach($playlists as $playlist) {
-	if ($playlist->id_user == $_SESSION['userId']) {
+	if ($playlist->id_user == CONNECTED_USER_ID) {
 		$playlist_created[] = $playlist;
 	} else {
 		if (!isset($id_user_map[$playlist->id_user])) {

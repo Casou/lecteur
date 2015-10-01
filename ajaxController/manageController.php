@@ -184,7 +184,7 @@ try {
 			
 			
 		case 'updateTabOrder' :
-			MetierDanse::saveDanseOrderForUser($ids, $_SESSION['userId']);
+			MetierDanse::saveDanseOrderForUser($ids, CONNECTED_USER_ID);
 			$ajaxReturnMessage = "L'ordre des onglets a été sauvegardé";
 			$ajaxReturnStatus = AJAX_STATUS_OK;
 			break;

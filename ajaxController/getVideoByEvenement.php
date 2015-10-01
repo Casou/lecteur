@@ -23,7 +23,7 @@ if (isset($_POST['id_user'])) {
 	$id_user = $_POST['id_user'];
 	$forceVisible = true;
 } else {
-	$id_user = $_SESSION['userId'];
+	$id_user = CONNECTED_USER_ID;
 	$forceVisible = false;
 }
 

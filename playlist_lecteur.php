@@ -7,7 +7,7 @@ Logger::init($pathToPhpRoot);
 
 $id_playlist = $_POST['id'];
 
-$playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_playlist);
+$playlistDTO = MetierPlaylist::getPlaylistWithVideo(CONNECTED_USER_ID, $id_playlist);
 
 ?>
 

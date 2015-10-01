@@ -2,8 +2,8 @@
 $title = "Playlists";
 include_once "entete.php";
 
-$playlists_created = MetierPlaylist::getPlaylistCreatedByUser($_SESSION['userId']);
-$playlists_granted = MetierPlaylistUserRights::getPlaylistSharedWithUser($_SESSION['userId']);
+$playlists_created = MetierPlaylist::getPlaylistCreatedByUser(CONNECTED_USER_ID);
+$playlists_granted = MetierPlaylistUserRights::getPlaylistSharedWithUser(CONNECTED_USER_ID);
 
 ?>
 <div id="div_playlist_list">

@@ -36,9 +36,6 @@ include_once $pathToPhpRoot.'popupAllowProfile.php';
 	<div id="playlist_video_list_rights">
 		<h2>Droits sur le dossier</h2>
 		
-		<div class="playlist_action_bar">
-		</div>
-		
 		<table>
 			<tr>
 				<th>Utilisateur</th>

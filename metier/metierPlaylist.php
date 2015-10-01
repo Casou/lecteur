@@ -99,7 +99,7 @@ class MetierPlaylist {
 			" inner join ".Playlist::getJoinVideoTableName()." pv on pv.id_video = v.id ";
 		if (!$skip_rights) {
 			$query .= " inner join ".Video::getJoinAllowedTableName().
-				" allw on pv.id_video = allw.id_video and allw.id_user = ".$_SESSION['userId']." ";
+				" allw on pv.id_video = allw.id_video and allw.id_user = ".CONNECTED_USER_ID." ";
 		}
 		$query .=
 			" where pv.id_playlist = $id_playlist ".
@@ -186,7 +186,7 @@ class MetierPlaylist {
 		$hasTransaction = Database::beginTransaction();
 		
 		if ($nom_playlist != "") {
-			$id_playlist = MetierPlaylist::insertPlaylist($nom_playlist, $_SESSION['userId']);
+			$id_playlist = MetierPlaylist::insertPlaylist($nom_playlist, CONNECTED_USER_ID);
 		}
 		
 		foreach ($ids_video as $id_video) {

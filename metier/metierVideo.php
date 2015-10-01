@@ -13,7 +13,7 @@ class MetierVideo {
 	public static function getDureeTotale() {
 		$sql = "select sum(duree) as somme from ".Video::getTableName()." v ".
 			"INNER JOIN ".Video::getJoinAllowedTableName()." allw ON v.id = allw.id_video ".
-			"WHERE allw.id_user=".$_SESSION['userId'];
+			"WHERE allw.id_user=".CONNECTED_USER_ID;
 		$results = Database::getResults($sql);
 		return $results[0]["somme"];
 	}
@@ -21,7 +21,7 @@ class MetierVideo {
 	public static function getNbVideos() {
 		$sql = "select count(*) as compte from ".Video::getTableName()." v ".
 			"INNER JOIN ".Video::getJoinAllowedTableName()." allw ON v.id = allw.id_video ".
-			"WHERE allw.id_user=".$_SESSION['userId'];
+			"WHERE allw.id_user=".CONNECTED_USER_ID;
 		$results = Database::getResults($sql);
 		return $results[0]["compte"];
 	}
@@ -115,7 +115,7 @@ class MetierVideo {
 				" inner join ".Video::getTableName()." v on v.id = dv.id_video ".
 				" inner join ".Video::getJoinAllowedTableName()." allw on v.id = allw.id_video ".
 				" inner join ".Passe::getTableName()." p on dv.id_video = p.id_video ".
-				" where dv.id_danse = $id_danse and p.niveau = '$niveau' and allw.id_user = ".$_SESSION['userId'];
+				" where dv.id_danse = $id_danse and p.niveau = '$niveau' and allw.id_user = ".CONNECTED_USER_ID;
 		$videos = Database::getResultsObjects($sql, "Video");
 		$videosDTO = array();
 		foreach($videos as $video) {
@@ -129,7 +129,7 @@ class MetierVideo {
 				" inner join ".Video::getTableName()." v on v.id = dv.id_video ".
 				" inner join ".Professeur::getJoinVideoTableName()." pv on pv.id_video = dv.id_video ".
 				" inner join ".Video::getJoinAllowedTableName()." allw ON pv.id_video = allw.id_video ".
-				" where dv.id_danse = $id_danse and pv.id_professeur = $id_prof and allw.id_user=".$_SESSION['userId'];
+				" where dv.id_danse = $id_danse and pv.id_professeur = $id_prof and allw.id_user=".CONNECTED_USER_ID;
 		
 		$videos = Database::getResultsObjects($sql, "Video");
 		$videosDTO = array();
@@ -247,7 +247,7 @@ class MetierVideo {
 	
 	
 	public static function getAllVideosWithAttributesForDanseNiveau() {
-		$allDanses = MetierDanse::getDanseActivatedByUser($_SESSION['userId']);
+		$allDanses = MetierDanse::getDanseActivatedByUser(CONNECTED_USER_ID);
 	
 		$arrayAllVideos = array();
 		foreach ($allDanses as $danse) {
@@ -298,7 +298,7 @@ class MetierVideo {
 	
 	
 	public static function getAllVideosWithAttributesForDanseProfesseur() {
-		$allDanses = MetierDanse::getDanseActivatedByUser($_SESSION['userId']);
+		$allDanses = MetierDanse::getDanseActivatedByUser(CONNECTED_USER_ID);
 	
 		$arrayAllVideos = array();
 		foreach ($allDanses as $danse) {
@@ -717,7 +717,7 @@ class MetierVideo {
 		}
 		
 		$where = substr($where, strlen($operator) + 2); // On retire le premier opérateur
-		$where = " WHERE v.type IS NOT NULL AND allw.id_user=".$_SESSION['userId']." AND ($where)";
+		$where = " WHERE v.type IS NOT NULL AND allw.id_user=".CONNECTED_USER_ID." AND ($where)";
 		
 		$sql .= $join.$where;
 		
@@ -1072,17 +1072,17 @@ class MetierVideo {
 	
 	public static function isFavori($id_video) {
 		$sql = "select f.* from ".Video::getJoinFavoriTableName()." f ".
-				" where id_user = ".$_SESSION['userId']." and f.id_video = $id_video";
+				" where id_user = ".CONNECTED_USER_ID." and f.id_video = $id_video";
 		return count(Database::getResultsObjects($sql, "Video")) > 0;
 	}
 	
 	public static function changeFavori($idVideo, $action) {
 		if ($action == "addFavori") {
 			$sql = "INSERT INTO ".Video::getJoinFavoriTableName()."(id_user, id_video) ".
-				"VALUES (".$_SESSION['userId'].", $idVideo)";
+				"VALUES (".CONNECTED_USER_ID.", $idVideo)";
 		} else if ($action == "removeFavori") {
 			$sql = "DELETE FROM ".Video::getJoinFavoriTableName().
-					" WHERE id_user = ".$_SESSION['userId']." and id_video = $idVideo";
+					" WHERE id_user = ".CONNECTED_USER_ID." and id_video = $idVideo";
 		} else {
 			throw new Exception("Action inconnue pour la méthode changeFavori : $action");
 		}
@@ -1094,7 +1094,7 @@ class MetierVideo {
 		$sql = "SELECT v.* FROM ".Danse::getJoinVideoTableName()." dv ".
 				" INNER JOIN ".Video::getTableName()." v ON v.id = dv.id_video ".
 				" INNER JOIN ".Video::getJoinFavoriTableName()." f ON v.id = f.id_video ".
-				" WHERE id_danse = $danseId AND id_user = ".$_SESSION['userId'];
+				" WHERE id_danse = $danseId AND id_user = ".CONNECTED_USER_ID;
 		return Database::getResultsObjects($sql, "Video");
 	}
 	

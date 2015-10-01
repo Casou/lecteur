@@ -10,7 +10,7 @@ $default_log_level = FwkParameter::getParameter(PARAM_CONTEXT_LOG, PARAM_ID_LOG_
 
 ?>
 
-<div id="admin_action_log_level" class="admin_action_log_management" class="ui-widget ui-corner-all block">
+<div id="admin_action_log_level" class="admin_action_log_management ui-widget ui-corner-all block">
 	<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
 		Niveau de logs par défaut
 	</div>
@@ -36,7 +36,7 @@ $default_log_level = FwkParameter::getParameter(PARAM_CONTEXT_LOG, PARAM_ID_LOG_
 	</div>
 </div>
 
-<div id="admin_action_log_delete" class="admin_action_log_management" class="ui-widget ui-corner-all block">
+<div id="admin_action_log_delete" class="admin_action_log_management ui-widget ui-corner-all block">
 	<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
 		Supprimer les logs des utilisateurs
 	</div>

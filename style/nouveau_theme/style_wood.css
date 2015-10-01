@@ -1,0 +1,615 @@
+body {
+	background : url("images/plancher_fonce.jpg") repeat top left scroll;
+}
+
+input, select {
+    border-color: #654b24;
+}
+
+td, th {
+	background-color : transparent;
+}
+
+#login {
+	background : url('images/bg_main.jpg') repeat top left white;
+	border : 1px solid #08580D;
+	top : 45%;
+	left : 48%;
+}
+
+#login h1 {
+	text-align : center;
+	color : #08580D;
+}
+
+#version {
+	color : #08580D;
+	border-color : #08580D;
+}
+
+.ui-button,
+.ui-state-default,
+.ui-widget-header .ui-state-default,
+#user_list_div .bouton_retour,
+#contenu_playlist .bouton_retour {
+	background : #eceadf url("images/jq/ui-bg_fine-grain_20_fffdea_60x60.png") repeat top left;
+	border-color : #654b24;
+	color : #08580D;
+}
+
+.ui-button:hover,
+#user_list_div .bouton_retour:hover,
+#contenu_playlist .bouton_retour:hover {
+	background : #eceadf url("images/jq/ui-bg_fine-grain_hover.png") repeat top left;
+}
+
+.blockContent {
+	border : none;
+}
+
+.ui-widget-header .ui-state-default {
+	background-image : ui-bg_gloss-wave_33_026306_500x100;
+	color : #08580D;
+}
+
+.ui-state-default .ui-icon {
+	background-image : url("images/ui-icons_417f00_256x240.png");
+}
+
+.ui-widget, .ui-widget-header {
+	border: 1px solid #08580D;
+}
+
+.ui-widget-header {
+	// background : #08580D url("images/ui-bg_gloss-wave_33_026306_500x100.png") repeat-x scroll 50% 50%;
+	background : #08580D url("images/jq/ui-bg_layered-circles_60_654500_13x13.png") repeat scroll 50% 50%;
+	text-shadow: #654b24 1px 1px, #654b24 -1px 1px, #654b24 -1px -1px, #654b24 1px -1px;
+}
+
+.ui-widget-header a {
+	text-shadow: none;
+}
+
+.ui-widget-content {
+	background : #fffdea url("images/jq/ui-bg_fine-grain_20_fffdea_60x60.png") repeat scroll 50% 50%;
+}
+
+.ui-widget-content .ui-state-default {
+	// background : #fffad1 url("images/jq/ui-bg_diamond_90_fffad1_10x8.png") repeat top left;
+	background : #eceadf url("images/jq/ui-bg_fine-grain_10_eceadf_60x60.png") repeat top left;
+	// border-color : #08580D;
+	border-color : #654b24;
+	color : #08580D;
+}
+
+.ui-widget-content .ui-state-hover {
+	// background-image : url("images/ui-bg_highlight-soft_65_a6e8b0_1x100.png");
+	background-image : url("images/jq/ui-bg_fine-grain_hover.png");
+	color : #08580D;
+}
+
+.listeDiv .ui-accordion-header.ui-state-active, 
+.ui-widget-content .ui-state-active {
+	// background-image : url("images/jq/ui-bg_fine-grain_65_654b24_60x60.png");
+	background-image : url("images/jq/ui-bg_fine-grain_65_654b24_60x60.png");
+	border-color : #3E2D14;
+	color : white;
+}
+
+.listeDiv .ui-accordion-header.ui-state-active .ui-icon {	background-image : url("images/jq/ui-icons_ffffff_256x240.png"); }
+
+
+
+.ui-widget-content .ui-state-default a {
+	color : #378B3B;
+}
+
+.ui-widget-content .ui-state-hover a, 
+.ui-widget-content .ui-state-active a,
+.listeDiv .ui-state-active {
+	color : #08580D;
+}
+
+
+#bodyContent {
+	background : url('images/bg_main.jpg') repeat top left white;
+	min-height : 200px;
+}
+
+#bodyContent #title {
+    top : auto;
+    margin : -17px 0 0 1px;
+	width : 1198px;
+	box-sizing : border-box;
+	padding : 2px 20px;
+	border-color : #08580D;
+	border-left : none;
+	border-right : none;
+	background-color : #a6e8b0;
+	background-image : none;
+}
+
+#bodyContent #title h1 {
+	font-size: 20px;
+	padding : 0;
+	color : black;
+	text-shadow : none;
+}
+
+.refresh_icon {
+	-webkit-filter: hue-rotate(-96deg);
+  	filter: hue-rotate(-96deg);
+}
+
+#menu {
+	position : absolute;
+	width : 1200px;
+	height : 59px;
+	left : 50%;
+	margin-left : -600px;
+	top : 50px;
+	border : 2px inset grey;
+	
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#045e37+0,00401b+100 */
+	background: #045e37; /* Old browsers */
+	background: -moz-linear-gradient(top,  #045e37 0%, #00401b 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#045e37), color-stop(100%,#00401b)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #045e37 0%,#00401b 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #045e37 0%,#00401b 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #045e37 0%,#00401b 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #045e37 0%,#00401b 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045e37', endColorstr='#00401b',GradientType=0 ); /* IE6-9 */
+	
+	background : url('images/vert-fonce.jpg') repeat top left rgb(7, 61, 31);
+	
+	overflow : visible;
+	box-sizing : border-box;
+}
+
+#menu #menu_list {
+	text-align : center;
+	margin : 23px 0 0 0;
+}
+
+#menu h1, #menu_bar {
+	display : none;
+}
+
+#menu li {
+	text-align : center;
+}
+
+#menu li a {
+	display : inline-block;
+	width : 100%;
+}
+
+#menu_list li.level_1, .menu_list_level_2 li {
+	display : inline-block;
+	width : 170px;
+	cursor : pointer;
+	border : 2px inset #aaa;
+	border-bottom : 2px solid #bababa;
+	border-radius : 8px 8px 0 0;
+	padding-top : 0;
+	height : 30px;
+	line-height : 30px;
+	margin : 0;
+	
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#07995a+0,006a2c+100 */
+	background: #07995a; /* Old browsers */
+	background: -moz-linear-gradient(top,  #07995a 0%, #006a2c 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#07995a), color-stop(100%,#006a2c)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #07995a 0%,#006a2c 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #07995a 0%,#006a2c 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #07995a 0%,#006a2c 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #07995a 0%,#006a2c 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#07995a', endColorstr='#006a2c',GradientType=0 ); /* IE6-9 */
+
+}
+
+#menu_list li.level_2 {
+	margin : 0;
+}
+
+#menu_list ul.menu_list_level_2 {
+	visibility:hidden;
+	opacity:0;
+	-webkit-transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+	transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+	    
+	position : absolute;
+	top : 56px;
+	list-style-type : none;
+	margin : 0 0 0 -2px;
+	padding : 0;
+	width : 172px;
+	height : 24px;
+	line-height : 24px;
+}
+
+.menu_list_level_2 li {
+	border-radius : 0;
+	border : 1px inset grey;
+	width : 172px;
+}
+
+#menu_list li.level_1:hover, #menu_list li.level_2:hover {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#09cd78+0,00a645+100 */
+	background: #09cd78; /* Old browsers */
+	background: -moz-linear-gradient(top,  #09cd78 0%, #00a645 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#09cd78), color-stop(100%,#00a645)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #09cd78 0%,#00a645 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #09cd78 0%,#00a645 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #09cd78 0%,#00a645 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #09cd78 0%,#00a645 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#09cd78', endColorstr='#00a645',GradientType=0 ); /* IE6-9 */
+
+}
+
+#menu_list li.level_1:hover > .menu_list_level_2 {
+	visibility:visible;
+	opacity:1;
+	transition-delay:0s;
+}
+
+
+#menu_list li.level_1#menu_accueil_li {
+	width : 40px;
+}
+
+#menu_accueil .menu_item_text {
+	display : none;
+}
+
+#menu_list li.level_1.deconnexion {
+	border : none;
+	background : none;
+	width : 100px;
+	height : 30px;
+	margin : 0 0 10px 10px;
+}
+
+#menu_list li.level_1.deconnexion .ui-widget {
+	font-size : 12px;
+	font-weight : bold;
+}
+
+#menu_list li.level_1.deconnexion .ui-corner-all {
+	border-radius : 5px;
+}
+
+
+
+
+
+
+
+#bodyContent {
+	width : 1200px;
+	padding : 75px 10px 10px 10px;
+	
+	background-color : white;
+	box-sizing : border-box;
+	// box-shadow : 0 0 20px rgba(150, 150, 150, 0.6), 0 0 40px rgba(150, 150, 150, 0.6);
+	box-shadow : 10px 10px 10px #000;
+	
+	margin-left : 0;
+	margin-bottom : 50px;
+	border : 1px solid black;
+}
+
+#bodyWrap {
+	position : absolute;
+	left : 50%;
+	width : 1200px;
+	margin : 42px 0 50px -600px;
+}
+
+
+#stats_thumbnails {
+    background-color: #7ABF74;
+    border: 1px solid #08580D;
+}
+
+#indexStat, .ui-widget, .ui-widget-header {
+	border: 1px solid #9C8551;
+}
+
+#indexStatTable th {
+	color : #08580D;
+}
+
+
+#indexStatTable .switch_on {
+    background: rgba(0, 0, 0, 0) url("images/switch_on_off.png") no-repeat scroll center top;
+}
+
+
+
+
+
+
+.ui-tabs .ui-tabs-nav > li.ui-state-default {
+	color : #378B3B;
+}
+.ui-tabs .ui-tabs-nav > li.ui-state-active a {
+	color : white;
+}
+
+.ui-accordion-content {
+	border : 1px solid #AAA;
+}
+
+.listeResultats td {
+    border: 1px solid #444;
+}
+
+.ui-accordion-content .listeResultats tr th:first-of-type,
+.ui-accordion-content .listeResultats tr td:first-of-type {
+    border-left : none;
+}
+
+
+.dataTables_wrapper, .dataTables_wrapper table {
+	border : none;
+}
+
+.ui-accordion-header.ui-state-default {
+	color : #08580D;
+}
+
+.accordeon-blue.ui-accordion-header.ui-state-active,
+.accordeon-blue.ui-state-default {
+	background : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_glass_85_dfeffc_1x400.png") repeat-x scroll 50% 50% #EE322A;
+	color : #2e6e9e;
+	border-color : #c5dbec;
+}
+.accordeon-blue.ui-accordion-header.ui-state-hover { border-color : #3E72D2; }
+.accordeon-blue.ui-state-default .ui-icon {	background-image : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_6da8d5_256x240.png"); }
+
+
+.accordeon-darkblue.ui-accordion-header.ui-state-active,
+.accordeon-darkblue.ui-state-default {
+	background : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_15_0b3e6f_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : white;
+	border-color : #0b3e6f;
+}
+.accordeon-darkblue.ui-accordion-header.ui-state-hover { border-color : #5CD0F7; }
+.accordeon-darkblue.ui-state-default .ui-icon {	background-image : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_6da8d5_256x240.png"); }
+
+
+.accordeon-red.ui-accordion-header.ui-state-active,
+.accordeon-red.ui-state-default {
+	background : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_55_ee322a_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	border-color : #a3000a;
+	color : #a3000a;
+	text-shadow: 0 0 1px white, 0 0 2px white;
+}
+.accordeon-red.ui-accordion-header.ui-state-hover { border-color : #FF8888; }
+.accordeon-red.ui-state-default .ui-icon {	background-image : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_cd0a0a_256x240.png"); }
+
+
+.accordeon-orange.ui-accordion-header.ui-state-active,
+.accordeon-orange.ui-state-default {
+	background : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_75_f88300_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color: #c65000;
+	border-color: #c65000;
+    text-shadow: 0 0 1px white, 0 0 2px white;
+}
+.accordeon-orange.ui-accordion-header.ui-state-hover { border-color : #E6B555; }
+.accordeon-orange.ui-state-default .ui-icon { background-image : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_b74400_256x240.png"); }
+
+
+.accordeon-yellow.ui-accordion-header.ui-state-active,
+.accordeon-yellow.ui-state-default {
+	background : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_75_d5ce00_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : #c66400;
+	border-color : #c66400;
+	text-shadow: 0 0 1px white, 0 0 2px white;
+}
+.accordeon-yellow.ui-accordion-header.ui-state-hover { border-color : #E6B555; }
+.accordeon-yellow.ui-state-default .ui-icon { background-image : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_b74400_256x240.png"); }
+
+
+.accordeon-pink.ui-accordion-header.ui-state-active,
+.accordeon-pink.ui-state-default {
+	background : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_75_ff7ee8_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : #890072;
+	border-color : #890072;
+}
+.accordeon-pink.ui-accordion-header.ui-state-hover { border-color : #F565D8; }
+.accordeon-pink.ui-state-default .ui-icon { background-image : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_ba079c_256x240.png"); }
+
+
+.accordeon-green.ui-accordion-header.ui-state-active,
+.accordeon-green.ui-state-default {
+	background : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-bg_gloss-wave_33_419702_500x100.png") repeat-x scroll 50% 50% #EE322A;
+	color : #E4FFE4;
+	border-color : #E4FFE4;
+}
+.accordeon-green.ui-accordion-header.ui-state-hover { border-color : #0E5B0D; }
+.accordeon-green.ui-state-default .ui-icon { background-image : url("../jquery-ui-1.10.0.custom/css/redmond/images/ui-icons_c1ffc2_256x240.png"); }
+
+
+
+
+
+
+
+
+#resultat table th {
+	// background : #fffad1 url("images/jq/ui-bg_diamond_90_fffad1_10x8.png") repeat top left;
+	background : #eceadf url("images/jq/ui-bg_fine-grain_10_eceadf_60x60.png") repeat top left;
+	// border-color : #08580D;
+	border-color : #654b24;
+	color : #08580D;
+}
+
+
+#resultat table td {
+	background-color : white;
+	border-color : #654b24;
+	color : black;
+}
+
+
+ #resultat .ui-widget-header .ui-state-default.ui-state-disabled {
+ 	color : #362915;
+ }
+
+
+
+
+
+
+
+#liste_playlist {
+	float : none;
+	display : inline-block;
+	vertical-align : top;
+	width : 25%;
+	min-width : 275px;
+}
+
+#contenu_playlist {
+	display : inline-block;
+	margin-left : 15px;
+	width : 70%;
+	min-width : 500px;
+}
+
+#contenu_playlist.fullWidth {
+	width : 100%;
+}
+
+
+.playlist_list,
+#playlist_video_list_order, 
+#playlist_video_list_rights,
+#playlist_folder_properties {
+    border: 1px solid #654b24;
+    border-radius: 0 0 7px 7px;
+}
+
+.playlist_list .playlist_list_title, 
+#playlist_folder_properties h2, 
+#playlist_video_list_order h2, 
+#playlist_video_list_rights h2 {
+	background-image : url("images/jq/ui-bg_fine-grain_65_654b24_60x60.png");
+	color : white;
+	text-shadow: #654b24 1px 1px, #654b24 -1px 1px, #654b24 -1px -1px, #654b24 1px -1px;	
+}
+
+#playlist_video_list_order #playlist_video_list {
+	width : 85%;
+}
+
+#playlist_video_list_order #playlist_video_list li {
+	width : 90%;
+}
+
+#playlist_video_list_order #playlist_video_list li span.video_title, 
+#playlist_video_list_order #playlist_video_list li span.video_evenement {
+	display: inline-block;
+    margin-left: 15px;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 68%;
+}
+
+#playlist_video_list br {
+	display : none;
+}
+
+#playlist_video_list_order #playlist_video_list li span.video_evenement {
+	margin-top : -10px;
+}
+
+#user_list_div .bouton_retour a,
+#contenu_playlist .bouton_retour a {
+	color : #08580d;
+	text-shadow : none;
+}
+
+.jw-skin-lecteur .jw-display-icon-container {
+	background : #654b24 url("images/jq/ui-bg_fine-grain_65_654b24_60x60.png") repeat top left;
+	border-color : #412D10;
+}
+
+
+
+
+
+
+
+#bodyContent #title.admin_title {
+	display : none; 
+}
+
+#adminActions {
+	top : auto;
+	margin-left : 1px;
+	width : 1198px;
+	box-sizing : border-box;
+	padding : 0 20px;
+	margin-top : -17px;
+	border-color : #08580D;
+	border-left : none;
+	border-right : none;
+	background-color : #a6e8b0;
+}
+
+#admin_left_div, #editDiv {
+	float : none;
+	display : inline-block;
+	vertical-align : top;
+}
+
+.critere {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e0d5bc+0,cfc6b1+48,e0d5bc+100 */
+	background: rgb(224,213,188); /* Old browsers */
+	background: -moz-linear-gradient(top,  rgba(224,213,188,1) 0%, rgba(207,198,177,1) 48%, rgba(224,213,188,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(224,213,188,1)), color-stop(48%,rgba(207,198,177,1)), color-stop(100%,rgba(224,213,188,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  rgba(224,213,188,1) 0%,rgba(207,198,177,1) 48%,rgba(224,213,188,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(224,213,188,1) 0%,rgba(207,198,177,1) 48%,rgba(224,213,188,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(224,213,188,1) 0%,rgba(207,198,177,1) 48%,rgba(224,213,188,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(224,213,188,1) 0%,rgba(207,198,177,1) 48%,rgba(224,213,188,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0d5bc', endColorstr='#e0d5bc',GradientType=0 ); /* IE6-9 */
+
+	border : 1px solid #bd8e48;
+	border-radius : 4px;
+}
+
+
+#user_list_div td, #user_list_div th {
+    border: 1px solid #08580D;
+}
+
+#user_list_div td {
+    color: #08580D;
+}
+
+.user_list_login .img_user {
+  -webkit-filter: hue-rotate(-96deg);
+  filter: hue-rotate(-96deg);
+}
+
+
+
+
+#playerDiv {
+	margin-top : 40px;
+}
+#playerDiv #player {
+	border : 1px solid #888;
+}
+
+#editVideoProperties {
+	border : 1px solid #888;
+	box-shadow : 4px 4px 4px #444;
+}
+
+

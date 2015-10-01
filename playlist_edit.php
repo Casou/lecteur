@@ -9,7 +9,7 @@ Logger::init($pathToPhpRoot);
 
 $id_playlist = $_POST['id'];
 
-$playlistDTO = MetierPlaylist::getPlaylistWithVideo($_SESSION['userId'], $id_playlist);
+$playlistDTO = MetierPlaylist::getPlaylistWithVideo(CONNECTED_USER_ID, $id_playlist);
 $allAdmins = MetierUser::getAllAdminUser();
 $userDto = MetierUser::getUserById($playlistDTO->playlist->id_user);
 $allAdmins[] = $userDto->user;
@@ -69,10 +69,6 @@ include_once $pathToPhpRoot.'popupAllowProfile.php';
 	<?php if ($playlistDTO->can_share) { ?>
 	<div id="playlist_video_list_rights">
 		<h2>Droits sur la playlist</h2>
-		
-		<div class="playlist_action_bar">
-		</div>
-		
 		
 		<table>
 			<tr>

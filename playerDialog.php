@@ -36,7 +36,7 @@
 		</button>
 		<input id="shareVideoKey" type="text" readonly="readonly" value="" onFocus="this.select();" />
 		<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
-		<button onClick="window.open('editVideoProperties.php?id='+$('#video_viewed').val(), '_blank'); $('#player')[0].pause();" class="editProperties">
+		<button onClick="window.open('editVideoProperties.php?id='+$('#video_viewed').val(), '_blank'); jwplayer('player').pause(true);" class="editProperties">
 		Editer
 		</button>
 		<?php } ?>
@@ -181,7 +181,8 @@
 			height : 635,
 			close : function() {
 				// $('#player')[0].pause();
-				window.clearInterval(ival);
+				jwplayer("player").pause(true);
+				// window.clearInterval(ival);
 			}
 		});
 

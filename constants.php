@@ -3,7 +3,7 @@
 define('APPLICATION_NAME', 'lecteur');
 define('APPLICATION_URL', 'lecteur');
 define('LOG_FILE_NAME', 'lecteur');
-define('APPLICATION_VERSION', '2.4.3');
+define('APPLICATION_VERSION', '3.0.0');
 // define('URL_APPLICATION', 'http://localhost/lecteur');
 define('ABSOLUTE_PATH', '/lecteur/');
 
@@ -98,5 +98,9 @@ DEFINE('NO_EVENT_VIDEO_ID', -1);
 DEFINE('PARAM_CONTEXT_LOG', 'LOG');
 DEFINE('PARAM_ID_LOG_DEFAULT_LEVEL', 'LOG_DEFAULT_LEVEL');
 
+if (session_status() != PHP_SESSION_NONE && isset($_SESSION['userId'])) {
+	DEFINE('CONNECTED_USER_ID', $_SESSION['userId']);
+	// $CONNECTED_USER_ID = $_SESSION['userId'];
+}
 
 ?>

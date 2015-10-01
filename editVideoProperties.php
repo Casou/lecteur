@@ -39,7 +39,7 @@ $usersAllowed = MetierUser::getUserAllowedForVideo(array($id), true);
 	<h1>Modification des propriétés : <?= $video->nom_video ?></h1>
 </div>
 
-<div id="playerDiv" style="width : 100%; margin-top : 15px; text-align : center;">
+<div id="playerDiv">
 	<div id="player">Chargement de la vidéo...</div>
 	<!-- <video id="player" title="Prévisualisation" width="640" height="360" controls>
 		<source src="<?= changeBackToSlash(PATH_CONVERTED_FILE)."/".escapeDoubleQuote($video->nom_video) ?>" type="video/webm" />

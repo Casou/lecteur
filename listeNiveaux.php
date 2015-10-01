@@ -5,7 +5,7 @@ include_once $pathToPhpRoot."entete.php";
 
 $allDansesNiveaux = MetierVideo::getAllVideosWithAttributesForDanseNiveau();
 
-$danseOrder = MetierDanse::getDansesOrderedByUserPreference($_SESSION['userId']);
+$danseOrder = MetierDanse::getDansesOrderedByUserPreference(CONNECTED_USER_ID);
 $dansesName = MetierDanse::getAllDanseName();
 
 ?>

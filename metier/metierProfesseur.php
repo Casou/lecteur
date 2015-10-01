@@ -12,7 +12,7 @@ class MetierProfesseur {
 				"select distinct p.* from ".Professeur::getTableName()." p ".
 				" inner join ".Professeur::getJoinVideoTableName()." pv on pv.id_professeur = p.id ".
 				" inner join ".Video::getJoinAllowedTableName()." allw_vid on pv.id_video = allw_vid.id_video ".
-				" WHERE id_user=".$_SESSION['userId']. 
+				" WHERE id_user=".CONNECTED_USER_ID. 
 				" order by nom asc", "Professeur");
 	}
 	
@@ -51,7 +51,7 @@ class MetierProfesseur {
 				" inner join ".Professeur::getJoinVideoTableName()." pv on pv.id_video = dv.id_video ".
 				" inner join ".Professeur::getTableName()." p on pv.id_professeur = p.id ".
 				" inner join ".Video::getJoinAllowedTableName()." allw ON pv.id_video = allw.id_video ".
-				" where dv.id_danse = $id_danse and allw.id_user=".$_SESSION['userId'].
+				" where dv.id_danse = $id_danse and allw.id_user=".CONNECTED_USER_ID.
 				" group by p.id, p.nom, dv.id_danse ".
 				" ORDER BY p.nom ASC;";
 		$results = Database::getResults($sql);

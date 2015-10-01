@@ -177,6 +177,10 @@ class MetierUser {
 		$_SESSION["userId"] = $user->id;
 		$_SESSION["userLogged"] = $user->id;
 		
+		if (!defined('CONNECTED_USER_ID')) {
+			DEFINE('CONNECTED_USER_ID', $_SESSION['userId']);
+		}
+		
 		if ($user->log_level == null || $user->log_level == "") {
 			$_SESSION["log_level"] = $user->log_level;
 		} else {
