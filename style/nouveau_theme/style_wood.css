@@ -1,5 +1,6 @@
 body {
 	background : url("images/plancher_fonce.jpg") repeat top left scroll;
+	margin : 0;
 }
 
 input, select {
@@ -120,9 +121,34 @@ td, th {
 }
 
 
-#bodyContent {
+
+
+
+
+
+
+
+#bodyWrap {
+	position : absolute;
+	left : 50%;
+	width : 1200px;
+	min-height : 100%;
+	margin : 0 0 0 -600px;
+	box-sizing : border-box;
+	box-shadow : 0 0 10px #444, 0 0 20px #444;
 	background : url('images/bg_main.jpg') repeat top left white;
+	border : 1px solid black;
+}
+
+#bodyContent {
+	width : 1200px;
 	min-height : 200px;
+	
+	padding : 75px 10px 10px 10px;
+	box-sizing : border-box;
+	
+	margin-left : 0;
+	padding : 15px 15px 40px 15px;
 }
 
 #bodyContent #title {
@@ -155,13 +181,14 @@ td, th {
 }
 
 #menu {
-	position : absolute;
+	position : relative;
+	display : inline-block;
 	width : 1200px;
-	height : 59px;
+	height : 140px;
 	left : 50%;
 	margin-left : -600px;
-	top : 50px;
-	border : 2px inset grey;
+	top : 0;
+	border : 0;
 	
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#045e37+0,00401b+100 */
 	background: #045e37; /* Old browsers */
@@ -181,7 +208,7 @@ td, th {
 
 #menu #menu_list {
 	text-align : center;
-	margin : 23px 0 0 0;
+	margin : 108px 0 0 0;
 }
 
 #menu h1, #menu_bar {
@@ -202,7 +229,7 @@ td, th {
 	width : 170px;
 	cursor : pointer;
 	border : 2px inset #aaa;
-	border-bottom : 2px solid #bababa;
+	border-bottom : 0;
 	border-radius : 8px 8px 0 0;
 	padding-top : 0;
 	height : 30px;
@@ -232,7 +259,7 @@ td, th {
 	transition:visibility 0s linear 0.5s,opacity 0.5s linear;
 	    
 	position : absolute;
-	top : 56px;
+	top : 140px;
 	list-style-type : none;
 	margin : 0 0 0 -2px;
 	padding : 0;
@@ -306,28 +333,6 @@ td, th {
 }
 
 
-
-
-#bodyContent {
-	width : 1200px;
-	padding : 75px 10px 10px 10px;
-	
-	background-color : white;
-	box-sizing : border-box;
-	// box-shadow : 0 0 20px rgba(150, 150, 150, 0.6), 0 0 40px rgba(150, 150, 150, 0.6);
-	box-shadow : 10px 10px 10px #000;
-	
-	margin-left : 0;
-	margin-bottom : 50px;
-	border : 1px solid black;
-}
-
-#bodyWrap {
-	position : absolute;
-	left : 50%;
-	width : 1200px;
-	margin : 42px 0 50px -600px;
-}
 
 
 #stats_thumbnails {

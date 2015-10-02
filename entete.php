@@ -53,7 +53,7 @@ if (!isset($_SESSION["user"])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/jquery-ui-1.10.0.custom/css/redmond/jquery-ui-1.10.0.custom.css" />
-	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/html5demos.css" />
+	<!-- <link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/html5demos.css" /> -->
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/style.css" />
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/styleDatatable.css" />
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/styleTaille.css" />
@@ -98,11 +98,13 @@ if (!isset($_SESSION["user"])) {
 
 <body>
 
-<?php include "menu.php"; ?>
-
 <div id="loadingPopup">
 	<img src="<?= APPLICATION_ABSOLUTE_URL ?>style/images/loading_popup.gif" alt="Loading..." />
 </div>
 
 <div id="bodyWrap">
+	<header>
+	<?php include "menu.php"; ?>
+	</header>
+	
 	<div id="bodyContent">
