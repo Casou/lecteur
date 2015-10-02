@@ -184,20 +184,20 @@ class MetierDanse {
 	}
 	
 	
-	public static function saveDanseOrderForUser($danse_order, $user_id) {
+	public static function saveDanseOrderForUser($danse_orders, $user_id) {
 		$hasTransaction = Database::beginTransaction();
 		
-		$danses = explode(",", $danse_order);
+		$danses = explode(",", $danse_orders);
 		$ordre = 1;
 		$dansesUpdated = "";
 		foreach ($danses as $id_danse) {
 			$dansesUpdated .= (($dansesUpdated == "") ? "" : ",");
-			Database::executeUpdate("UPDATE ".Danse::getJoinUserOrderTableName()." set ordre = $ordre where id_danse = $id_danse and id_user = $user_id");
+			Database::executeUpdate("UPDATE ".Danse::getJoinUserOrderTableName()." set ordre_danse = $ordre where id_danse = $id_danse and id_user = $user_id");
 			$dansesUpdated .= $id_danse;
 			$ordre++;
 		}
 		
-		Database::executeUpdate("UPDATE ".Danse::getJoinUserOrderTableName()." set ordre = 99 where id_danse not in ($dansesUpdated) and id_user = $user_id");
+		Database::executeUpdate("UPDATE ".Danse::getJoinUserOrderTableName()." set ordre_danse = 99 where id_danse not in ($dansesUpdated) and id_user = $user_id");
 		
 		if ($hasTransaction) Database::commit();
 	}
@@ -205,7 +205,7 @@ class MetierDanse {
 	public static function getDansesOrderedByUserPreference($user_id) {
 		return Database::getResultsObjects("SELECT d.* FROM ".Danse::getTableName()." d ".
 				"INNER JOIN ".Danse::getJoinUserOrderTableName()." udo on d.id = udo.id_danse "
-				."WHERE id_user = $user_id ORDER BY udo.ordre ASC", 
+				."WHERE id_user = $user_id ORDER BY udo.ordre_danse ASC", 
 				"Danse");
 	}
 	
