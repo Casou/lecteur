@@ -176,6 +176,7 @@ class MetierUser {
 		$_SESSION["user"] = $_POST["login"];
 		$_SESSION["userId"] = $user->id;
 		$_SESSION["userLogged"] = $user->id;
+		$_SESSION["theme"] = $user->theme;
 		
 		if (!defined('CONNECTED_USER_ID')) {
 			DEFINE('CONNECTED_USER_ID', $_SESSION['userId']);
@@ -215,6 +216,7 @@ class MetierUser {
 		
 		$_SESSION["user"] = $user->user->login;
 		$_SESSION["userId"] = $user->user->id;
+		$_SESSION["theme"] = $user->user->theme;
 		foreach($user->droits as $droit) {
 			$_SESSION[$droit->nom] = $droit->label;
 		}
@@ -299,6 +301,13 @@ class MetierUser {
 		Database::executeUpdate($sql);
 		
 		if ($hasTransaction) Database::commit();
+	}
+	
+	
+	public static function changeTheme($theme, $id_user) {
+		$sql = "UPDATE ".User::getTableName()." SET theme=$theme WHERE id=$id_user";
+		Database::executeUpdate($sql);
+		$_SESSION['theme'] = $theme;
 	}
 	
 }

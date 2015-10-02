@@ -15,136 +15,138 @@ if(isset($_GET['viewAll'])) {
 
 ?>
 
-<div id="title">
+<div id="title" class="manage_videos">
 	<h1>Vidéos converties</h1>
 </div>
 
-<div>
-<?php if (!$isAllVideos) { ?>
-	Seules les vidéos non classées sont affichées. <a href="manageVideos.php?viewAll">Afficher toutes les vidéos</a>
-<?php } else { ?>
-	Toutes les vidéos sont affichées.
-<?php }?>
-</div>
-
-<table id="manageTreatedVideoTable" class="manageTable">
-	<thead>
-		<tr>
-			<th class="id"></th>
-			<th class="nom_affiche">Nom / Fichier</th>
-			<th class="type">Type</th>
-			<th class="evenement">Evènement</th>
-			<th class="duree" title="Durée">D.</th>
-			<th class="previsualiser">Actions</th>
-		</tr>
-	</thead>
+<main id="manage_videos">
+	<div>
+	<?php if (!$isAllVideos) { ?>
+		Seules les vidéos non classées sont affichées. <a href="manageVideos.php?viewAll">Afficher toutes les vidéos</a>
+	<?php } else { ?>
+		Toutes les vidéos sont affichées.
+	<?php }?>
+	</div>
 	
-	<tbody>
-
-<?php
-foreach ($allVideos as $video) {
-	$nomEvenement = null;
-	if ($video->id_evenement != null) {
-		$evenement = MetierEvenement::getEvenementById($video->id_evenement);
-		$nomEvenement = $evenement->nom;
-	}
-	
-	$hasPasseTimed = MetierPasse::hasPasseTimed($video->id);
-	
-	$fileExists = true;
-	$filesize = "??";
-	if (file_exists($pathToPhpRoot.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$video->nom_video)) {
-		$filesize = Fwk::getFormatedFileSize($pathToPhpRoot.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$video->nom_video);
-		/*
-		// Taille en Ko
-		$filesize = @filesize(PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$video->nom_video) / 1000;
-		$unite = "";
-		if ($filesize != 0) {
-			$unite = "Ko";
-			if ($filesize < 1000) {
-				$filesize = round($filesize, 0);
-			}
-			// Taille en Mo
-			if ($filesize > 1000) {
-				$filesize = round($filesize / 1000, 2);
-				$unite = "Mo";
-			}
-			// Taille en Go
-			if ($filesize > 1000) {
-				$filesize = round($filesize / 1000, 2);
-				$unite = "Go";
-			}
-			$filesize .= " $unite";
-		}
-		*/
-	} else {
-		$fileExists = false;
-	}
-?>
-			<tr id="video_<?= $video->id ?>">
-				<td class="id">
-					<?= $video->id ?>
-				</td>
-				<td class="nom_affiche">
-					<input type="text" class="noBorder" 
-						onFocus="$(this).removeClass('noBorder');"
-						onBlur="$(this).addClass('noBorder');"
-						onChange="changeNomAfficheVideo(<?= $video->id ?>, this);"
-						value="<?= htmlspecialchars($video->nom_affiche) ?>"/>
-						
-					<span id="nom_affiche_hidden_<?= $video->id ?>" style="display : none;">
-						<?= htmlspecialchars($video->nom_affiche) ?>
-					</span>
-						
-					<?php if ($hasPasseTimed) { ?>
-						<img src="style/images/timer.gif" 
-							title="Les passes ont été timées." 
-							style="width : 16px;" />
-					<?php } ?>
-					
-					<br/>
-					<span style="font-style : italic;">
-						<?= $video->nom_video ?>
-						(<?= $filesize ?>)
-					</span>
-				</td>
-				<td class="type"><?= $video->type ?></td>
-				<td class="evenement"><?= $nomEvenement ?></td>
-				<td class="duree"><?= Fwk::formatDureeEnSecondes($video->duree) ?></td>
-				<td class="action">
-				<?php if ($fileExists) { ?>
-					<!-- <a href="#" onClick="previsualize('<?= escapeSimpleQuote($video->nom_video) ?>'); return false;" -->
-					<a href="#" onClick="previsualizeId(<?= escapeSimpleQuote($video->id) ?>); return false;" 
-							action="convert"
-							fileToConvert="<?= $video->nom_video ?>"
-							name="video_<?= $video->id ?>">
-						<img src="style/images/previsualisation.png" alt="Prévisu" alt="Prévisualiser" />
-					</a>
-					<a href="editVideoProperties.php?id=<?= $video->id ?>" target="_blank"> 
-						<img src="style/images/modify.png" alt="Edit" alt="Editer les propriétés" />
-					</a>
-					<a href="#" onClick="deleteVideo(<?= $video->id ?>); return false;"> 
-						<img src="style/images/delete.png" alt="Suppr" alt="Supprimer la vidéo" />
-					</a>
-				<?php } else { ?>
-					<a href="#" onClick="return false;" name="video_<?= $video->id ?>">
-						<img src="style/images/previsualisation_off.png" alt="Pas de prévisu" alt="Prévisualisation impossible (fichier inexistant)" />
-					</a>
-					<a href="#" onClick="return false;" > 
-						<img src="style/images/modify_off.png" alt="Pas d'édit" alt="Edition des propriétés impossible (fichier inexistant)" />
-					</a>
-					<a href="#" onClick="deleteVideo(<?= $video->id ?>); return false;"> 
-						<img src="style/images/delete.png" alt="Suppr" alt="Supprimer la vidéo" />
-					</a>
-				<?php } ?>
-					
-				</td>
+	<table id="manageTreatedVideoTable" class="manageTable">
+		<thead>
+			<tr>
+				<th class="id"></th>
+				<th class="nom_affiche">Nom / Fichier</th>
+				<th class="type">Type</th>
+				<th class="evenement">Evènement</th>
+				<th class="duree" title="Durée">D.</th>
+				<th class="previsualiser">Actions</th>
 			</tr>
-<?php 
-}
-?>
-	</tbody>
-</table>
+		</thead>
+		
+		<tbody>
+	
+	<?php
+	foreach ($allVideos as $video) {
+		$nomEvenement = null;
+		if ($video->id_evenement != null) {
+			$evenement = MetierEvenement::getEvenementById($video->id_evenement);
+			$nomEvenement = $evenement->nom;
+		}
+		
+		$hasPasseTimed = MetierPasse::hasPasseTimed($video->id);
+		
+		$fileExists = true;
+		$filesize = "??";
+		if (file_exists($pathToPhpRoot.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$video->nom_video)) {
+			$filesize = Fwk::getFormatedFileSize($pathToPhpRoot.PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$video->nom_video);
+			/*
+			// Taille en Ko
+			$filesize = @filesize(PATH_CONVERTED_FILE.DIRECTORY_SEPARATOR.$video->nom_video) / 1000;
+			$unite = "";
+			if ($filesize != 0) {
+				$unite = "Ko";
+				if ($filesize < 1000) {
+					$filesize = round($filesize, 0);
+				}
+				// Taille en Mo
+				if ($filesize > 1000) {
+					$filesize = round($filesize / 1000, 2);
+					$unite = "Mo";
+				}
+				// Taille en Go
+				if ($filesize > 1000) {
+					$filesize = round($filesize / 1000, 2);
+					$unite = "Go";
+				}
+				$filesize .= " $unite";
+			}
+			*/
+		} else {
+			$fileExists = false;
+		}
+	?>
+				<tr id="video_<?= $video->id ?>">
+					<td class="id">
+						<?= $video->id ?>
+					</td>
+					<td class="nom_affiche">
+						<input type="text" class="noBorder" 
+							onFocus="$(this).removeClass('noBorder');"
+							onBlur="$(this).addClass('noBorder');"
+							onChange="changeNomAfficheVideo(<?= $video->id ?>, this);"
+							value="<?= htmlspecialchars($video->nom_affiche) ?>"/>
+							
+						<span id="nom_affiche_hidden_<?= $video->id ?>" style="display : none;">
+							<?= htmlspecialchars($video->nom_affiche) ?>
+						</span>
+							
+						<?php if ($hasPasseTimed) { ?>
+							<img src="style/images/timer.gif" 
+								title="Les passes ont été timées." 
+								style="width : 16px;" />
+						<?php } ?>
+						
+						<br/>
+						<span style="font-style : italic;">
+							<?= $video->nom_video ?>
+							(<?= $filesize ?>)
+						</span>
+					</td>
+					<td class="type"><?= $video->type ?></td>
+					<td class="evenement"><?= $nomEvenement ?></td>
+					<td class="duree"><?= Fwk::formatDureeEnSecondes($video->duree) ?></td>
+					<td class="action">
+					<?php if ($fileExists) { ?>
+						<!-- <a href="#" onClick="previsualize('<?= escapeSimpleQuote($video->nom_video) ?>'); return false;" -->
+						<a href="#" onClick="previsualizeId(<?= escapeSimpleQuote($video->id) ?>); return false;" 
+								action="convert"
+								fileToConvert="<?= $video->nom_video ?>"
+								name="video_<?= $video->id ?>">
+							<img src="style/images/previsualisation.png" alt="Prévisu" alt="Prévisualiser" />
+						</a>
+						<a href="editVideoProperties.php?id=<?= $video->id ?>" target="_blank"> 
+							<img src="style/images/modify.png" alt="Edit" alt="Editer les propriétés" />
+						</a>
+						<a href="#" onClick="deleteVideo(<?= $video->id ?>); return false;"> 
+							<img src="style/images/delete.png" alt="Suppr" alt="Supprimer la vidéo" />
+						</a>
+					<?php } else { ?>
+						<a href="#" onClick="return false;" name="video_<?= $video->id ?>">
+							<img src="style/images/previsualisation_off.png" alt="Pas de prévisu" alt="Prévisualisation impossible (fichier inexistant)" />
+						</a>
+						<a href="#" onClick="return false;" > 
+							<img src="style/images/modify_off.png" alt="Pas d'édit" alt="Edition des propriétés impossible (fichier inexistant)" />
+						</a>
+						<a href="#" onClick="deleteVideo(<?= $video->id ?>); return false;"> 
+							<img src="style/images/delete.png" alt="Suppr" alt="Supprimer la vidéo" />
+						</a>
+					<?php } ?>
+						
+					</td>
+				</tr>
+	<?php 
+	}
+	?>
+		</tbody>
+	</table>
+</main>
 
 
 <script type="text/javascript">

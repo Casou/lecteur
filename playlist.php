@@ -10,110 +10,111 @@ $playlists_folder_created = MetierPlaylistFolder::getPlaylistFolderCreatedByUser
 
 // $playlists_granted = MetierPlaylistUserRights::getPlaylistDTOSharedWithUser(CONNECTED_USER_ID);
 ?>
-<div id="title">
+<div id="title" class="playlists_screen">
 	<h1>Playlists</h1>
 </div>
 
-<div id="liste_playlist">
-	
-	<button id="addFolder">Créer un dossier</button>
-	<button id="addPlaylistButton">Créer une playlist</button>
-	
-	<div id="createFolder" title="Créer un nouveau dossier de playlists" style="display : none;" class="dialog_input">
-		<div>
-			<label for="createFolderName">Nom du dossier : </label>
-			<input id="createFolderName" maxlength="50" />
-		</div>
+<main id="playlists_screen">
+	<div id="liste_playlist">
 		
-		<button id="createFolderButton">Créer le dossier</button>
-	</div>
-	
-	<div id="createPlaylist" title="Créer une playlist vide" style="display : none;" class="dialog_input">
-		<div>
-			<label for="createPlaylistName">Nom de la playlist : </label>
-			<input id="createPlaylistName" maxlength="50" />
-		</div>
+		<button id="addFolder">Créer un dossier</button>
+		<button id="addPlaylistButton">Créer une playlist</button>
 		
-		<button id="createPlaylistButton">Créer la playlist</button>
-	</div>
-	
-	<div id="popup_playlist"></div>
-	
-	
-	
-	
-	
-	
-	<div id="playlist_created_by_me" class="playlist_list">
-		<?php 
-			$id_current_folder = "";
-			$mode = "CREATED";
-		?>
-		<div class="playlist_list_title" onClick="collapse('playlist_created_by_me')">Crées par moi</div>
-		<div class="playlist_list_content">
-			<div class="playlist_list_ul playlists">
-				<ul>
-				<?php 
-					include ('playlist_panel.php');
-				?>
-				</ul>
+		<div id="createFolder" title="Créer un nouveau dossier de playlists" style="display : none;" class="dialog_input">
+			<div>
+				<label for="createFolderName">Nom du dossier : </label>
+				<input id="createFolderName" maxlength="50" />
 			</div>
-
-			<div class="playlist_list_ul folder_detail" style="display : none">
-				<ul>
-					<li folder_id="null" class="droppable_folder folder_up">
-						<a href="#" onClick="hideFolder('<?= $mode ?>', this); return false;">
-							<img src="style/images/folder_up.png" />
-							Retour
-						</a>
-					</li>
-				</ul>
-			</div>
+			
+			<button id="createFolderButton">Créer le dossier</button>
 		</div>
 		
-		<div class="clear">&nbsp;</div>
-	</div>
-	
-	
-	
-	
-	
-	<?php
-		$id_current_folder = "";
-		$mode = "GRANTED";
-	?>
-	<div id="playlist_visible_by_me" class="playlist_list">
-		<div class="playlist_list_title" onClick="collapse('playlist_visible_by_me')">Visibles par moi</div>
-		<div class="playlist_list_content">
-			<div class="playlist_list_ul playlists">
-				<ul>
+		<div id="createPlaylist" title="Créer une playlist vide" style="display : none;" class="dialog_input">
+			<div>
+				<label for="createPlaylistName">Nom de la playlist : </label>
+				<input id="createPlaylistName" maxlength="50" />
+			</div>
+			
+			<button id="createPlaylistButton">Créer la playlist</button>
+		</div>
+		
+		<div id="popup_playlist"></div>
+		
+		
+		
+		
+		
+		
+		<div id="playlist_created_by_me" class="playlist_list">
+			<?php 
+				$id_current_folder = "";
+				$mode = "CREATED";
+			?>
+			<div class="playlist_list_title" onClick="collapse('playlist_created_by_me')">Crées par moi</div>
+			<div class="playlist_list_content">
+				<div class="playlist_list_ul playlists">
+					<ul>
 					<?php 
 						include ('playlist_panel.php');
 					?>
-				</ul>
+					</ul>
+				</div>
+	
+				<div class="playlist_list_ul folder_detail" style="display : none">
+					<ul>
+						<li folder_id="null" class="droppable_folder folder_up">
+							<a href="#" onClick="hideFolder('<?= $mode ?>', this); return false;">
+								<img src="style/images/folder_up.png" />
+								Retour
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
 			
-			<div class="playlist_list_ul folder_detail" style="display : none">
-				<ul>
-					<li folder_id="null" class="droppable_folder folder_up">
-						<a href="#" onClick="hideFolder('<?= $mode ?>', this); return false;">
-							<img src="style/images/folder_up.png" />
-							Retour
-						</a>
-					</li>
-				</ul>
-			</div>
+			<div class="clear">&nbsp;</div>
 		</div>
 		
-		<div class="clear">&nbsp;</div>
+		
+		
+		
+		
+		<?php
+			$id_current_folder = "";
+			$mode = "GRANTED";
+		?>
+		<div id="playlist_visible_by_me" class="playlist_list">
+			<div class="playlist_list_title" onClick="collapse('playlist_visible_by_me')">Visibles par moi</div>
+			<div class="playlist_list_content">
+				<div class="playlist_list_ul playlists">
+					<ul>
+						<?php 
+							include ('playlist_panel.php');
+						?>
+					</ul>
+				</div>
+				
+				<div class="playlist_list_ul folder_detail" style="display : none">
+					<ul>
+						<li folder_id="null" class="droppable_folder folder_up">
+							<a href="#" onClick="hideFolder('<?= $mode ?>', this); return false;">
+								<img src="style/images/folder_up.png" />
+								Retour
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<div class="clear">&nbsp;</div>
+		</div>
+	
 	</div>
-
-</div>
-
-
-<div id="contenu_playlist">
-</div>
-
+	
+	
+	<div id="contenu_playlist">
+	</div>
+</main>
 
 
 

@@ -4,37 +4,38 @@ include_once 'entete.php';
 
 ?>
 
-<div id="title">
+<div id="title" class="export_script">
 	<h1>Export de script SQL</h1>
 </div>
 
-<div id="exportDiv" class="ui-widget ui-corner-all block">
-	<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
-		Génération du script
+<main id="export_script">
+	<div id="exportDiv" class="ui-widget ui-corner-all block">
+		<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
+			Génération du script
+		</div>
+		<div class="blockContent">
+			<div>
+				<label for="exportMinId">Exporter à partir de l'id : </label>
+				<input type="text" name="exportMinId" id="exportMinId" value="" size="12"  
+					maxlength="4" placeholder="Borne inf (req)" />
+				<input type="text" name="exportMaxId" id="exportMaxId" value="" size="12"
+					maxlength="4" placeholder="Borne sup" />
+			</div>
+			
+			<div>
+				<a href="#" id="generate">Générer</a>
+			</div>
+	
+			<div>
+				<button id="selectQueries">Sélectionner tout le texte</button>
+			</div>
+			<div id="resultSqlScript">
+				<textarea placeholder="Résultat" readonly="readonly" id="resultSql"></textarea>
+			</div>
+			
+		</div>
 	</div>
-	<div class="blockContent">
-		<div>
-			<label for="exportMinId">Exporter à partir de l'id : </label>
-			<input type="text" name="exportMinId" id="exportMinId" value="" size="12"  
-				maxlength="4" placeholder="Borne inf (req)" />
-			<input type="text" name="exportMaxId" id="exportMaxId" value="" size="12"
-				maxlength="4" placeholder="Borne sup" />
-		</div>
-		
-		<div>
-			<a href="#" id="generate">Générer</a>
-		</div>
-
-		<div>
-			<button id="selectQueries">Sélectionner tout le texte</button>
-		</div>
-		<div id="resultSqlScript">
-			<textarea placeholder="Résultat" readonly="readonly" id="resultSql"></textarea>
-		</div>
-		
-	</div>
-</div>
-
+</main>
 
 
 

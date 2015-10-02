@@ -90,6 +90,15 @@ DEFINE('DEFAULT_EVENT_COLOR_CSS', 'accordeon-blue');
 DEFINE('NO_EVENT_VIDEO_ID', -1);
 
 
+$ALL_THEMES = array(
+	1 => array( "nom" => "Thème bleu" ),
+	2 => array( "nom" => "Thème vert" )
+);
+$THEME_1 = '';
+$THEME_2 = '<link rel="stylesheet" href="'.APPLICATION_ABSOLUTE_URL.'style/nouveau_theme/style_wood.css" />'.
+			'<link rel="text/javascript" href="'.APPLICATION_ABSOLUTE_URL.'js/nouveau_theme.js" />';
+
+
 
 
 /* ******************************************

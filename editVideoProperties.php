@@ -714,6 +714,7 @@ $(document).ready(function() {
 		image: encodeURI('<?= APPLICATION_ABSOLUTE_URL.PATH_CONVERTED_FILE."/".escapeDoubleQuote($video->nom_video) ?>.jpg'),
 		width : '600px',
 		height : '100%',
+		autostart: false,
 		tracks: [{ 
 			file: encodeURI(escapeSpaces('<?= APPLICATION_ABSOLUTE_URL.PATH_CONVERTED_FILE."/".escapeDoubleQuote($video->nom_video) ?>.vtt')), 
 			label: "French",

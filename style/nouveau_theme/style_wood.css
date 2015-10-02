@@ -10,6 +10,11 @@ td, th {
 	background-color : transparent;
 }
 
+.dataTable td, .dataTable th, 
+#editVideoProperties td, #editVideoProperties th {
+	background-color : white;
+}
+
 #login {
 	background : url('images/bg_main.jpg') repeat top left white;
 	border : 1px solid #08580D;
@@ -110,6 +115,10 @@ td, th {
 	color : #08580D;
 }
 
+.no-border, .ui-widget.no-border {
+	border : 0;
+}
+
 
 #bodyContent {
 	background : url('images/bg_main.jpg') repeat top left white;
@@ -134,6 +143,10 @@ td, th {
 	padding : 0;
 	color : black;
 	text-shadow : none;
+}
+
+#bodyContent main {
+	margin-top : 25px;
 }
 
 .refresh_icon {
@@ -281,6 +294,16 @@ td, th {
 
 
 
+
+
+#infoDiv {
+	margin-bottom : 15px;
+}
+
+#bodyContent #error_login {
+	position : relative;
+	margin-top : 0;
+}
 
 
 
@@ -611,5 +634,9 @@ td, th {
 	border : 1px solid #888;
 	box-shadow : 4px 4px 4px #444;
 }
+
+
+
+
 
 

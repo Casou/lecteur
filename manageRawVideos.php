@@ -17,90 +17,92 @@ foreach ($runningEncodingVideos as $video) {
 
 ?>
 
-<div id="title">
+<div id="title" class="manage_raw_videos">
 	<h1>Vidéos importées, non converties</h1>
 </div>
 
-<div id="convertAllVideosDiv" style="float : right;">
-	<button id="convertAllVideos">Convertir toutes les vidéos</button>
-</div>
-
-<div id="unlockVideosDiv">
-	<button id="unlockVideos">Débloquer les vidéos</button>
-</div>
-
-<div id="manageRawVideo">
-<table id="manageRawVideoTable"  class="manageTable">
-	<thead>
-		<tr>
-			<th class="nom">Nom</th>
-			<th class="taille">Taille</th>
-			<th class="action">Action</th>
-		</tr>
-	</thead>
+<main id="manage_raw_videos">
+	<div id="convertAllVideosDiv" style="float : right;">
+		<button id="convertAllVideos">Convertir toutes les vidéos</button>
+	</div>
 	
-	<tbody>
-
-<?php
-if ($handle = opendir($pathToPhpRoot.PATH_RAW_FILE)) {
-
-	while (false !== ($entry = readdir($handle))) {
-		// $fileName = iconv( "iso-8859-1", "utf-8", $entry );
-		$fileName = utf8_encode($entry);
+	<div id="unlockVideosDiv">
+		<button id="unlockVideos">Débloquer les vidéos</button>
+	</div>
+	
+	<div id="manageRawVideo">
+		<table id="manageRawVideoTable"  class="manageTable">
+			<thead>
+				<tr>
+					<th class="nom">Nom</th>
+					<th class="taille">Taille</th>
+					<th class="action">Action</th>
+				</tr>
+			</thead>
+			
+			<tbody>
 		
-		if($entry != "." && $entry != ".." && !endsWith($entry, ".log")) {
-			$filesize = Fwk::getFormatedFileSize($pathToPhpRoot.PATH_RAW_FILE.DIRECTORY_SEPARATOR.$entry);
-			/*
-			// Taille en Ko
-			$filesize = filesize($pathToPhpRoot.PATH_RAW_FILE.DIRECTORY_SEPARATOR.$entry) / 1000;
-			$unite = "Ko";
-			if ($filesize < 1000) {
-				$filesize = round($filesize, 0);
+		<?php
+		if ($handle = opendir($pathToPhpRoot.PATH_RAW_FILE)) {
+		
+			while (false !== ($entry = readdir($handle))) {
+				// $fileName = iconv( "iso-8859-1", "utf-8", $entry );
+				$fileName = utf8_encode($entry);
+				
+				if($entry != "." && $entry != ".." && !endsWith($entry, ".log")) {
+					$filesize = Fwk::getFormatedFileSize($pathToPhpRoot.PATH_RAW_FILE.DIRECTORY_SEPARATOR.$entry);
+					/*
+					// Taille en Ko
+					$filesize = filesize($pathToPhpRoot.PATH_RAW_FILE.DIRECTORY_SEPARATOR.$entry) / 1000;
+					$unite = "Ko";
+					if ($filesize < 1000) {
+						$filesize = round($filesize, 0);
+					}
+					// Taille en Mo
+					if ($filesize > 1000) {
+						$filesize = round($filesize / 1000, 2);
+						$unite = "Mo";
+					}
+					// Taille en Go
+					if ($filesize > 1000) {
+						$filesize = round($filesize / 1000, 2);
+						$unite = "Go";
+					}
+					$filesize .= " $unite";
+					*/
+		?>
+					<tr>
+						<td class="nom"><?= $fileName ?></td>
+						<td class="taille"><?= $filesize ?></td>
+						<td class="action">
+							<a href="#" onClick="actionButton(this); return false;" 
+									action="convert"
+									fileToConvert="<?= $fileName ?>"
+									class="boutonAction">
+								<img src="style/images/convertir.gif" alt="Convertir" title="Convertir" />
+							</a>
+							<a href="#" class="logFile"></a>
+							<a href="#" onClick="deleteFile(this); return false;"
+								fileToDelete="<?= $fileName ?>"
+								class="deleteIcon">
+								<img src="style/images/delete.png" alt="Suppr" title="Supprimer le fichier" />
+							</a>
+							<span class="progress"></span>
+							<span class="resting"></span>
+						</td>
+					</tr>
+		<?php 
+				}
 			}
-			// Taille en Mo
-			if ($filesize > 1000) {
-				$filesize = round($filesize / 1000, 2);
-				$unite = "Mo";
-			}
-			// Taille en Go
-			if ($filesize > 1000) {
-				$filesize = round($filesize / 1000, 2);
-				$unite = "Go";
-			}
-			$filesize .= " $unite";
-			*/
-?>
-			<tr>
-				<td class="nom"><?= $fileName ?></td>
-				<td class="taille"><?= $filesize ?></td>
-				<td class="action">
-					<a href="#" onClick="actionButton(this); return false;" 
-							action="convert"
-							fileToConvert="<?= $fileName ?>"
-							class="boutonAction">
-						<img src="style/images/convertir.gif" alt="Convertir" title="Convertir" />
-					</a>
-					<a href="#" class="logFile"></a>
-					<a href="#" onClick="deleteFile(this); return false;"
-						fileToDelete="<?= $fileName ?>"
-						class="deleteIcon">
-						<img src="style/images/delete.png" alt="Suppr" title="Supprimer le fichier" />
-					</a>
-					<span class="progress"></span>
-					<span class="resting"></span>
-				</td>
-			</tr>
-<?php 
+		
+			closedir($handle);
 		}
-	}
-
-	closedir($handle);
-}
-
-?>
-	</tbody>
-</table>
-</div>
+		
+		?>
+		</tbody>
+		</table>
+	</div>
+</main>
 
 
 <div id="logDialog" title="Fichier de log">

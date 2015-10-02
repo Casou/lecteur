@@ -6,6 +6,7 @@ class User {
 	public $login;
 	public $password;
 	public $log_level;
+	public $theme;
 	
 	public static function getTableName() {
 		return "lct_user";

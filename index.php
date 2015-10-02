@@ -35,28 +35,15 @@ $NB_COLONNES = 4;
 		Retourner à la version mobile
 	</a>
 </div>
-<?php } else if (!Fwk::isUsingFirefox()) { 
+<?php } else if (Fwk::isUsingFirefox()) { 
 	$infoNavigateur = Fwk::getNavigateur(); 
 ?>
-<div class="ui-widget">
+<div id="infoDiv" class="ui-widget no-border">
 	<div id="error_login" class="ui-state-error ui-corner-all">
-		Ce site est optimisé pour <strong>Firefox</strong>. En utilisant un autre navigateur, 
+		Ce site est optimisé pour <strong>Firefox</strong> (Chrome marche pas mal aussi). En utilisant un autre navigateur, 
 		il se peut que certaines fonctionalités ne fonctionnent pas.<br/>
 		Vous utilisez actuellement : <?= $infoNavigateur[1] ?> 
 	</div>
-</div>
-<?php } ?>
-
-<?php if (isset($_SESSION[DROIT_ADMIN])) { ?>
-<div id="stats_thumbnails">
-	<span id="stats_thumbnails_texte">
-	<?php if (file_exists(PATH_THUMBNAIL_FILE)) { 
-			echo file_get_contents(PATH_THUMBNAIL_FILE); 
-		} else { ?>
-			Pas encore de vérification des thumbnails.
-	<?php } ?>
-	</span>
-	<a href="#" onClick="majStatsThumbnail(); return false;"><img src="style/images/actualiser.png" class="refresh_icon" /></a>
 </div>
 <?php } ?>
 
@@ -70,6 +57,19 @@ $NB_COLONNES = 4;
 			Durée totale : <?= $stats->dureeTotale ?> |
 			Nombre de passes : <?= $stats->nbPasses ?>  
 		</h3>
+		<?php if (isset($_SESSION[DROIT_ADMIN])) { ?>
+			<h4 id="thumbnails_stats">
+				<span id="stats_thumbnails_texte">
+				<?php if (file_exists(PATH_THUMBNAIL_FILE)) { 
+						echo file_get_contents(PATH_THUMBNAIL_FILE); 
+					} else { ?>
+						Pas encore de vérification des thumbnails.
+				<?php } ?>
+				</span>
+				<a href="#" onClick="majStatsThumbnail(); return false;"><img src="style/images/actualiser.png" class="refresh_icon" /></a>
+			</h4>
+		<?php } ?>
+		
 		
 		<table id="indexStatTable">
 			<thead>

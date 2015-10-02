@@ -17,74 +17,76 @@ foreach ($runningEncodingVideos as $video) {
 
 ?>
 
-<div id="title">
+<div id="title" class="manage_bin">
 	<h1>Corbeille (vidéos déjà converties)</h1>
 </div>
 
-<button id="clearBin" style="margin-bottom : 20px;">Vider la corbeille</button>
-
-<table id="manageVideoBinTable"  class="manageTable">
-	<thead>
-		<tr>
-			<th class="nom">Nom</th>
-			<th class="taille">Taille</th>
-			<th class="action">Action</th>
-		</tr>
-	</thead>
+<main id="manage_bin">
+	<button id="clearBin" style="margin-bottom : 20px;">Vider la corbeille</button>
 	
-	<tbody>
-
-<?php
-if ($handle = opendir($pathToPhpRoot.PATH_RAW_FILE_BIN)) {
-
-	while (false !== ($entry = readdir($handle))) {
-		$fileName = utf8_encode($entry);
-		
-		if($entry != "." && $entry != ".." && !endsWith($entry, ".log")) {
-			$filesize = Fwk::getFormatedFileSize($pathToPhpRoot.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$entry);
-			/*
-			// Taille en Ko
-			$filesize = filesize(PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$entry) / 1000;
-			$unite = "Ko";
-			if ($filesize < 1000) {
-				$filesize = round($filesize, 0);
-			}
-			// Taille en Mo
-			if ($filesize > 1000) {
-				$filesize = round($filesize / 1000, 2);
-				$unite = "Mo";
-			}
-			// Taille en Go
-			if ($filesize > 1000) {
-				$filesize = round($filesize / 1000, 2);
-				$unite = "Go";
-			}
-			$filesize .= " $unite";
-			*/
-?>
+	<table id="manageVideoBinTable"  class="manageTable">
+		<thead>
 			<tr>
-				<td class="nom"><?= $fileName ?></td>
-				<td class="taille"><?= $filesize ?></td>
-				<td class="action">
-					<a href="#" onClick="moveFile('<?= escapeSimpleQuote($fileName) ?>', this); return false;" class="boutonAction">
-						<img src="style/images/move.png" alt="Déplacer" 
-							title="Remettre le fichier parmi les vidéos à convertir" />
-					</a>
-					<a href="#" onClick="deleteFile('<?= escapeSimpleQuote($fileName) ?>', this); return false;" class="boutonAction">
-						<img src="style/images/delete.png" alt="Suppr" title="Supprimer le fichier" />
-					</a>
-				</td>
+				<th class="nom">Nom</th>
+				<th class="taille">Taille</th>
+				<th class="action">Action</th>
 			</tr>
-<?php 
+		</thead>
+		
+		<tbody>
+	
+	<?php
+	if ($handle = opendir($pathToPhpRoot.PATH_RAW_FILE_BIN)) {
+	
+		while (false !== ($entry = readdir($handle))) {
+			$fileName = utf8_encode($entry);
+			
+			if($entry != "." && $entry != ".." && !endsWith($entry, ".log")) {
+				$filesize = Fwk::getFormatedFileSize($pathToPhpRoot.PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$entry);
+				/*
+				// Taille en Ko
+				$filesize = filesize(PATH_RAW_FILE_BIN.DIRECTORY_SEPARATOR.$entry) / 1000;
+				$unite = "Ko";
+				if ($filesize < 1000) {
+					$filesize = round($filesize, 0);
+				}
+				// Taille en Mo
+				if ($filesize > 1000) {
+					$filesize = round($filesize / 1000, 2);
+					$unite = "Mo";
+				}
+				// Taille en Go
+				if ($filesize > 1000) {
+					$filesize = round($filesize / 1000, 2);
+					$unite = "Go";
+				}
+				$filesize .= " $unite";
+				*/
+	?>
+				<tr>
+					<td class="nom"><?= $fileName ?></td>
+					<td class="taille"><?= $filesize ?></td>
+					<td class="action">
+						<a href="#" onClick="moveFile('<?= escapeSimpleQuote($fileName) ?>', this); return false;" class="boutonAction">
+							<img src="style/images/move.png" alt="Déplacer" 
+								title="Remettre le fichier parmi les vidéos à convertir" />
+						</a>
+						<a href="#" onClick="deleteFile('<?= escapeSimpleQuote($fileName) ?>', this); return false;" class="boutonAction">
+							<img src="style/images/delete.png" alt="Suppr" title="Supprimer le fichier" />
+						</a>
+					</td>
+				</tr>
+	<?php 
+			}
 		}
+	
+		closedir($handle);
 	}
-
-	closedir($handle);
-}
-
-?>
-	</tbody>
-</table>
+	
+	?>
+		</tbody>
+	</table>
+</main>
 
 <script type="text/javascript">
 	function moveFile(fileName, caller) {

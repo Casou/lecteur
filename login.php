@@ -3,6 +3,7 @@ session_start();
 
 $pathToPhpRoot = './';
 include_once $pathToPhpRoot.'fwk/php/includeFwk.php';
+include_once $pathToPhpRoot.'constantsPrivate.php';
 include_once $pathToPhpRoot.'constants.php';
 
 header('Content-Type: text/html; charset=utf-8');

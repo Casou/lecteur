@@ -10,61 +10,63 @@ $dansesName = MetierDanse::getAllDanseName();
 
 ?>
 
-<div id="title">
+<div id="title" class="liste_profs">
 	<h1>Lister par danses et par professeur</h1>
 </div>
 
-<div id="danses" class="listeDiv">
-	 <ul>
-	 	<?php
-	 	foreach($danseOrder as $danseOrd) {
-	 		if (isset($allDansesProfesseurs[$danseOrd->id])) {
-	 			$id_danse = $danseOrd->id;
-		?>
-		<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>" onClick="$('.action_check').attr('checked', false);"><?= $dansesName[$id_danse] ?></a></li>
-		<?php
-			}
-		} 
-		?>
-	</ul>
-	
-	<?php 
-	include $pathToPhpRoot."liste_actionSelect.php";
-	?>
-
-	<?php 
-	foreach ($allDansesProfesseurs as $id_danse => $arrayProfesseurs) {
-	?>
-		<div id="tabs-<?= $id_danse ?>" class="professeurs categories">
+<main id="liste_profs">
+	<div id="danses" class="listeDiv">
+		 <ul>
+		 	<?php
+		 	foreach($danseOrder as $danseOrd) {
+		 		if (isset($allDansesProfesseurs[$danseOrd->id])) {
+		 			$id_danse = $danseOrd->id;
+			?>
+			<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>" onClick="$('.action_check').attr('checked', false);"><?= $dansesName[$id_danse] ?></a></li>
+			<?php
+				}
+			} 
+			?>
+		</ul>
+		
 		<?php 
-		foreach ($arrayProfesseurs as $professeur) {
-			$nbVideos = $professeur["cpt"];
-			if ($nbVideos < 2) {
-				$nbVideosLabel = " ($nbVideos vidéo)";
-			} else {
-				$nbVideosLabel = " ($nbVideos vidéos)";
-			}
+		include $pathToPhpRoot."liste_actionSelect.php";
 		?>
-			<h3 id="h3_<?= $professeur['id_danse'] ?>_<?= $professeur["id_prof"] ?>" 
-				<?php if ($nbVideos > 0) { ?> onClick="getVideos(<?= $professeur['id_danse'] ?>, <?= $professeur["id_prof"] ?>);" <?php } ?>
-				>
-				<?= $professeur["nom_prof"].$nbVideosLabel ?>
-			</h3>
-			<div id="div_<?= $professeur['id_danse'] ?>_<?= $professeur['id_prof'] ?>" >
-				<?php 
-				if ($nbVideos == 0) {
-					echo "<h2>Pas de vidéo</h2>";
+	
+		<?php 
+		foreach ($allDansesProfesseurs as $id_danse => $arrayProfesseurs) {
+		?>
+			<div id="tabs-<?= $id_danse ?>" class="professeurs categories">
+			<?php 
+			foreach ($arrayProfesseurs as $professeur) {
+				$nbVideos = $professeur["cpt"];
+				if ($nbVideos < 2) {
+					$nbVideosLabel = " ($nbVideos vidéo)";
 				} else {
-				?>
-				
-				<i>&nbsp;&nbsp;&nbsp;&nbsp;Recherche des vidéos...</i> <img src="style/images/loading.gif" />
-				
-				<?php } // end else  ?>
+					$nbVideosLabel = " ($nbVideos vidéos)";
+				}
+			?>
+				<h3 id="h3_<?= $professeur['id_danse'] ?>_<?= $professeur["id_prof"] ?>" 
+					<?php if ($nbVideos > 0) { ?> onClick="getVideos(<?= $professeur['id_danse'] ?>, <?= $professeur["id_prof"] ?>);" <?php } ?>
+					>
+					<?= $professeur["nom_prof"].$nbVideosLabel ?>
+				</h3>
+				<div id="div_<?= $professeur['id_danse'] ?>_<?= $professeur['id_prof'] ?>" >
+					<?php 
+					if ($nbVideos == 0) {
+						echo "<h2>Pas de vidéo</h2>";
+					} else {
+					?>
+					
+					<i>&nbsp;&nbsp;&nbsp;&nbsp;Recherche des vidéos...</i> <img src="style/images/loading.gif" />
+					
+					<?php } // end else  ?>
+				</div>
+				<?php } // end foreach evenements ?>	
 			</div>
-			<?php } // end foreach evenements ?>	
-		</div>
-	<?php } // end foreach danses ?>
-</div>
+		<?php } // end foreach danses ?>
+	</div>
+</main>
 
 <script type="text/javascript">
 

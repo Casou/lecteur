@@ -9,179 +9,180 @@ $allTags = MetierTag::getAllTag();
 
 ?>
 
-<div id="title">
+<div id="title" class="recherche_screen">
 	<h1>Recherche</h1>
 </div>
 
-<div id="recherche" class="ui-widget ui-widget-content ui-corner-all block">
-	<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
-		Critères de recherche
-	</div>
-	<div class="ui-widget-content ui-corner-bottom blockContent blockContentRecherche">
-		<form id="rechercheForm" action="rechercheResultat.php" method="post" onSubmit="return false;">
-		<table style="width : 100%;">
-			<tr>
-				<td colspan="3" id="tousLesCriteres">
-					Rechercher selon
-					<select name="operatorCriteres">
-						<option value="all">Tous les critères</option>
-						<option value="one">Au moins un critère</option>
-					</select>
-				</td>
-				<th>
-					<div title="Coefficient d'importance. Plus ce coefficient est grand, plus le critère est pris en compte dans la pertinance"
-						class="cursorQuestion">
-						Coeff
-					</div>
-				</th>
-			</tr>
-			<tr>
-				<th>
-					<label for="rechercheVideo">Nom de la vidéo</label>
-				</th>
-				<td colspan="2"> 
-					<input id="rechercheVideo" type="text" name="nom_affiche" size="70" />
-				</td>
-				<td style="text-align : center;">
-					<input type="text" name="coeff_nom_affiche" size="1" value="1" class="coeff" style="text-align : right;" />
-				</td>
-			</tr>
-			
-			<tr>
-				<th>Type(s)</th>
-				<td id="rechercheType" colspan="2">
-					<input type="checkbox" name="tousTypes" value="0" id="tousTypes" onClick="checkAll(this, 'rechercheType', 'type[]');" />
-					<label for="tousTypes">-Tous-</label>
-					
-					<?php foreach($VIDEO_TYPES as $videoType => $label) { ?>
-					<input type="checkbox" name="type[]" value="<?= $videoType ?>" id="<?= $videoType ?>" class="checkType" />
-					<label for="<?= $videoType ?>"><?= $label ?></label>
+<main id="recherche_screen">
+	<div id="recherche" class="ui-widget ui-widget-content ui-corner-all block">
+		<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
+			Critères de recherche
+		</div>
+		<div class="ui-widget-content ui-corner-bottom blockContent blockContentRecherche">
+			<form id="rechercheForm" action="rechercheResultat.php" method="post" onSubmit="return false;">
+			<table style="width : 100%;">
+				<tr>
+					<td colspan="3" id="tousLesCriteres">
+						Rechercher selon
+						<select name="operatorCriteres">
+							<option value="all">Tous les critères</option>
+							<option value="one">Au moins un critère</option>
+						</select>
+					</td>
+					<th>
+						<div title="Coefficient d'importance. Plus ce coefficient est grand, plus le critère est pris en compte dans la pertinance"
+							class="cursorQuestion">
+							Coeff
+						</div>
+					</th>
+				</tr>
+				<tr>
+					<th>
+						<label for="rechercheVideo">Nom de la vidéo</label>
+					</th>
+					<td colspan="2"> 
+						<input id="rechercheVideo" type="text" name="nom_affiche" size="70" />
+					</td>
+					<td style="text-align : center;">
+						<input type="text" name="coeff_nom_affiche" size="1" value="1" class="coeff" style="text-align : right;" />
+					</td>
+				</tr>
+				
+				<tr>
+					<th>Type(s)</th>
+					<td id="rechercheType" colspan="2">
+						<input type="checkbox" name="tousTypes" value="0" id="tousTypes" onClick="checkAll(this, 'rechercheType', 'type[]');" />
+						<label for="tousTypes">-Tous-</label>
+						
+						<?php foreach($VIDEO_TYPES as $videoType => $label) { ?>
+						<input type="checkbox" name="type[]" value="<?= $videoType ?>" id="<?= $videoType ?>" class="checkType" />
+						<label for="<?= $videoType ?>"><?= $label ?></label>
+						<?php } ?>
+					</td>
+					<td style="text-align : center;">
+						<input type="text" name="coeff_type" size="1" value="1" class="coeff" style="text-align : right;" />
+					</td>
+				</tr>
+				
+				<tr>
+					<th>
+						<label>Danse(s)</label>
+					</th>
+					<td id="rechercheDanse" colspan="2">
+						<input type="checkbox" name="tousDanses" value="0" id="tousDanses" onClick="checkAll(this, 'rechercheDanse', 'danse[]');" />
+						<label for="tousDanses">-Tous-</label>
+						
+						<?php foreach($allDanses as $danse) { ?>
+						<input type="checkbox" name="danse[]" value="<?= $danse->id ?>" id="danse_<?= $danse->id ?>" />
+						<label for="danse_<?= $danse->id ?>"><?= $danse->nom ?></label>
+						<?php } ?>
+					</td>
+					<td style="text-align : center;">
+						<input type="text" name="coeff_danse" size="1" value="1" class="coeff" style="text-align : right;" />
+					</td>
+				</tr>
+				
+				<tr>
+					<th>
+						<label for="rechercheEvenementAutocomplete">Evènement(s)</label>
+					</th>
+					<td>
+						<input type="text" id="rechercheEvenementAutocomplete" name="evenementInput" onKeyPress="cancelEntry(event);" />
+					</td>
+					<td>
+						<div id="linkedEvents">
+						
+						</div>
+					</td>
+					<td style="text-align : center;">
+						<input type="text" name="coeff_evenement" size="1" value="1" class="coeff" style="text-align : right;" />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="recherchePasse">Nom de passe</label>
+					</th>
+					<td colspan="2"> 
+						<input id="recherchePasse" type="text" name="passe" size="70" />
+					</td>
+					<td style="text-align : center;">
+						<input type="text" name="coeff_passe" size="1" value="1" class="coeff" style="text-align : right;" />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label>Niveau(x)</label>
+					</th>
+					<td id="rechercheNiveaux" colspan="2">
+						<input type="checkbox" name="tousNiveaux" value="0" id="tousNiveaux" onClick="checkAll(this, 'rechercheNiveaux', 'niveau[]');" />
+						<label for="tousNiveaux">-Tous-</label>
+						
+						<?php foreach($NIVEAUX as $niveau => $libelle) { ?>
+							<input type="checkbox" name="niveau[]" value="<?= $niveau ?>" id="<?= $niveau ?>" />
+							<label for="<?= $niveau ?>"><?= $libelle ?></label>
 					<?php } ?>
-				</td>
-				<td style="text-align : center;">
-					<input type="text" name="coeff_type" size="1" value="1" class="coeff" style="text-align : right;" />
-				</td>
-			</tr>
+					</td>
+					<td style="text-align : center;">
+						<input type="text" name="coeff_niveau" size="1" value="1" class="coeff" style="text-align : right;" />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="rechercheProfAutocomplete">Professeur(s)</label>
+					</th>
+					<td>
+						<input id="rechercheProfAutocomplete" type="text" name="professeurInput" />
+					</td>
+					<td>
+						<div id="linkedProfs">
+						
+						</div>
+					</td>
+					<td style="text-align : center;">
+						<input type="text" name="coeff_professeur" size="1" value="1" class="coeff" style="text-align : right;" />
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<th>
+						<label for="rechercheTagAutocomplete">Tags</label>
+					</th>
+					<td style="width : 150px;">
+						<input type="text" id="rechercheTagAutocomplete" name="tagInput" />
+					</td>
+					<td>
+						<div id="linkedTags">
+						
+						</div>
+					</td>
+					<td style="text-align : center;">
+						<input type="text" name="coeff_tag" size="1" value="1" class="coeff" style="text-align : right;" />
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<th>
+						
+					</th>
+					<td style="width : 150px;" colspan="3">
+						<input type="checkbox" id="only_no_passes_check" name="only_no_passes" />
+						<label for="only_no_passes_check">Uniquement les vidéos sans passes</label>
+					</td>
+				</tr>
+			</table>
+			</form>
 			
-			<tr>
-				<th>
-					<label>Danse(s)</label>
-				</th>
-				<td id="rechercheDanse" colspan="2">
-					<input type="checkbox" name="tousDanses" value="0" id="tousDanses" onClick="checkAll(this, 'rechercheDanse', 'danse[]');" />
-					<label for="tousDanses">-Tous-</label>
-					
-					<?php foreach($allDanses as $danse) { ?>
-					<input type="checkbox" name="danse[]" value="<?= $danse->id ?>" id="danse_<?= $danse->id ?>" />
-					<label for="danse_<?= $danse->id ?>"><?= $danse->nom ?></label>
-					<?php } ?>
-				</td>
-				<td style="text-align : center;">
-					<input type="text" name="coeff_danse" size="1" value="1" class="coeff" style="text-align : right;" />
-				</td>
-			</tr>
-			
-			<tr>
-				<th>
-					<label for="rechercheEvenementAutocomplete">Evènement(s)</label>
-				</th>
-				<td>
-					<input type="text" id="rechercheEvenementAutocomplete" name="evenementInput" onKeyPress="cancelEntry(event);" />
-				</td>
-				<td>
-					<div id="linkedEvents">
-					
-					</div>
-				</td>
-				<td style="text-align : center;">
-					<input type="text" name="coeff_evenement" size="1" value="1" class="coeff" style="text-align : right;" />
-				</td>
-			</tr>
-			<tr>
-				<th>
-					<label for="recherchePasse">Nom de passe</label>
-				</th>
-				<td colspan="2"> 
-					<input id="recherchePasse" type="text" name="passe" size="70" />
-				</td>
-				<td style="text-align : center;">
-					<input type="text" name="coeff_passe" size="1" value="1" class="coeff" style="text-align : right;" />
-				</td>
-			</tr>
-			<tr>
-				<th>
-					<label>Niveau(x)</label>
-				</th>
-				<td id="rechercheNiveaux" colspan="2">
-					<input type="checkbox" name="tousNiveaux" value="0" id="tousNiveaux" onClick="checkAll(this, 'rechercheNiveaux', 'niveau[]');" />
-					<label for="tousNiveaux">-Tous-</label>
-					
-					<?php foreach($NIVEAUX as $niveau => $libelle) { ?>
-						<input type="checkbox" name="niveau[]" value="<?= $niveau ?>" id="<?= $niveau ?>" />
-						<label for="<?= $niveau ?>"><?= $libelle ?></label>
-				<?php } ?>
-				</td>
-				<td style="text-align : center;">
-					<input type="text" name="coeff_niveau" size="1" value="1" class="coeff" style="text-align : right;" />
-				</td>
-			</tr>
-			<tr>
-				<th>
-					<label for="rechercheProfAutocomplete">Professeur(s)</label>
-				</th>
-				<td>
-					<input id="rechercheProfAutocomplete" type="text" name="professeurInput" />
-				</td>
-				<td>
-					<div id="linkedProfs">
-					
-					</div>
-				</td>
-				<td style="text-align : center;">
-					<input type="text" name="coeff_professeur" size="1" value="1" class="coeff" style="text-align : right;" />
-				</td>
-			</tr>
-			
-			
-			<tr>
-				<th>
-					<label for="rechercheTagAutocomplete">Tags</label>
-				</th>
-				<td style="width : 150px;">
-					<input type="text" id="rechercheTagAutocomplete" name="tagInput" />
-				</td>
-				<td>
-					<div id="linkedTags">
-					
-					</div>
-				</td>
-				<td style="text-align : center;">
-					<input type="text" name="coeff_tag" size="1" value="1" class="coeff" style="text-align : right;" />
-				</td>
-			</tr>
-			
-			
-			<tr>
-				<th>
-					
-				</th>
-				<td style="width : 150px;" colspan="3">
-					<input type="checkbox" id="only_no_passes_check" name="only_no_passes" />
-					<label for="only_no_passes_check">Uniquement les vidéos sans passes</label>
-				</td>
-			</tr>
-		</table>
-		</form>
-		
-		<button id="vider" style="margin-top : 10px; float : right;">Vider</button>
-		<button id="rechercher" style="margin-top : 10px;">Rechercher</button>
+			<button id="vider" style="margin-top : 10px; float : right;">Vider</button>
+			<button id="rechercher" style="margin-top : 10px;">Rechercher</button>
+		</div>
 	</div>
-</div>
-
-<div id="resultat">
-
-</div>
-
+	
+	<div id="resultat">
+	
+	</div>
+</main>
 
 <script>
 

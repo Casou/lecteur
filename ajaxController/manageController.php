@@ -189,7 +189,12 @@ try {
 			$ajaxReturnStatus = AJAX_STATUS_OK;
 			break;
 			
-			
+		case 'changeTheme' :
+			MetierUser::changeTheme($theme, CONNECTED_USER_ID);
+			$ajaxReturnMessage = "Le thème a été changé";
+			$ajaxReturnStatus = AJAX_STATUS_OK;
+			break;
+				
 		default :
 			break;
 	}

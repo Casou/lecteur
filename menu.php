@@ -4,6 +4,7 @@ include_once $pathToPhpRoot.'popupProf.php';
 include_once $pathToPhpRoot.'popupDanse.php';
 include_once $pathToPhpRoot.'popupEvenement.php';
 include_once $pathToPhpRoot.'popupTag.php';
+include_once $pathToPhpRoot.'popupTheme.php';
 
 ?>
 
@@ -82,13 +83,23 @@ include_once $pathToPhpRoot.'popupTag.php';
 		
 	<?php } ?>
 	
-	<?php if (isset($_SESSION[DROIT_ADMIN]) || $_SESSION["user"] == "admin") { ?>
-		<li class="level_1">
-			<a href="#" onClick="return false;">
-				Administrer
-			</a>
-			
-			<ul class="menu_list_level_2">
+	
+	<li class="level_1">
+		<a href="#" onClick="return false;">
+			Administrer
+		</a>
+		<ul class="menu_list_level_2">
+			<li class="level_2">
+				<a href="#" onClick="showPopup('themeDialog'); return false;">
+					<span class="menu_item_img">
+							<img src="style/images/themes.png" />
+						</span>
+					<span class="menu_item_text">
+						Changer de thème
+					</span>
+				</a>
+			</li>
+			<?php if (isset($_SESSION[DROIT_ADMIN]) || $_SESSION["user"] == "admin") { ?>
 				<li class="level_2">
 					<a href="admin.php">
 						<span class="menu_item_img">
@@ -122,9 +133,10 @@ include_once $pathToPhpRoot.'popupTag.php';
 					</a>
 				</li>
 			<?php } ?>
-			</ul>
-		</li>
-	<?php } ?>
+		</ul>
+		<?php } ?>
+	</li>
+	
 	
 			
 		

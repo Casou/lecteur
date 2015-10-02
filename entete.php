@@ -80,8 +80,10 @@ if (!isset($_SESSION["user"])) {
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/jwskin-lecteur.css" />
 	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>tools/jwplayer/jwplayer_7.js"></script>
 	
-	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/nouveau_theme/style_wood.css" />
-	<link rel="text/javascript" href="<?= APPLICATION_ABSOLUTE_URL ?>js/nouveau_theme.js" />
+	<?php 
+		$var_theme = 'THEME_'.$_SESSION['theme'];
+		echo $$var_theme;
+	?>
 
 	<script>
 		var niveauLibelle = {

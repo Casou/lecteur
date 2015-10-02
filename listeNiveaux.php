@@ -10,62 +10,65 @@ $dansesName = MetierDanse::getAllDanseName();
 
 ?>
 
-<div id="title">
+<div id="title" class="liste_niveaux">
 	<h1>Lister par danses et par niveau</h1>
 </div>
 
-<div id="danses" class="listeDiv">
-	 <ul>
-	 	<?php 
-		foreach($danseOrder as $danseOrd) {
-			if (isset($allDansesNiveaux[$danseOrd->id])) {
-				$id_danse = $danseOrd->id;
-		?>
-		<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>" onClick="$('.action_check').attr('checked', false);"><?= $dansesName[$id_danse] ?></a></li>
-		<?php
-			}
-		} 
-		?>
-	</ul>
-	
-	<?php 
-	include $pathToPhpRoot."liste_actionSelect.php";
-	?>
 
-	<?php 
-	foreach ($allDansesNiveaux as $id_danse => $arrayNiveaux) {
-	?>
-		<div id="tabs-<?= $id_danse ?>" class="niveaux categories">
+<main id="liste_niveaux">
+	<div id="danses" class="listeDiv">
+		 <ul>
+		 	<?php 
+			foreach($danseOrder as $danseOrd) {
+				if (isset($allDansesNiveaux[$danseOrd->id])) {
+					$id_danse = $danseOrd->id;
+			?>
+			<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>" onClick="$('.action_check').attr('checked', false);"><?= $dansesName[$id_danse] ?></a></li>
+			<?php
+				}
+			} 
+			?>
+		</ul>
+		
 		<?php 
-		foreach ($arrayNiveaux as $niveau) {
-			$label = $NIVEAUX[$niveau['nom_niveau']];
-			$nbVideos = $niveau['cpt'];
-			if ($nbVideos < 2) {
-				$nbVideosLabel = " ($nbVideos vidéo)";
-			} else {
-				$nbVideosLabel = " ($nbVideos vidéos)";
-			}
+		include $pathToPhpRoot."liste_actionSelect.php";
 		?>
-			<h3 id="h3_<?= $niveau['id_danse'] ?>_<?= $niveau['nom_niveau'] ?>" 
-				<?php if ($nbVideos > 0) { ?> onClick="getVideos(<?= $niveau['id_danse'] ?>, '<?= $niveau['nom_niveau'] ?>');" <?php } ?>
-				>
-				<?= $label.$nbVideosLabel ?>
-			</h3>
-			<div id="div_<?= $niveau['id_danse'] ?>_<?= $niveau['nom_niveau'] ?>" >
-				<?php 
-				if ($nbVideos == 0) {
-					echo "<h2>Pas de vidéo</h2>";
+	
+		<?php 
+		foreach ($allDansesNiveaux as $id_danse => $arrayNiveaux) {
+		?>
+			<div id="tabs-<?= $id_danse ?>" class="niveaux categories">
+			<?php 
+			foreach ($arrayNiveaux as $niveau) {
+				$label = $NIVEAUX[$niveau['nom_niveau']];
+				$nbVideos = $niveau['cpt'];
+				if ($nbVideos < 2) {
+					$nbVideosLabel = " ($nbVideos vidéo)";
 				} else {
-				?>
-				
-				<i>&nbsp;&nbsp;&nbsp;&nbsp;Recherche des vidéos...</i> <img src="style/images/loading.gif" />
-				
-				<?php } // end else  ?>
+					$nbVideosLabel = " ($nbVideos vidéos)";
+				}
+			?>
+				<h3 id="h3_<?= $niveau['id_danse'] ?>_<?= $niveau['nom_niveau'] ?>" 
+					<?php if ($nbVideos > 0) { ?> onClick="getVideos(<?= $niveau['id_danse'] ?>, '<?= $niveau['nom_niveau'] ?>');" <?php } ?>
+					>
+					<?= $label.$nbVideosLabel ?>
+				</h3>
+				<div id="div_<?= $niveau['id_danse'] ?>_<?= $niveau['nom_niveau'] ?>" >
+					<?php 
+					if ($nbVideos == 0) {
+						echo "<h2>Pas de vidéo</h2>";
+					} else {
+					?>
+					
+					<i>&nbsp;&nbsp;&nbsp;&nbsp;Recherche des vidéos...</i> <img src="style/images/loading.gif" />
+					
+					<?php } // end else  ?>
+				</div>
+				<?php } // end foreach niveau ?>	
 			</div>
-			<?php } // end foreach niveau ?>	
-		</div>
-	<?php } // end foreach danses ?>
-</div>
+		<?php } // end foreach danses ?>
+	</div>
+</main>
 
 <script type="text/javascript">
 	

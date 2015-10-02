@@ -24,71 +24,72 @@ $danseOrder = MetierDanse::getDansesOrderedByUserPreference($id_user);
 $dansesName = MetierDanse::getAllDanseName(true);
 ?>
 
-<div id="title">
+<div id="title" class="liste_evenements">
 	<h1>Lister par danses et par évènements</h1>
 </div>
 
-<div id="danses" class="listeDiv">
-	 <ul>
-	 	<?php 
-	 	foreach($danseOrder as $danseOrd) {
-	 		if (isset($allDansesEvenements[$danseOrd->id])) {
-	 			$id_danse = $danseOrd->id;
-		?>
-		<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>" onClick="$('.action_check').attr('checked', false);"><?= $dansesName[$id_danse] ?></a></li>
-		<?php
-	 		}
-		} 
-		?>
-	</ul>
-	
-	<?php 
-	if ($includeSelect) {
-		include $pathToPhpRoot."liste_actionSelect.php";
-	}
-	?>
-
-	<?php 
-	foreach ($allDansesEvenements as $id_danse => $evenements) {
-	?>
-		<div id="tabs-<?= $id_danse ?>" class="evenements categories">
-				
+<main id="liste_evenements">
+	<div id="danses" class="listeDiv">
+		 <ul>
+		 	<?php 
+		 	foreach($danseOrder as $danseOrd) {
+		 		if (isset($allDansesEvenements[$danseOrd->id])) {
+		 			$id_danse = $danseOrd->id;
+			?>
+			<li><a id="danse_<?= $id_danse ?>" href="#tabs-<?= $id_danse ?>" onClick="$('.action_check').attr('checked', false);"><?= $dansesName[$id_danse] ?></a></li>
+			<?php
+		 		}
+			} 
+			?>
+		</ul>
+		
 		<?php 
-		foreach ($evenements as $evenementDTO) {
-			$evenement = $evenementDTO->evenement;
-			$couleur = $evenementDTO->couleur;
-			$danse = $evenementDTO->danse;
-			
-			$label = $evenement->date." - ".$evenement->nom." - ".$evenement->ville;
-			
-			$nbVideos = $evenementDTO->nbVideos;
-			if ($nbVideos < 2) {
-				$nbVideosLabel = " ($nbVideos vidéo)";
-			} else {
-				$nbVideosLabel = " ($nbVideos vidéos)";
-			}
+		if ($includeSelect) {
+			include $pathToPhpRoot."liste_actionSelect.php";
+		}
 		?>
-			<h3 id="h3_<?= $danse->id ?>_<?= $evenement->id ?>" class="<?= $couleur->css_class ?>" 
-				<?php if ($nbVideos > 0) { ?> onClick="getVideos(<?= $danse->id ?>, <?= $evenement->id ?>);" <?php } ?>
-				>
-				<?= $label.$nbVideosLabel ?>
-			</h3>
-			<div id="div_<?= $danse->id ?>_<?= $evenement->id ?>" >
-				<?php 
-				if ($nbVideos == 0) {
-					echo "<h2>Pas de vidéo</h2>";
+	
+		<?php 
+		foreach ($allDansesEvenements as $id_danse => $evenements) {
+		?>
+			<div id="tabs-<?= $id_danse ?>" class="evenements categories">
+					
+			<?php 
+			foreach ($evenements as $evenementDTO) {
+				$evenement = $evenementDTO->evenement;
+				$couleur = $evenementDTO->couleur;
+				$danse = $evenementDTO->danse;
+				
+				$label = $evenement->date." - ".$evenement->nom." - ".$evenement->ville;
+				
+				$nbVideos = $evenementDTO->nbVideos;
+				if ($nbVideos < 2) {
+					$nbVideosLabel = " ($nbVideos vidéo)";
 				} else {
-				?>
-				
-				<i>&nbsp;&nbsp;&nbsp;&nbsp;Recherche des vidéos...</i> <img src="style/images/loading.gif" />
-				
-				<?php } // end else  ?>
+					$nbVideosLabel = " ($nbVideos vidéos)";
+				}
+			?>
+				<h3 id="h3_<?= $danse->id ?>_<?= $evenement->id ?>" class="<?= $couleur->css_class ?>" 
+					<?php if ($nbVideos > 0) { ?> onClick="getVideos(<?= $danse->id ?>, <?= $evenement->id ?>);" <?php } ?>
+					>
+					<?= $label.$nbVideosLabel ?>
+				</h3>
+				<div id="div_<?= $danse->id ?>_<?= $evenement->id ?>" >
+					<?php 
+					if ($nbVideos == 0) {
+						echo "<h2>Pas de vidéo</h2>";
+					} else {
+					?>
+					
+					<i>&nbsp;&nbsp;&nbsp;&nbsp;Recherche des vidéos...</i> <img src="style/images/loading.gif" />
+					
+					<?php } // end else  ?>
+				</div>
+				<?php } // end foreach evenements ?>	
 			</div>
-			<?php } // end foreach evenements ?>	
-		</div>
-	<?php } // end foreach danses ?>
-</div>
-
+		<?php } // end foreach danses ?>
+	</div>
+</main>
 
 <script type="text/javascript">
 	

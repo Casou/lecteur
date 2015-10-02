@@ -358,7 +358,7 @@ abbr {
 
 
 
-
+/*
 #stats_thumbnails {
 	background-color : #93cfea;
 	border : 1px solid #54ABE6;
@@ -370,6 +370,17 @@ abbr {
 
 #stats_thumbnails img {
 	float : right;
+}
+*/
+
+h4#thumbnails_stats {
+	margin-top : 0;
+	margin-bottom : 15px;
+	text-align : center;
+	font-size : 15px;
+}
+h4#thumbnails_stats img {
+	height : 15px;
 }
 
 #indexStat {

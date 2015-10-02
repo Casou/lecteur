@@ -866,7 +866,7 @@ class MetierVideo {
 				$title .= NB_THUMBNAIL_ERRORS." premières erreurs affichées\n";
 			}
 			foreach($errors as $error) {
-				$title .= "$error->nom_video \n";
+				$title .= "[Id] $error->id [Nom] ".htmlspecialchars($error->nom_affiche, ENT_QUOTES)." \n";
 			}
 			$text .= "<b>$nb_errors</b> aperçus introuvables. <span style='cursor : help' title='$title'>[?]</span>";
 		}
