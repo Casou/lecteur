@@ -104,6 +104,14 @@ if (!isset($_SESSION["user"])) {
 
 <div id="bodyWrap">
 	<header>
+		<div id="images_header">
+			<div id="images_header_1"></div>
+			<div id="images_header_2"></div>
+			<div id="images_header_3"></div>
+			<div id="images_header_4"></div>
+			<div id="images_header_5"></div>
+		</div>
+	
 	<?php include "menu.php"; ?>
 	</header>
 	

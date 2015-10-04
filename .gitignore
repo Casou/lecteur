@@ -60,3 +60,4 @@ lecteur
 constantsPrivate.php
 *.bak
 ressources/stats_thumbnails.txt
+*.psd

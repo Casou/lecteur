@@ -180,16 +180,9 @@ td, th {
   	filter: hue-rotate(-96deg);
 }
 
-#menu {
-	position : relative;
-	display : inline-block;
-	width : 1200px;
-	height : 140px;
-	left : 50%;
-	margin-left : -600px;
-	top : 0;
-	border : 0;
-	
+
+
+header {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#045e37+0,00401b+100 */
 	background: #045e37; /* Old browsers */
 	background: -moz-linear-gradient(top,  #045e37 0%, #00401b 100%); /* FF3.6+ */
@@ -200,15 +193,60 @@ td, th {
 	background: linear-gradient(to bottom,  #045e37 0%,#00401b 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#045e37', endColorstr='#00401b',GradientType=0 ); /* IE6-9 */
 	
-	background : url('images/vert-fonce.jpg') repeat top left rgb(7, 61, 31);
 	
+	background : url('images/vert-fonce.jpg') repeat top left rgb(7, 61, 31);
+	height : 185px;
+}
+
+
+header #images_header_1,
+header #images_header_2,
+header #images_header_3 {
+	position : absolute;
+	width : 180px;
+	height : 150px;
+	top : 10px;
+	left : 50%;
+}
+
+header #images_header_1 {
+	background-image : url('images/gramophone.png');
+	margin-left : 380px;
+}
+
+header #images_header_2 {
+	background-image : url('images/titre.png');
+	margin-left : -425px;
+	width : 850px;
+}
+
+header #images_header_3 {
+	background-image : url('images/gramophone_inverse.png');
+	margin-left : -570px;
+}
+
+
+
+
+
+
+#menu {
+	position : relative;
+	display : inline-block;
+	width : 1200px;
+	height : 140px;
+	left : 50%;
+	margin-left : -600px;
+	top : 0;
+	border : 0;
 	overflow : visible;
 	box-sizing : border-box;
+	background : none;
 }
 
 #menu #menu_list {
 	text-align : center;
-	margin : 108px 0 0 0;
+	margin : 154px 0 0 0;
 }
 
 #menu h1, #menu_bar {
@@ -228,7 +266,7 @@ td, th {
 	display : inline-block;
 	width : 170px;
 	cursor : pointer;
-	border : 2px inset #aaa;
+	border : 1px inset #006a2c;
 	border-bottom : 0;
 	border-radius : 8px 8px 0 0;
 	padding-top : 0;
@@ -249,7 +287,7 @@ td, th {
 }
 
 #menu_list li.level_2 {
-	margin : 0;
+	margin : 0 0 0 1px;
 }
 
 #menu_list ul.menu_list_level_2 {
@@ -270,8 +308,11 @@ td, th {
 
 .menu_list_level_2 li {
 	border-radius : 0;
-	border : 1px inset grey;
-	width : 172px;
+	border-top : 1px solid #24983E;
+	border-bottom : 1px solid #24983E;
+	border-left : 2px solid #24983E;
+	border-right : 2px solid #24983E;
+	width : 168px;
 }
 
 #menu_list li.level_1:hover, #menu_list li.level_2:hover {
