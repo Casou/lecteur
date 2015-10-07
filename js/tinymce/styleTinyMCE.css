@@ -1,0 +1,21 @@
+body#tinymce {
+	font-size : 16px;
+}
+
+body#tinymce h1 {
+	font-size : 26px;
+}
+
+body#tinymce h2 {
+	font-size : 23px;
+}
+
+body#tinymce h3 {
+	font-size : 20px;
+}
+
+body#tinymce h4, body#tinymce h5, body#tinymce h6 {
+	font-size : 16px;
+}
+
+

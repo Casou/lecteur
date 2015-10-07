@@ -80,6 +80,8 @@ if (!isset($_SESSION["user"])) {
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/jwskin-lecteur.css" />
 	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>tools/jwplayer/jwplayer_7.js"></script>
 	
+	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>js/tinymce/tinymce.min.js"></script>
+	
 	<?php 
 		$var_theme = 'THEME_'.$_SESSION['theme'];
 		echo $$var_theme;

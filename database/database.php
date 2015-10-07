@@ -147,7 +147,7 @@ class Database {
 	
 	public static function executeUpdate($sql) {
 		try {
-			Logger::info("Execute update : $sql");
+			Logger::warn("Execute update : $sql");
 			/*
 			Database::connectDB();
 			if (mysqli_query(Database::$CONNEXION, $sql) === false) {

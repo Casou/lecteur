@@ -162,10 +162,10 @@ $(document).ready(function() {
 			"sInfoFiltered": "(filtré sur _MAX_ enregistrements)"
 		},
 		"aLengthMenu": [
-						 [10, 20, 50, -1],
-						 [10, 20, 50, "Tous"]
+						 [<?= VIDEO_PAGINATION_NB ?>],
+						 [<?= VIDEO_PAGINATION_STRING ?>]
 					],
-		"iDisplayLength": 10,
+		"iDisplayLength": <?= VIDEO_PAGINATION_DEFAULT ?>,
 		"sPaginationType": "full_numbers",
 		"aoColumns": [
 			{ "bSortable": false },

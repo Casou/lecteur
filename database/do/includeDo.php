@@ -17,5 +17,6 @@ include_once "doPlaylist.php";
 include_once "doPlaylistFolder.php";
 include_once "doPlaylistUserRights.php";
 include_once "doConnexion.php";
+include_once "doNews.php";
 
 ?>

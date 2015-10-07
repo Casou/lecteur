@@ -95,6 +95,26 @@ try {
 			$ajaxReturnMessage = "Niveau de log changé";
 			$ajaxReturnStatus = AJAX_STATUS_OK;
 			break;
+		
+		case 'getNews' :
+			$news = MetierNews::getNewsById($id);
+			$ajaxReturnMessage = "News enregistrée";
+			$infos = array('news' => $news);
+			$ajaxReturnStatus = AJAX_STATUS_OK;
+			break;
+			
+		case 'saveNews' :
+			MetierNews::saveNews($formulaire);
+			$ajaxReturnMessage = "News enregistrée";
+			$ajaxReturnStatus = AJAX_STATUS_OK;
+			break;
+			
+		case 'deleteNews' :
+			MetierNews::deleteNews($id);
+			$ajaxReturnMessage = "News enregistrée";
+			$ajaxReturnStatus = AJAX_STATUS_OK;
+			break;
+		
 			
 		default :
 			break;

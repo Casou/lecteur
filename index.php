@@ -27,6 +27,8 @@ $stats = MetierStat::getStatsVideo();
 
 $NB_COLONNES = 4;
 
+$news = MetierNews::getAvailableNews();
+
 ?>
 
 <?php if ($isPhone) { ?>
@@ -35,14 +37,30 @@ $NB_COLONNES = 4;
 		Retourner à la version mobile
 	</a>
 </div>
-<?php } else if (Fwk::isUsingFirefox()) { 
+<?php } else if (!Fwk::isUsingFirefox()) { 
 	$infoNavigateur = Fwk::getNavigateur(); 
 ?>
 <div id="infoDiv" class="ui-widget no-border">
 	<div id="error_login" class="ui-state-error ui-corner-all">
-		Ce site est optimisé pour <strong>Firefox</strong> (Chrome marche pas mal aussi). En utilisant un autre navigateur, 
+		Ce site est optimisé pour <strong>Firefox</strong> (Chrome marche pas mal aussi mais il peut subsiter quelques erreurs). En utilisant un autre navigateur, 
 		il se peut que certaines fonctionalités ne fonctionnent pas.<br/>
 		Vous utilisez actuellement : <?= $infoNavigateur[1] ?> 
+	</div>
+</div>
+<?php } ?>
+
+
+<?php if (count($news) > 0) { ?>
+<div id="news" class="ui-widget ui-corner-all block">
+	<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
+		News
+	</div>
+	
+	<div class="ui-widget-content">
+		<?php foreach($news as $news_record) { ?>
+		<hr />
+		<div class="news_record"><?= $news_record->texte ?></div>
+		<?php } ?>
 	</div>
 </div>
 <?php } ?>
@@ -51,7 +69,7 @@ $NB_COLONNES = 4;
 	<div class="ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all blockHeader">
 		Statistiques
 	</div>
-	<div id="indexStatDivBody">
+	<div id="indexStatDivBody" class="ui-widget-content">
 		<h3 style="text-align : center; margin : 0; padding-top : 15px;">
 			Nombre de vidéos : <?= $stats->nbVideos ?> |
 			Durée totale : <?= $stats->dureeTotale ?> |
@@ -110,14 +128,15 @@ $NB_COLONNES = 4;
 				} else {
 					$switchClass = "";
 					if (!$switchDanses[$i + $currentIndex]) {
-						$switchClass = "class='switched_off'";
+						$switchClass = "switched_off";
 					}
 					$id = $idDanses[$i + $currentIndex];
-					echo "<th id=\"nom_$id\" $switchClass>".$nomDanses[$i + $currentIndex]."</th>";
+					echo "<th id=\"nom_$id\" class='stats_titre_danse $switchClass' onClick=\"$('.detail_stats').toggle();\" title='Afficher les détails'>".
+						$nomDanses[$i + $currentIndex]."</th>";
 				}
 			}
 			echo "</tr>";
-			echo "<tr>";
+			echo "<tr class='detail_stats'>";
 			for($i = 0; $i < $NB_COLONNES; $i++) {
 				if (!isset($statDanses[$i + $currentIndex])) {
 					echo "<td> </td>";

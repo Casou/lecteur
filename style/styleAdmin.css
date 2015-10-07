@@ -422,3 +422,85 @@ margin-bottom : 20px;
 #allowed_videos_dialog .listeDiv {
 	margin-bottom : 15px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* *******************************************************
+*********************** ADMIN NEWS ***********************
+********************************************************** */
+#all_news {
+	width : 100%;	
+}
+
+#all_news .texte {
+	width : 60%;	
+}
+
+#add_news {
+	margin : 5px 20px;
+}
+
+#all_news td.actions {
+	text-align : center;
+}
+
+#all_news .date_creation {
+	color : #888;
+}
+
+#all_news .date_creation,
+#all_news .date_debut,
+#all_news .date_fin,
+#all_news .id {
+	text-align : center;
+}
+
+#texte_news_ifr {
+	min-height : 250px;
+}
+
+#news_edit {
+	margin-top : 30px;
+	display : none;
+}
+
+#news_edit_content {
+	padding : 10px;
+}
+
+#news_edit #date_debut_div, #news_edit #date_fin_div {
+	display : inline-block;
+	width : 49%;
+	text-align : center;
+	font-size : 20px;
+}
+
+#news_edit #date_debut_div input, #news_edit #date_fin_div input {
+	text-align : center;
+}
+
+
+#news_edit #texte_div {
+	display : inline-block;
+	width : 100%;
+	margin-top : 20px;
+	text-align : center;
+}
+
+#save_div {
+	margin-top : 10px;
+	text-align : right;
+}
+

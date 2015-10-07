@@ -11,6 +11,11 @@ td, th {
 	background-color : transparent;
 }
 
+
+
+
+
+
 .dataTable td, .dataTable th, 
 #editVideoProperties td, #editVideoProperties th {
 	background-color : white;
@@ -78,6 +83,7 @@ td, th {
 
 .ui-widget-content {
 	background : #fffdea url("images/jq/ui-bg_fine-grain_20_fffdea_60x60.png") repeat scroll 50% 50%;
+	//background : white;
 }
 
 .ui-widget-content .ui-state-default {
@@ -299,7 +305,7 @@ header #images_header_3 {
 	position : absolute;
 	top : 140px;
 	list-style-type : none;
-	margin : 0 0 0 -2px;
+	margin : 45px 0 0 -2px;
 	padding : 0;
 	width : 172px;
 	height : 24px;
@@ -372,7 +378,6 @@ header #images_header_3 {
 	position : relative;
 	margin-top : 0;
 }
-
 
 
 

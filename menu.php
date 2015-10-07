@@ -110,6 +110,15 @@ include_once $pathToPhpRoot.'popupTheme.php';
 						</span>
 					</a>
 				</li>
+				
+				<li class="level_2">
+					<a href="news.php">
+						<span class="menu_item_text">
+							Gérer les news
+						</span>
+					</a>
+				</li>
+			<?php } ?>
 		
 			<?php if (isset($_SESSION[DROIT_EDIT_VIDEO])) { ?>
 				<li class="level_2">
@@ -134,7 +143,6 @@ include_once $pathToPhpRoot.'popupTheme.php';
 				</li>
 			<?php } ?>
 		</ul>
-		<?php } ?>
 	</li>
 	
 	

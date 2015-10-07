@@ -36,6 +36,11 @@ function formatForPlayer(timer) {
 }
 
 
+function formatDate(dateMysql) {
+	var d = new Date(dateMysql);
+	return lpad(d.getDate(), 2, '0') + "/" + lpad(d.getMonth() + 1, 2, '0') + "/" + (1900 + d.getYear());
+}
+
 
 
 

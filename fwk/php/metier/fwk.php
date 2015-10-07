@@ -303,6 +303,11 @@ class Fwk {
 		return strftime("%d/%m", strtotime($date));
 	}
 	
+	public static function reformateDate($date, $fromFormat, $toFormat) {
+		$date = DateTime::createFromFormat($fromFormat, $date);
+		return $date->format($toFormat);
+	}
+	
 	public static function getWeekNumber($dateString) {
 		return date('W', strtotime($dateString));
 	}
