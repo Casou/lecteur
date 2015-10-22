@@ -86,6 +86,7 @@ td, th {
 	//background : white;
 }
 
+.ui-button .ui-state-default,
 .ui-widget-content .ui-state-default {
 	// background : #fffad1 url("images/jq/ui-bg_diamond_90_fffad1_10x8.png") repeat top left;
 	background : #eceadf url("images/jq/ui-bg_fine-grain_10_eceadf_60x60.png") repeat top left;
@@ -94,6 +95,7 @@ td, th {
 	color : #08580D;
 }
 
+.ui-button.ui-state-hover,
 .ui-widget-content .ui-state-hover {
 	// background-image : url("images/ui-bg_highlight-soft_65_a6e8b0_1x100.png");
 	background-image : url("images/jq/ui-bg_fine-grain_hover.png");
@@ -101,7 +103,8 @@ td, th {
 }
 
 .listeDiv .ui-accordion-header.ui-state-active, 
-.ui-widget-content .ui-state-active {
+.ui-widget-content .ui-state-active,
+.ui-button.ui-state-active {
 	// background-image : url("images/jq/ui-bg_fine-grain_65_654b24_60x60.png");
 	background-image : url("images/jq/ui-bg_fine-grain_65_654b24_60x60.png");
 	border-color : #3E2D14;
