@@ -94,8 +94,9 @@ $ALL_THEMES = array(
 	1 => array( "nom" => "Thème bleu" ),
 	2 => array( "nom" => "Thème vert" )
 );
-$THEME_1 = '';
-$THEME_2 = '<link rel="stylesheet" href="'.APPLICATION_ABSOLUTE_URL.'style/nouveau_theme/style_wood.css" />'.
+$THEME_1 = '<link rel="shortcut icon" HREF="'.APPLICATION_ABSOLUTE_URL.'style/images/icone.png">';
+$THEME_2 = '<link rel="shortcut icon" HREF="'.APPLICATION_ABSOLUTE_URL.'style/nouveau_theme/images/icone.png">'.
+			'<link rel="stylesheet" href="'.APPLICATION_ABSOLUTE_URL.'style/nouveau_theme/style_wood.css" />'.
 			'<link rel="text/javascript" href="'.APPLICATION_ABSOLUTE_URL.'js/nouveau_theme.js" />';
 
 

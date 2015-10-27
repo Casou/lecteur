@@ -1,4 +1,6 @@
 <?php 
+header('Content-type: text/html; charset=utf-8');
+mb_internal_encoding('UTF-8');
 
 function endsWith($haystack, $needle) {
 	return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
@@ -56,7 +58,7 @@ function transformSrtToVtt($srtFile, $directory) {
 			continue;
 		}
 		
-		fputs($vttFile, utf8_decode(str_replace(",000", ".000", $lineContent))."\n");
+		fputs($vttFile, str_replace(",000", ".000", $lineContent)."\n");
 	}
 	
 	// fputs($vttFile, utf8_decode("")."\n");

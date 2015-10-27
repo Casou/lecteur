@@ -61,8 +61,6 @@ if (!isset($_SESSION["user"])) {
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/styleAdmin.css" />
 	<link rel="stylesheet" href="<?= APPLICATION_ABSOLUTE_URL ?>style/stylePlaylist.css" />
 	
-	<link rel="shortcut icon" HREF="<?= APPLICATION_ABSOLUTE_URL ?>style/images/icone.png">
-	
 	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>style/jquery-ui-1.10.0.custom/js/jquery-1.9.0.js"></script>
 	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>style/jquery-ui-1.10.0.custom/js/jquery-ui-1.10.0.custom.js"></script>
 	<script type="text/javascript" src="<?= APPLICATION_ABSOLUTE_URL ?>js/jquery.dataTables-1.9.4.min.js"></script>
