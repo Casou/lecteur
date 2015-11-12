@@ -84,6 +84,7 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo(CONNECTED_USER_ID, $id_playl
 	var idx_video_played = 0;
 
 	function launchVideo(p_idx_video_played) {
+		console.log("launch video : " + p_idx_video_played);
 		showLoadingPopup();
 		$.ajax({
 			type: 'POST', 
@@ -122,6 +123,11 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo(CONNECTED_USER_ID, $id_playl
 					        edgeStyle : 'dropshadow'
 					    }
 					});
+					jwplayer("player").on("complete", function() {
+						if ($('#read_continu').is(':checked')) {
+							playNext();
+						}
+				    });
 					var statusBeforeSeek = null;
 					jwplayer("player").on('seek', function() {
 						statusBeforeSeek = jwplayer("player").getState();
@@ -157,7 +163,7 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo(CONNECTED_USER_ID, $id_playl
 					// $('#player_srt').attr('data-srt', escapeSpaces('<?= changeBackToSlash(PATH_CONVERTED_FILE)."/" ?>1183_Big Apple - Sequence 15.mp4.webm.srt'));
 					// launchSubtitles();
 					// $('#playlist_player video')[0].play();
-					idx_video_played = p_idx_video_played;
+					// idx_video_played = p_idx_video_played;
 					hideLoadingPopup();
 				}
 			},
@@ -169,15 +175,15 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo(CONNECTED_USER_ID, $id_playl
 	}
 
 	function playNext() {
-		console.log("play next");
 		idx_video_played++;
+		console.log("play next array_length (" + array_length + ") > idx_video_played (" + idx_video_played + ") => " + (array_length > idx_video_played));
 		if (array_length > idx_video_played) {
 			launchVideo(array_video[idx_video_played]);
 		}
 	}
 	
 	function playerGoto(time) {
-		$t = toSeconds(time);
+		var t = toSeconds(time);
 		// document.getElementById("playlist_player").currentTime = $t;
 		jwplayer("player").seek(t);
 		// Coupe et remet les sous-titres pour les recharger (sinon bug en cas de relecture de la vidéo)
@@ -197,11 +203,6 @@ $playlistDTO = MetierPlaylist::getPlaylistWithVideo(CONNECTED_USER_ID, $id_playl
 			alert('Indice de vidéo inconnu : ' + idx_video_played);
 		}
 
-		$('#playlist_player').bind("ended", function() {
-			if ($('#read_continu').is(':checked')) {
-				playNext();
-			}
-	    });
 	});
 
 </script>
