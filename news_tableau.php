@@ -205,7 +205,8 @@ $(document).ready(function() {
 	});
 
 	$('#date_debut, #date_fin').datepicker({
-		dateFormat: 'dd/mm/yy'
+		dateFormat: 'dd/mm/yy',
+		firstDay : 1
 	});
 
 	$('#all_news_wrapper .ui-widget-header.ui-corner-tl').append('<button id="add_news">Ajouter une news</button>');

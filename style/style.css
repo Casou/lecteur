@@ -418,8 +418,8 @@ h4#thumbnails_stats img {
 	margin : auto;
 }
 
-#stats_titre_danse {
-	cursor : pointer;
+.stats_titre_danse {
+	cursor : help;
 }
 
 #indexStatTable .switch_on, #indexStatTable .switch_off {
