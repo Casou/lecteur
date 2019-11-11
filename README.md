@@ -1,6 +1,6 @@
 # Référentiel de vidéos
 
-![Aperçu](https://github.com/basile-parent/lecteur/tree/master/ressources/thumbnail.jpg "Aperçu")
+![Aperçu](https://github.com/basile-parent/lecteur/blob/master/ressources/thumbnail.jpg?raw=true "Aperçu")
 
 Référentiel de vidéos de danse avec indexation et recherche multi-cirtères : 
 danse, type d'événement (cours, stage, initiation, etc.), professeur, niveau, passes réalisées, tags
