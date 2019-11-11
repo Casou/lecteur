@@ -61,3 +61,5 @@ constantsPrivate.php
 *.bak
 ressources/stats_thumbnails.txt
 *.psd
+.idea
+*.iml
